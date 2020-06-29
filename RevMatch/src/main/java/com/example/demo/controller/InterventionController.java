@@ -24,7 +24,7 @@ public class InterventionController {
 	
 	@PostMapping("/intervention")
 	public String post(@RequestBody Intervention intervention) {
-		snspublisherservice.publisher(intervention.getSubject(),intervention.getBody());
+		snspublisherservice.publisher(intervention.getSubject(),intervention.getClientName(),intervention.getClientCompany(),intervention.getClientContactMethod(),intervention.getSkillCategory(),intervention.getNumberOfEngineers());
 		return "Your mail is on the way !";
 	}
 }
