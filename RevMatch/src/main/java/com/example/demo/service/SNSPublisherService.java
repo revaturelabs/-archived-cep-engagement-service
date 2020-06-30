@@ -9,9 +9,9 @@ public class SNSPublisherService {
 	
 	private final String TOPIC_ARN = "arn:aws:sns:us-east-2:667247404250:TalentRequest";
 
-	private final String EMAIL_SUBJECT = "E-Mail Notification";
+	//private final String EMAIL_SUBJECT = "E-Mail Notification";
 	
-	private final String EMAIL_MESSAGE = "You are getting this mail since the endpoint works";
+	//private final String EMAIL_MESSAGE = "You are getting this mail since the endpoint works";
 	
 	private AmazonSNSClient snsClient = null;
 
@@ -20,7 +20,7 @@ public class SNSPublisherService {
 		snsClient = (AmazonSNSClient) AmazonSNSClientBuilder.standard().withRegion(Regions.US_EAST_2).build();
 
 		// Publish message to the topic
-		snsClient.publish(TOPIC_ARN, "Client Name: "+clientName+"\n "+"Client Company: "+clientCompany+"\n "+"Client Contact Method: "+clientContactMethod+"\n "+"Skill Category of Concern: "+skillCategory+"\n "+"Number Of Engineers Needed: "+numberOfEngineers, subject);
+		snsClient.publish(TOPIC_ARN, " Client Name: "+clientName+"\n "+"Client Company: "+clientCompany+"\n "+"Client Contact Method: "+clientContactMethod+"\n "+"Skill Category of Concern: "+skillCategory+"\n "+"Number Of Engineers Needed: "+numberOfEngineers, subject);
 
 	}
 

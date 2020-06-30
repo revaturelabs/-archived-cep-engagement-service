@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.models.Intervention;
+import com.example.demo.service.InterventionService;
 import com.example.demo.service.SNSPublisherService;
 
 @RestController
@@ -16,6 +17,8 @@ public class InterventionController {
 	
 	@Autowired
 	SNSPublisherService snspublisherservice;
+	@Autowired
+	InterventionService interventionservice;
 	
 	@GetMapping("/")
 	public String root() {
@@ -24,6 +27,7 @@ public class InterventionController {
 	
 	@PostMapping("/intervention")
 	public String post(@RequestBody Intervention intervention) {
+		interventionservice.postTalentRequest(intervention);
 		snspublisherservice.publisher(intervention.getSubject(),intervention.getClientName(),intervention.getClientCompany(),intervention.getClientContactMethod(),intervention.getSkillCategory(),intervention.getNumberOfEngineers());
 		return "Your mail is on the way !";
 	}

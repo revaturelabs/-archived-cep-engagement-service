@@ -20,19 +20,19 @@ public class Intervention implements Serializable {
 	@Column(name = "subject")
 	private String subject;
 	
-	@Column(name = "clientName")
+	@Column(name = "clientname")
 	private String clientName;
 	
-	@Column(name = "clientCompany")
+	@Column(name = "clientcompany")
 	private String clientCompany;
 	
-	@Column(name = "clientContactMethod")
+	@Column(name = "clientcontactmethod")
 	private String clientContactMethod;
 	
-	@Column(name = "skillCategory")
+	@Column(name = "skillcategory")
 	private String skillCategory;
 	
-	@Column(name = "numberOfEngineers")
+	@Column(name = "numberofengineers")
 	private String numberOfEngineers;
 	
 	public Intervention() {
