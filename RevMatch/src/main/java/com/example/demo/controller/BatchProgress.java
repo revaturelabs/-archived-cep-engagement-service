@@ -14,7 +14,7 @@ import com.example.demo.models.Batch;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin
 public class BatchProgress {
 	
 	

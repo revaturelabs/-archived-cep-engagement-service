@@ -28,7 +28,14 @@ public class InterventionController {
 	@PostMapping("/intervention")
 	public String post(@RequestBody Intervention intervention) {
 		interventionservice.postTalentRequest(intervention);
+		System.out.println(intervention);
+		try {
 		snspublisherservice.publisher(intervention.getSubject(),intervention.getClientName(),intervention.getClientCompany(),intervention.getClientContactMethod(),intervention.getSkillCategory(),intervention.getNumberOfEngineers());
+		}
+		catch(Exception e){
+			
+			
+		}
 		return "Your mail is on the way !";
 	}
 }
