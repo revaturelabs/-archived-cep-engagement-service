@@ -22,10 +22,10 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-// import lombok.EqualsAndHashCode;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
-// import lombok.ToString;
+import lombok.ToString;
 
 //Why does it has to be an enum?
 //Not handling logic inside of it, neither storing several.
@@ -34,8 +34,8 @@ import lombok.NonNull;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-// @EqualsAndHashCode(exclude = { "batches" })
-// @ToString(exclude = { "batches" })
+@EqualsAndHashCode(exclude = { "batches" })
+@ToString(exclude = { "batches" })
 @Entity
 @Table(name = "USERS")
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "userId")
@@ -68,6 +68,10 @@ public class User {
     @NonNull
     @Column(name = "PHONE")
     private String phone;
+
+    // TODO: Figure out how to map the users to batches
+    // TODO: make this a set of BatchId's instead of batch objects. That way the
+    // storage is simpler and then we can make a method to return the join.
 
     // @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     // @JoinTable(name = "USER_BATCH", joinColumns = @JoinColumn(name = "USER_ID"),
@@ -122,6 +126,7 @@ public class User {
         this.phone = phone;
     }
 
+    // TODO: convert the batchIds to a list of Batches and return
     // public Set<Batch> getBatches() {
     // return batches;
     // }

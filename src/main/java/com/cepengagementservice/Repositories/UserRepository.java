@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 public interface UserRepository extends JpaRepository<User, Integer> {
 
     // Assuming email is unique
+
     User findByEmail(String email);
 
     // @Query(value = "SELECT u FROM User u INNER JOIN u.batches ub WHERE ub.batchId

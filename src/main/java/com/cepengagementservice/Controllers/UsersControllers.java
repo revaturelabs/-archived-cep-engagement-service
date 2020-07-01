@@ -41,7 +41,7 @@ public class UsersControllers {
         return new ResponseEntity<String>("Email already in use", HttpStatus.CONFLICT);
     }
 
-    // DO SOME ERROR CHECKING.
+    // TODO: DO SOME ERROR CHECKING.
     // @RequestMapping(method = RequestMethod.POST, value = "/add/batch")
     // ResponseEntity<?> add(@RequestBody Batch batch, @RequestParam Integer id) {
     // User usr = userService.getUserById(id);
@@ -73,6 +73,7 @@ public class UsersControllers {
         return new ResponseEntity<User>(user, HttpStatus.NO_CONTENT);
     }
 
+    // TODO: Get this working
     // @RequestMapping(method = RequestMethod.GET, value = "/batch/")
     // public ResponseEntity<?> getByBatchId(@RequestParam String batchId) {
     // List<User> user = userService.getByBatchId(batchId);

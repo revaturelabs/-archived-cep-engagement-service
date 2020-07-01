@@ -23,6 +23,7 @@ public class UserServices {
 
     // Better way instead of true false?
     public Boolean addUser(User user) {
+
         if (userRepository.findByEmail(user.getEmail()) != null) {
             return false;
         }
@@ -39,7 +40,7 @@ public class UserServices {
         return userRepository.findById(id).get();
     }
 
-    // public List<User> getByBatchId(String batchId){
+    // public List<User> getByBatchId(String batchId) {
     // return userRepository.findByBatchId(batchId);
     // }
 
