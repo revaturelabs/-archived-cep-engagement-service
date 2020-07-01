@@ -73,12 +73,12 @@ public class UsersControllers {
         return new ResponseEntity<User>(user, HttpStatus.NO_CONTENT);
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/batch/")
-    public ResponseEntity<?> getByBatchId(@RequestParam String batchId) {
-        List<User> user = userService.getByBatchId(batchId);
-        if (user != null) {
-            return new ResponseEntity<List<User>>(user, HttpStatus.OK);
-        }
-        return new ResponseEntity<List<User>>(user, HttpStatus.NO_CONTENT);
-    }
+    // @RequestMapping(method = RequestMethod.GET, value = "/batch/")
+    // public ResponseEntity<?> getByBatchId(@RequestParam String batchId) {
+    // List<User> user = userService.getByBatchId(batchId);
+    // if (user != null) {
+    // return new ResponseEntity<List<User>>(user, HttpStatus.OK);
+    // }
+    // return new ResponseEntity<List<User>>(user, HttpStatus.NO_CONTENT);
+    // }
 }

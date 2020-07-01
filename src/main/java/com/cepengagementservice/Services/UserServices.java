@@ -11,43 +11,40 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class UserServices {
-    
+
     @Autowired
     private UserRepository userRepository;
 
-    public List<User> getAllUsers(){
+    public List<User> getAllUsers() {
         List<User> users = new ArrayList<>();
         userRepository.findAll().forEach(users::add);
         return users;
     }
 
-
-    //Better way instead of true false?
-    public Boolean addUser(User user){
-        if(userRepository.findByEmail(user.getEmail()) != null){
+    // Better way instead of true false?
+    public Boolean addUser(User user) {
+        if (userRepository.findByEmail(user.getEmail()) != null) {
             return false;
         }
         userRepository.save(user);
         return true;
     }
 
-    public User getUserByEmail(String email){
+    public User getUserByEmail(String email) {
         return userRepository.findByEmail(email);
     }
 
-
-    //Either do Optional<Users> or check yourself.
-    public User getUserById(Integer id){
+    // Either do Optional<Users> or check yourself.
+    public User getUserById(Integer id) {
         return userRepository.findById(id).get();
     }
 
-    public List<User> getByBatchId(String batchId){
-        return userRepository.findByBatchId(batchId);
-    }
+    // public List<User> getByBatchId(String batchId){
+    // return userRepository.findByBatchId(batchId);
+    // }
 
-
-    public User updateUser(User user){
-       return userRepository.save(user);
+    public User updateUser(User user) {
+        return userRepository.save(user);
     }
 
 }

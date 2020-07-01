@@ -1,31 +1,31 @@
 package com.cepengagementservice.Models;
 
-import java.util.Set;
+// import java.util.Set;
 
-import javax.annotation.Generated;
-import javax.persistence.CascadeType;
+// import javax.annotation.Generated;
+// import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
+// import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+// import javax.persistence.JoinColumn;
+// import javax.persistence.JoinTable;
+// import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+// import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+// import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
+// import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
-import lombok.ToString;
+// import lombok.ToString;
 
 //Why does it has to be an enum?
 //Not handling logic inside of it, neither storing several.
@@ -34,8 +34,8 @@ import lombok.ToString;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(exclude = { "batches" })
-@ToString(exclude = { "batches" })
+// @EqualsAndHashCode(exclude = { "batches" })
+// @ToString(exclude = { "batches" })
 @Entity
 @Table(name = "USERS")
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "userId")
@@ -69,8 +69,9 @@ public class User {
     @Column(name = "PHONE")
     private String phone;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
-    @JoinTable(name = "USER_BATCH", joinColumns = @JoinColumn(name = "USER_ID"), inverseJoinColumns = @JoinColumn(name = "BATCH_ID"))
+    // @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    // @JoinTable(name = "USER_BATCH", joinColumns = @JoinColumn(name = "USER_ID"),
+    // inverseJoinColumns = @JoinColumn(name = "BATCH_ID"))
     // private Set<Batch> batches;
 
     public Integer getUserId() {
