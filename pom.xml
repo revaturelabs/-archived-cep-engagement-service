@@ -19,15 +19,20 @@
 	</properties>
 
 	<dependencies>
-		<dependency>
+		<!--<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
-		</dependency>
+		</dependency> -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-devtools</artifactId>
+      <scope>runtime</scope>
+      <optional>true</optional>
+    </dependency>
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
@@ -44,12 +49,58 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-		<dependency>
+	<!--	<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
-		</dependency>
+		</dependency> -->
+		    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-data-jpa</artifactId>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      	<artifactId>lombok</artifactId>
+      		<version>1.18.12</version>
+      	<scope>provided</scope>
+    </dependency>
+       <!--springfox-->
+    <dependency>
+      	<groupId>io.springfox</groupId>
+     	 <artifactId>springfox-swagger-ui</artifactId>
+      	<version>3.0.0-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+		<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+		<version>3.0.0-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+		<groupId>io.springfox</groupId>
+			<artifactId>springfox-data-rest</artifactId>
+		<version>3.0.0-SNAPSHOT</version>
+    </dependency>
+        <!-- springfox -->
+    <dependency>
+		<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-rest</artifactId>
+		<scope>compile</scope>
+    </dependency>
+    <dependency>
+		<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+		<scope>runtime</scope>
+    </dependency>
 	</dependencies>
+
+  <repositories>
+  <repository>
+  <id>jcenter-snapshots</id>
+  <name>jcenter</name>
+  <url>http://oss.jfrog.org/artifactory/oss-snapshot-local/</url>
+  </repository>
+  </repositories>
 
 	<build>
 		<plugins>
