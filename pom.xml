@@ -19,7 +19,7 @@
   <sonar.projectKey>revaturelabs_cep-engagement-service</sonar.projectKey>
   <sonar.organization>revaturelabs-screenforce</sonar.organization>
   <sonar.host.url>https://sonarcloud.io</sonar.host.url>
-  <sonar.login>6a74ad09b644f5186b26a76616b1231cd90168dd</sonar.login>
+  <sonar.login>b0be0236308a5924520ae89cfc7e990321eb82d3</sonar.login>
 	</properties>
 
 	<dependencies>
