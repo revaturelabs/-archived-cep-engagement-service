@@ -23,6 +23,9 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency> -->
+		 <groupId>org.springframework.plugin</groupId>
+            <artifactId>spring-plugin-core</artifactId>
+            <version>1.2.0.RELEASE</version>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
@@ -66,25 +69,23 @@
       	<scope>provided</scope>
     </dependency>
 	<dependency>
-            <groupId>org.springframework.plugin</groupId>
-            <artifactId>spring-plugin-core</artifactId>
-            <version>1.2.0.RELEASE</version>
+           
         </dependency>
        <!--springfox-->
     <dependency>
       	<groupId>io.springfox</groupId>
      	 <artifactId>springfox-swagger-ui</artifactId>
-      	<version>3.0.0-SNAPSHOT</version>
+      	<version>2.9.2</version>
     </dependency>
     <dependency>
 		<groupId>io.springfox</groupId>
 			<artifactId>springfox-swagger2</artifactId>
-		<version>3.0.0-SNAPSHOT</version>
+		<version>2.9.2</version>
     </dependency>
     <dependency>
 		<groupId>io.springfox</groupId>
 			<artifactId>springfox-data-rest</artifactId>
-		<version>3.0.0-SNAPSHOT</version>
+		<version>2.9.2</version>
     </dependency>
         <!-- springfox -->
     <dependency>
