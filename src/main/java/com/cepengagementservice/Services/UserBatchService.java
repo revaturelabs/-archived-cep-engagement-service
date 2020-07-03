@@ -35,18 +35,14 @@ public class UserBatchService {
         return batches;
     }
 
-    public int addPair(int userId, String batchId)
-    {
-        //Check User
-        if (userService.check(userId) {
+    public int addPair(int userId, String batchId) {
+        // Check User
+        if (userService.check(userId)) {
             return -1;
         }
 
-        //Check Batch
-
-
-
-        userBatchRepository.save(new UserBatch(userId,batchId));
-        return true;
+        // Check Batch
+        UserBatch ub = userBatchRepository.save(new UserBatch(userId, batchId));
+        return ub.id;
     }
 }

@@ -16,7 +16,7 @@ public class UserBatch {
      */
     @Id
     @GeneratedValue
-    private int id;
+    int id;
     int userId;
     String batchId;
 

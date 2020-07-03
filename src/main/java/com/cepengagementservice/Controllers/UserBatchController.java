@@ -1,11 +1,7 @@
 package com.cepengagementservice.Controllers;
 
 import java.util.List;
-
-import com.cepengagementservice.Models.Batch;
-import com.cepengagementservice.Services.BatchService;
 import com.cepengagementservice.Services.UserBatchService;
-import com.cepengagementservice.Services.UserServices;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
