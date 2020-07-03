@@ -82,13 +82,13 @@
       		<version>1.18.12</version>
       	<scope>provided</scope>
     </dependency>
-       <!--springfox-->
+       <!--springfox replacement-->
    <dependency>
       <groupId>org.springdoc</groupId>
       <artifactId>springdoc-openapi-ui</artifactId>
       <version>1.3.4</version>
    </dependency>
-        <!-- springfox -->
+        <!-- springfox replacement-->
 		<dependency>
   <groupId>org.springframework.plugin</groupId>
   <artifactId>spring-plugin-core</artifactId>
