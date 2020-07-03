@@ -50,7 +50,7 @@ public class Batch {
 
         RestTemplate restTemplate = new RestTemplate();
         BatchDTO result = restTemplate.getForObject(uri, BatchDTO.class, params);
-        System.out.println(result);
+
         return result;
     }
 
