@@ -14,10 +14,7 @@ public class BatchService {
      * @return Batch
      */
     public Batch getSingleBatch(String id) {
-        Batch b = Batch.getBatchById(id);
-
-        return b;
-
+        return Batch.getBatchById(id);
     }
 
     /**
@@ -26,10 +23,15 @@ public class BatchService {
      * @return Batch
      */
     public BatchDTO getSingleBatchDTO(String id) {
-        BatchDTO b = Batch.getBatchDTOById(id);
-
-        return b;
+        return Batch.getBatchDTOById(id);
 
     }
+
+	public boolean check(String batchId) {
+		if (getSingleBatch(batchId)!=null)
+			return true;
+		else
+			return false;
+	}
 
 }

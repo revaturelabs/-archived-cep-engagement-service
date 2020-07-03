@@ -16,6 +16,6 @@ public interface UserBatchRepository extends JpaRepository<UserBatch, Integer> {
      * @param userId
      * @return List of Strings representing the batchId related to the userId
      */
-    public List<String> findAllBatchIdByUserID(int userId);
+    public List<String> findAllBatchIdByUserId(int userId);
 
 }

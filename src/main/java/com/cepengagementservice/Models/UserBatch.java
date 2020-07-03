@@ -16,7 +16,7 @@ public class UserBatch {
      */
     @Id
     @GeneratedValue
-    int id;
+    private int id;
     int userId;
     String batchId;
 
@@ -24,5 +24,9 @@ public class UserBatch {
         this.userId = userId;
         this.batchId = batchId;
     }
+
+	public int getId() {
+		return this.id;
+	}
 
 }

@@ -3,6 +3,7 @@ package com.cepengagementservice.Services;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.cepengagementservice.Controllers.BatchController;
 import com.cepengagementservice.Models.Batch;
 import com.cepengagementservice.Models.UserBatch;
 import com.cepengagementservice.Repositories.UserBatchRepository;
@@ -19,6 +20,8 @@ public class UserBatchService {
     private BatchService batchService;
     @Autowired
     private UserServices userService;
+    @Autowired
+    private BatchController batchController;
 
     /**
      * 
@@ -26,7 +29,7 @@ public class UserBatchService {
      * @return A List of Batch objects Related to the UserId
      */
     public List<Batch> getBatchesByUserId(int userId) {
-        List<String> batchids = userBatchRepository.findAllBatchIdByUserID(userId);
+        List<String> batchids = userBatchRepository.findAllBatchIdByUserId(userId);
         List<Batch> batches = new ArrayList<>();
         // use the list of batchId Strings to make a list of Batches
         for (String id : batchids) {
@@ -35,14 +38,12 @@ public class UserBatchService {
         return batches;
     }
 
-    public int addPair(int userId, String batchId) {
-        // Check User
-        if (userService.check(userId)) {
-            return -1;
+    public UserBatch addPair(int userId, String batchId) {
+        // Check User and batch
+        if (userService.check(userId)==false & batchController.getDTOBatch(batchId)==null) {
+            return null;
         }
-
-        // Check Batch
         UserBatch ub = userBatchRepository.save(new UserBatch(userId, batchId));
-        return ub.id;
+        return ub;
     }
 }
