@@ -1,12 +1,5 @@
 package com.cepengagementservice.Models.dto;
 
-import com.cepengagementservice.Models.Batch;
-
-import java.util.HashMap;
-import java.util.Map;
-
-import org.springframework.web.client.RestTemplate;
-
 import lombok.Data;
 
 @Data
