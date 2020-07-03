@@ -33,7 +33,7 @@ public class BatchController {
     @RequestMapping(method = RequestMethod.GET, value = "/DTO/id")
     public ResponseEntity<?> getDTOBatch(@RequestParam String batchId) {
         try {
-            BatchDTO batch = (BatchDTO) batchService.getSingleBatch(batchId);
+            BatchDTO batch = batchService.getSingleBatchDTO(batchId);
             return new ResponseEntity<BatchDTO>(batch, HttpStatus.OK);
 
         } catch (Exception e) {
