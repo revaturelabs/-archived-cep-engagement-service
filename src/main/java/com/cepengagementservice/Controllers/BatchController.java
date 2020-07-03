@@ -1,6 +1,7 @@
 package com.cepengagementservice.Controllers;
 
 import com.cepengagementservice.Models.Batch;
+import com.cepengagementservice.Models.dto.BatchDTO;
 import com.cepengagementservice.Services.BatchService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,12 +19,27 @@ public class BatchController {
     private BatchService batchService;
 
     @RequestMapping(method = RequestMethod.GET, value = "/id")
-    public ResponseEntity<?> getBatch(@RequestParam String batchId) {
-        Batch batch = batchService.getSingleBatch(batchId);
-        if (batch != null) {
+    public ResponseEntity<?> getFullBatch(@RequestParam String batchId) {
+        try {
+            Batch batch = batchService.getSingleBatch(batchId);
             return new ResponseEntity<Batch>(batch, HttpStatus.OK);
+
+        } catch (Exception e) {
+            return new ResponseEntity<Batch>(HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<Batch>(batch, HttpStatus.NO_CONTENT);
+
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/DTO/id")
+    public ResponseEntity<?> getDTOBatch(@RequestParam String batchId) {
+        try {
+            BatchDTO batch = (BatchDTO) batchService.getSingleBatch(batchId);
+            return new ResponseEntity<BatchDTO>(batch, HttpStatus.OK);
+
+        } catch (Exception e) {
+            return new ResponseEntity<BatchDTO>(HttpStatus.NOT_FOUND);
+        }
+
     }
 
 }

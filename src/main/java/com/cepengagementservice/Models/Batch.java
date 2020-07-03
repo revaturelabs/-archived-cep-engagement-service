@@ -1,7 +1,10 @@
 package com.cepengagementservice.Models;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
+import com.cepengagementservice.Models.dto.BatchDTO;
 
 import org.springframework.web.client.RestTemplate;
 
@@ -13,7 +16,20 @@ import lombok.Data;
  */
 public class Batch {
 
-    private static Batch getBatchById(String id) {
+    String batchId;
+    String name;
+    String startDate;
+    String endDate;
+    String skill;
+    String location;
+    String type;
+    int goodGrade;
+    int passingGrade;
+    int currentWeek;
+    List<?> employeeAssignments;
+    List<?> associateAssignments;
+
+    public static Batch getBatchById(String id) {
         final String uri = "http://34.82.182.44:80/mock/training/batch/{id}";
 
         Map<String, String> params = new HashMap<String, String>();
@@ -22,7 +38,6 @@ public class Batch {
         RestTemplate restTemplate = new RestTemplate();
         Batch result = restTemplate.getForObject(uri, Batch.class, params);
 
-        System.out.println(result);
         return result;
     }
 
