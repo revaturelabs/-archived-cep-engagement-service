@@ -1,14 +1,18 @@
 package com.cepengagementservice.Models;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Entity
-
+@NoArgsConstructor
+@Table(name = "user_batch")
 public class UserBatch {
 
     /**
@@ -16,8 +20,11 @@ public class UserBatch {
      */
     @Id
     @GeneratedValue
-    private int id;
+    @Column(name = "row_id")
+    private int rowId;
+    @Column(name = "user_id")
     int userId;
+    @Column(name = "batch_id")
     String batchId;
 
     public UserBatch(int userId, String batchId) {
@@ -25,8 +32,7 @@ public class UserBatch {
         this.batchId = batchId;
     }
 
-	public int getId() {
-		return this.id;
-	}
-
+    public String getBatchId() {
+        return batchId;
+    }
 }
