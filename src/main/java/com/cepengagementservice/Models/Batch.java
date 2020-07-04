@@ -34,7 +34,7 @@ public class Batch {
         final String uri = "http://34.82.182.44:80/mock/training/batch/{id}";
 
         Map<String, String> params = new HashMap<String, String>();
-        params.put("id", "1");
+        params.put("id", id);
 
         RestTemplate restTemplate = new RestTemplate();
         Batch result = restTemplate.getForObject(uri, Batch.class, params);
@@ -46,7 +46,7 @@ public class Batch {
         final String uri = "http://34.82.182.44:80/mock/training/batch/{id}";
 
         Map<String, String> params = new HashMap<String, String>();
-        params.put("id", "1");
+        params.put("id", id);
 
         RestTemplate restTemplate = new RestTemplate();
         BatchDTO result = restTemplate.getForObject(uri, BatchDTO.class, params);

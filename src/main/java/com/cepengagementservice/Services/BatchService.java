@@ -8,18 +8,30 @@ import org.springframework.stereotype.Service;
 @Service
 public class BatchService {
 
+    /**
+     * 
+     * @param String batchid
+     * @return Batch
+     */
     public Batch getSingleBatch(String id) {
-        Batch b = Batch.getBatchById(id);
-
-        return b;
-
+        return Batch.getBatchById(id);
     }
 
+    /**
+     * 
+     * @param String batchid
+     * @return Batch
+     */
     public BatchDTO getSingleBatchDTO(String id) {
-        BatchDTO b = Batch.getBatchDTOById(id);
-
-        return b;
+        return Batch.getBatchDTOById(id);
 
     }
+
+	public boolean check(String batchId) {
+		if (getSingleBatch(batchId)!=null)
+			return true;
+		else
+			return false;
+	}
 
 }
