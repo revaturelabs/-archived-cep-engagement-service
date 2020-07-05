@@ -14,6 +14,7 @@ import javax.persistence.Id;
 // import javax.persistence.JoinTable;
 // import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 // import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -49,6 +50,15 @@ public class User {
     @Column(name = "USER_ID")
     private Integer userId;
 
+
+    @NonNull
+    @Column(name = "FIRST_NAME")
+    private String firstName;
+
+    @NonNull
+    @Column(name = "LAST_NAME")
+    private String lastName;
+
     @NonNull
     @Column(name = "EMAIL")
     private String email;
@@ -80,6 +90,23 @@ public class User {
 
     public void setUserId(Integer userId) {
         this.userId = userId;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+
+    public String getLastName() {
+        return firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getEmail() {
