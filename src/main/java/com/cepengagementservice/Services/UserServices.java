@@ -30,6 +30,19 @@ public class UserServices {
         return true;
     }
 
+    /**
+     * Check to see if the user exists
+     * 
+     * @param userId
+     * @return boolean
+     */
+    public boolean check(int userId) {
+        if (this.getUserById(userId) != null)
+            return true; // there is a user
+        else
+            return false;
+    }
+
     public User getUserByEmail(String email) {
         return userRepository.findByEmail(email);
     }
