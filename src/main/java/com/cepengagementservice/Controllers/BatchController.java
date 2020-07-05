@@ -1,4 +1,4 @@
-package com.example.demo.Controllers;
+package com.cepengagementservice.Controllers;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.apache.http.conn.ssl.NoopHostnameVerifier;
@@ -26,8 +26,8 @@ import java.util.Map;
 
 import javax.net.ssl.SSLContext;
 
-import com.example.demo.Models.Batch;
-import com.example.demo.Models.Employee;
+import com.cepengagementservice.Models.Batch;
+
 
 @RestController
 public class BatchController {
