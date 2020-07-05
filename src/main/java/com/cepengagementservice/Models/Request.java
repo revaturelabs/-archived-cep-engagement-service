@@ -15,10 +15,10 @@ import javax.persistence.Table;
 
 import lombok.NonNull;
 
+@Entity
 @Table(name= "REQUEST_TABLE")
 public class Request {
 
-	
 	//enums for status & request type 
 	public enum Status {
 	    Pending,Done
