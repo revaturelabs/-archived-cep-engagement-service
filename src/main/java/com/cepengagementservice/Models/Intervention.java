@@ -12,10 +12,10 @@ import javax.persistence.Table;
 import lombok.NonNull;
 
 @Entity
-@Table(name= "INTERVENTION")
+@Table(name= "INTERVENTION")  //so this should be called somthing else i believe requestTable
 public class Intervention {
 	
-	//enums for status & request type
+	//enums for status & request type 
 	public enum Status {
 	    Pending,Done
 	}
