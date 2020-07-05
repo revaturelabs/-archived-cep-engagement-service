@@ -1,6 +1,10 @@
 package com.cepengagementservice.Models;
 
 
+
+
+
+
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -12,8 +16,8 @@ import javax.persistence.Table;
 import lombok.NonNull;
 
 @Entity
-@Table(name= "INTERVENTION")
-public class Intervention {
+@Table(name= "REQUEST_TABLE")
+public class Request {
 	
 	//enums for status & request type
 	public enum Status {
@@ -65,12 +69,12 @@ public class Intervention {
 	@Column(name="DESCRIPTION")
 	private String description;
 	
-	public Intervention() {
+	public Request() {
 		
 	}
 	
 	//constructor
-	public Intervention(Integer requestId,Integer batchId, Integer userId, Date startTime, Date endTime, Boolean isAllDay,Status status,RequestType requestType,String description) {
+	public Request(Integer requestId,Integer batchId, Integer userId, Date startTime, Date endTime, Boolean isAllDay,Status status,RequestType requestType,String description) {
 		this.requestId=requestId;
 		this.batchId=batchId;
 		this.userId=userId;
