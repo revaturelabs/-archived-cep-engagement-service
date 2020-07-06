@@ -13,6 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
 @Entity
@@ -38,7 +39,7 @@ public class Request {
 	//batchId needs to be a foreign key to User_Batches' batchId
 	@NonNull
 	@Column(name= "BATCH_ID")
-	private Integer batchId;
+	private String batchId;
 	
 	//userId needs to be a foreign key to User_Batches' userId
 	@NonNull
@@ -69,13 +70,13 @@ public class Request {
 	@Column(name="DESCRIPTION")
 	private String description;
 	
+	
+	//constructor
 	public Request() {
 		
 	}
 	
-	//constructor
-	public Request(Integer requestId,Integer batchId, Integer userId, Date startTime, Date endTime, Boolean isAllDay,Status status,RequestType requestType,String description) {
-		this.requestId=requestId;
+	public Request(String batchId, Integer userId, Date startTime, Date endTime, Boolean isAllDay,Status status,RequestType requestType,String description) {
 		this.batchId=batchId;
 		this.userId=userId;
 		this.startTime=startTime;
@@ -90,7 +91,7 @@ public class Request {
 	public void setRequestId(Integer requestId) {
 		this.requestId=requestId;
 	}
-	public void setBatchId(Integer batchId) {
+	public void setBatchId(String batchId) {
 		this.batchId=batchId;
 	}
 	public void setUserId(Integer userId) {
@@ -119,7 +120,7 @@ public class Request {
 	public Integer getRequestId() {
 		return this.requestId;
 	}
-	public Integer getBatchId() {
+	public String getBatchId() {
 		return this.batchId;
 	}
 	public Integer getUserId() {

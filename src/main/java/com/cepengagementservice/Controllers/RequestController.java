@@ -31,7 +31,7 @@ public class RequestController {
 	@PostMapping("/interventions")
 	public String addIntervention(@RequestBody Request request) {
 		is.addIntervention(request);
-		snsPublisherService.publisher(request.getBatchId(),request.getUserId(),request.getStartTime(),request.getEndTime(),request.getIsAllDay(),request.getStatus(),request.getRequestType(),request.getDescription());
+		snsPublisherService.publisher(request);
 		return "Intervention added";
 		
 	}
