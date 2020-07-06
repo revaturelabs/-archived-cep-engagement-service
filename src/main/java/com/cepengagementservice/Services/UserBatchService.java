@@ -65,4 +65,14 @@ public class UserBatchService {
         UserBatch ub = userBatchRepository.save(new UserBatch(userId, batchId));
         return ub;
     }
+
+	public List<UserBatch> findAll() {
+		List<UserBatch> ubatches = new ArrayList<>();
+        try {
+            ubatches = userBatchRepository.findAll();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return ubatches;
+	}
 }

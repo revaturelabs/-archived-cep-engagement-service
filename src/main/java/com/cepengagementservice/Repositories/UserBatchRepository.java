@@ -19,5 +19,6 @@ public interface UserBatchRepository extends JpaRepository<UserBatch, Integer> {
      */
     @Query("select u from #{#entityName} u where u.userId = ?1")
     public List<UserBatch> findByUserId(int userId);
+    public List<UserBatch> findAll();
 
 }
