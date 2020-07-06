@@ -33,10 +33,10 @@ public class AuthenticationController {
   private AuthenticationManager authenticationManager; //for UsernamePasswordAuthenticationToken
 
   @Autowired
-  private JwtTokenUtil jwtTokenUtil; // to get functionality to load user by email and more
+  private JwtTokenUtil jwtTokenUtil;
 
   @Autowired
-  private JwtInMemoryUserDetailsService jwtInMemoryUserDetailsService;  //changing first parameter from UserDetailsService to my implemented class
+  private JwtInMemoryUserDetailsService jwtInMemoryUserDetailsService;
 
   @RequestMapping(value = "${jwt.get.token.uri}", method = RequestMethod.POST)  //Gets Login URI from app.properties and Generates Token if valid
   public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtTokenRequest authenticationRequest)
