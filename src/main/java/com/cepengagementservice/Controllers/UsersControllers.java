@@ -4,15 +4,19 @@ import java.util.List;
 
 import com.cepengagementservice.Models.User;
 import com.cepengagementservice.Services.UserServices;
-
+import com.cepengagementservice.Models.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import com.cepengagementservice.Services.RequestService;
 
 @RestController
 @RequestMapping(value = "/users")
@@ -80,4 +84,33 @@ public class UsersControllers {
     // }
     // return new ResponseEntity<List<User>>(user, HttpStatus.NO_CONTENT);
     // }
+    
+    
+
+    // admin can update the request status
+    @Autowired
+    RequestService requestService;
+    
+	@GetMapping("/admin/request")
+	public List<Request> getAllInterventions(){
+		return requestService.findAll();
+	}
+    
+    
+ 	@PutMapping("/admin/request/update/{requestId}")
+     public ResponseEntity<?> updateRequest(@PathVariable("requestId") int requestId, @RequestBody Request request) {
+        
+         Request currentRequest = requestService.findByRequestId(requestId);
+  
+         if (currentRequest == null) {
+         	return new ResponseEntity<String>("Unable to Update. Request ID: " + requestId +" not found.", HttpStatus.NOT_FOUND);
+         }
+         
+         currentRequest.setStatus(request.getStatus());
+         requestService.updateRequest(currentRequest);
+         return new ResponseEntity<Request>(currentRequest, HttpStatus.OK);
+     }
+    
+    
+    
 }
