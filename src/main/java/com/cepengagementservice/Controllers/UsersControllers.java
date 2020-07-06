@@ -33,7 +33,7 @@ public class UsersControllers {
     // Future, maybe return user.
     // Change logic in service.
     @RequestMapping(method = RequestMethod.POST, value = "/add")
-    ResponseEntity<?> add(@RequestBody User user) {
+    public ResponseEntity<?> add(@RequestBody User user) {
         if (userService.addUser(user)) {
             return new ResponseEntity<>(HttpStatus.OK);
         }
