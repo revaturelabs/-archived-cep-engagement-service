@@ -55,11 +55,12 @@ public class AuthenticationConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
-             // .csrf().disable()
+            .csrf().disable()
             .exceptionHandling().authenticationEntryPoint(jwtUnAuthorizedResponseAuthenticationEntryPoint).and() //handles any exceptions with custom handler
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and() //ensures that expired sessions are cleaned up
             .authorizeRequests() //Allows restricting access based upon the HttpServletRequest using RequestMatcher implementations 
-            .anyRequest().authenticated(); // If you are authorized you will be able to access any routes.
+            .anyRequest().authenticated().and()// If you are authorized you will be able to access any routes.
+        	.formLogin();
 
        httpSecurity
             .addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
@@ -78,13 +79,13 @@ public class AuthenticationConfig extends WebSecurityConfigurerAdapter {
                 HttpMethod.POST,
                 authenticationPath
             )
-            .antMatchers(HttpMethod.OPTIONS, "/**");
-//            .and()
-//            .ignoring()
-//            .antMatchers(
-//                HttpMethod.GET,
-//                "/" //Other Stuff You want to Ignore
-//            )
+            .antMatchers(HttpMethod.OPTIONS, "/**")
+            .and()
+            .ignoring()
+            .antMatchers(
+                HttpMethod.GET,
+                "/**" //Other Stuff You want to Ignore
+            );
 //            .and()
 //            .ignoring()
 //            .antMatchers("/h2-console/**/**");//Should not be in Production!
