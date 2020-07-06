@@ -22,7 +22,7 @@ public class UserBatchController {
     @Autowired
     private UserBatchService userBatchService;
 
-    @GetMapping(value = "/batchesbyuser")
+    @GetMapping(value = "/all")
     public ResponseEntity<List<UserBatch>> getAllUB() {
         try {
             List<UserBatch> batches = userBatchService.findAll();
@@ -62,7 +62,7 @@ public class UserBatchController {
 
     }
     @PostMapping(value = "/addPair")
-    public ResponseEntity<UserBatch> getAllMyBatches(@RequestParam int userId, @RequestParam String batchId) {
+    public ResponseEntity<UserBatch> makeUB(@RequestParam int userId, @RequestParam String batchId) {
         try {
             UserBatch ub = userBatchService.addPair(userId, batchId);
             return new ResponseEntity<>(ub, HttpStatus.OK);
