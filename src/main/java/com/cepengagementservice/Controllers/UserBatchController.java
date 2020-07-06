@@ -23,9 +23,9 @@ public class UserBatchController {
     private UserBatchService userBatchService;
 
     @GetMapping(value = "/batchesbyuser")
-    public ResponseEntity<List<Batch>> getAllUB() {
+    public ResponseEntity<List<UserBatch>> getAllUB() {
         try {
-            List<Batch> batches = userBatchService.findAll();
+            List<UserBatch> batches = userBatchService.findAll();
             return new ResponseEntity<>(batches, HttpStatus.OK);
 
         } catch (Exception e) {

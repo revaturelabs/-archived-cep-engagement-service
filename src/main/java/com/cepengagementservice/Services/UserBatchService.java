@@ -66,12 +66,13 @@ public class UserBatchService {
         return ub;
     }
 
-	public List<Batch> findAll() {
+	public List<UserBatch> findAll() {
 		List<UserBatch> ubatches = new ArrayList<>();
         try {
-            ubatches = userBatchRepository.findByUserId(userId);
+            ubatches = userBatchRepository.findAll();
         } catch (Exception e) {
             System.out.println(e);
         }
+        return ubatches;
 	}
 }
