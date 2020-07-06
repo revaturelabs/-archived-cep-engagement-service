@@ -8,6 +8,7 @@ import com.cepengagementservice.Models.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -86,8 +87,8 @@ public class UsersControllers {
     // }
     
     
-
-    // admin can update the request status
+    //below is admin role
+    // admin can update, delete the request status
     @Autowired
     RequestService requestService;
     
@@ -96,7 +97,7 @@ public class UsersControllers {
 		return requestService.findAll();
 	}
     
-    
+    //update a request
  	@PutMapping("/admin/request/update/{requestId}")
      public ResponseEntity<?> updateRequest(@PathVariable("requestId") int requestId, @RequestBody Request request) {
         
@@ -111,6 +112,20 @@ public class UsersControllers {
          return new ResponseEntity<Request>(currentRequest, HttpStatus.OK);
      }
     
+ 	
+ 	// delete a reqeust 
+	@DeleteMapping("/admin/request/delete/{requestId}")
+    public ResponseEntity<?> deleteRequest(@PathVariable("requestId") int requestId) {
+	       
+        Request request = requestService.findByRequestId(requestId);
+ 
+        if (request == null) {
+            return new ResponseEntity<String>("Unable to Delete. Request ID: " + requestId +" not found.", HttpStatus.NOT_FOUND);
+        }
+        requestService.deleteByRequestId(requestId);
+        return new ResponseEntity<Request>(HttpStatus.NO_CONTENT);
+        
+    }
     
     
 }

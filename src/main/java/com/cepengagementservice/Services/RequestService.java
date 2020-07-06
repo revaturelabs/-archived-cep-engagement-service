@@ -30,4 +30,9 @@ public class RequestService {
 		ir.save(request);
 	}
 
+	public void deleteByRequestId(int id) {
+		ir.deleteById(id);
+		
+	}
+
 }
