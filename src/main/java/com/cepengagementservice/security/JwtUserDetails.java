@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class JwtUserDetails implements UserDetails {
 
-  private static final long serialVersionUID = 6519609781961L;
+  private static final long serialVersionUID = 6519609781961L; //initialized to random long value
 
   private final Long userId;
   private final String email;
@@ -23,7 +23,7 @@ public class JwtUserDetails implements UserDetails {
   private final String company;
   private final String role;
   private final String phone;
-  private final Collection<? extends GrantedAuthority> authorities;
+  private final Collection<? extends GrantedAuthority> authorities; // collection of authorities granted to the user native to UserDetails interface
 
   public JwtUserDetails(Long userId, String email, String password, String company, String role, String phone) { //how to make company an Enum.
     this.userId = userId;
@@ -39,12 +39,12 @@ public class JwtUserDetails implements UserDetails {
     this.authorities = authorities;
   }
 
+//Start of unique methods to JwtUserDetails
   @JsonIgnore
   public Long getId() {
     return userId;
   }
-
-  //Start of unique methods to JwtUserDetails
+  
   public String getEmail() { // Made outside Interface to get Email used to authenticate the user.
     return email;
   }

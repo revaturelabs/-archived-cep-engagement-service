@@ -1,0 +1,27 @@
+{"properties": [
+  {
+    "name": "jwt.signing.key.secret",
+    "type": "java.lang.String",
+    "description": "A description for 'jwt.signing.key.secret'"
+  },
+  {
+    "name": "jwt.get.token.uri",
+    "type": "java.lang.String",
+    "description": "A description for 'jwt.get.token.uri'"
+  },
+  {
+    "name": "jwt.refresh.token.uri",
+    "type": "java.lang.String",
+    "description": "A description for 'jwt.refresh.token.uri'"
+  },
+  {
+    "name": "jwt.http.request.header",
+    "type": "java.lang.String",
+    "description": "A description for 'jwt.http.request.header'"
+  },
+  {
+    "name": "jwt.token.expiration.in.seconds",
+    "type": "java.lang.String",
+    "description": "A description for 'jwt.token.expiration.in.seconds'"
+  }
+]}

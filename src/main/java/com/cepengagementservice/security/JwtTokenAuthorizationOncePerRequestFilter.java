@@ -33,7 +33,7 @@ public class JwtTokenAuthorizationOncePerRequestFilter extends OncePerRequestFil
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
     
-    @Value("${jwt.http.request.header}")
+    @Value("${jwt.http.request.header}") //pulling header information from app.properties (Authorization: uses Bearer schema)
     private String tokenHeader;
     
 
@@ -41,14 +41,14 @@ public class JwtTokenAuthorizationOncePerRequestFilter extends OncePerRequestFil
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws ServletException, IOException {
         logger.debug("Authentication Request For '{}'", request.getRequestURL());
 
-        final String requestTokenHeader = request.getHeader(this.tokenHeader);
+        final String requestTokenHeader = request.getHeader(this.tokenHeader); // If request header doesn't match this.tokenHeader it returns null
 
         String email = null; //changed from username
         String jwtToken = null;
-        if (requestTokenHeader != null && requestTokenHeader.startsWith("Bearer ")) {
-            jwtToken = requestTokenHeader.substring(7);
+        if (requestTokenHeader != null && requestTokenHeader.startsWith("Bearer ")) { // checks to make sure header is Authorization header that look like: Bearer <token>
+            jwtToken = requestTokenHeader.substring(7); //7 to pass bearer and space, to start reading Token when it starts. Sets token.
             try {
-                email = jwtTokenUtil.getEmailFromToken(jwtToken); //changed username to email
+                email = jwtTokenUtil.getEmailFromToken(jwtToken); //changed username to email, sets email from received token.
             } catch (IllegalArgumentException e) {
                 logger.error("JWT_TOKEN_UNABLE_TO_GET_EMAIL", e);
             } catch (ExpiredJwtException e) {
@@ -59,9 +59,9 @@ public class JwtTokenAuthorizationOncePerRequestFilter extends OncePerRequestFil
         }
 
         logger.debug("JWT_TOKEN_EMAIL_VALUE '{}'", email);
-        if (email != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+        if (email != null && SecurityContextHolder.getContext().getAuthentication() == null) { //makes sure the authentication token and email are both non-null
 
-            JwtUserDetails jwtUserDetails = this.jwtInMemoryUserDetailsService.loadUserByEmail(email);
+            JwtUserDetails jwtUserDetails = this.jwtInMemoryUserDetailsService.loadUserByEmail(email); //loads in user as a JwtUserDetails object 
 
             if (jwtTokenUtil.validateToken(jwtToken, jwtUserDetails)) {
                 UsernamePasswordAuthenticationToken emailPasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(jwtUserDetails, null, jwtUserDetails.getAuthorities());
