@@ -1,4 +1,5 @@
 package com.cepengagementservice.Services;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -18,10 +19,11 @@ import com.cepengagementservice.Models.Request;
 import com.cepengagementservice.Models.Request.RequestType;
 import com.cepengagementservice.Models.Request.Status;
 
-
+import com.cepengagementservice.Services.UserServices;
 @Service
 public class SNSPublisherService{
-	
+	@Autowired
+	UserServices userServices;
 	//private final String TOPIC_ARN = "arn:aws:sns:us-east-2:667247404250:TalentRequest";
 
 	//private final String EMAIL_SUBJECT = "E-Mail Notification";
@@ -36,7 +38,7 @@ public class SNSPublisherService{
 		snsClient = (AmazonSNSClient) AmazonSNSClientBuilder.standard().withRegion(Regions.US_EAST_2).build();
 
 		// Publish message to the topic
-		snsClient.publish("arn:aws:sns:us-east-2:667247404250:TalentRequest", " BatchID: "+request.getBatchId()+"\n "+"UserID: "+request.getUserId()+"\n "+"StartDate: "+request.getStartTime()+"\n "+
+		snsClient.publish("arn:aws:sns:us-east-2:667247404250:TalentRequest", " BatchID: "+request.getBatchId()+"\n "+"UserEmail: "+userServices.getUserById(request.getUserId().getUserId()).getEmail()+"\n "+"StartDate: "+request.getStartTime()+"\n "+
 				 "EndDate: "+request.getEndTime()+"\n "+"isAllDay: "+request.getIsAllDay()+"\n "
 				+ "Status: "+request.getStatus()+"\n "+"Request type: "+request.getRequestType()
 				+"\n "+ "Description: "+request.getDescription(), request.getRequestType().toString());

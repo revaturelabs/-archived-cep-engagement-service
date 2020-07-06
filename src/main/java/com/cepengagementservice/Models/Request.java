@@ -11,7 +11,12 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
@@ -41,10 +46,13 @@ public class Request {
 	@Column(name= "BATCH_ID")
 	private String batchId;
 	
-	//userId needs to be a foreign key to User_Batches' userId
+	//userId mapped to User's table userId
+	@ManyToOne
 	@NonNull
-	@Column(name="USER_ID")
-	private Integer userId;
+	@JoinColumn(name="USER_ID")
+	//@Column(name="USER_ID")
+	private User userId;
+	//private Integer userId;
 	
 	@NonNull
 	@Column(name="START_TIME")
@@ -76,7 +84,7 @@ public class Request {
 		
 	}
 	
-	public Request(String batchId, Integer userId, Date startTime, Date endTime, Boolean isAllDay,Status status,RequestType requestType,String description) {
+	public Request(String batchId, User userId, Date startTime, Date endTime, Boolean isAllDay,Status status,RequestType requestType,String description) {
 		this.batchId=batchId;
 		this.userId=userId;
 		this.startTime=startTime;
@@ -94,7 +102,7 @@ public class Request {
 	public void setBatchId(String batchId) {
 		this.batchId=batchId;
 	}
-	public void setUserId(Integer userId) {
+	public void setUserId(User userId) {
 		this.userId=userId;
 	}
 	public void setStartTime(Date startTime) {
@@ -123,7 +131,7 @@ public class Request {
 	public String getBatchId() {
 		return this.batchId;
 	}
-	public Integer getUserId() {
+	public User getUserId() {
 		return this.userId;
 	}
 	public Date getStartTime() {
@@ -145,5 +153,10 @@ public class Request {
 		return this.description;
 	}
 	
-
+	@JsonProperty("userId")
+	private void unPack(Integer userId)
+	{
+		this.userId = new User();
+		this.userId.setUserId(userId);
+	}
 }
