@@ -46,7 +46,7 @@ public class Request {
 	@Column(name= "BATCH_ID")
 	private String batchId;
 	
-	//userId needs to be a foreign key to User_Batches' userId
+	//userId mapped to User's table userId
 	@ManyToOne
 	@NonNull
 	@JoinColumn(name="USER_ID")
