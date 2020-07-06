@@ -105,6 +105,13 @@
 			<artifactId>postgresql</artifactId>
 		<scope>runtime</scope>
     </dependency>
+    
+    <dependency>
+    <groupId>com.amazonaws</groupId>
+    <artifactId>aws-java-sdk-sns</artifactId>
+    <version>1.11.808</version>
+</dependency>
+
 	</dependencies>
 
   <repositories>
