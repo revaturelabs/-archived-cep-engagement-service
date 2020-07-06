@@ -1,7 +1,5 @@
 package com.cepengagementservice.Models;
 
-import com.fasterxml.jackson.annotation.JsonAlias;
-import java.util.*;
 
 public class AssociateGraph {
 	
