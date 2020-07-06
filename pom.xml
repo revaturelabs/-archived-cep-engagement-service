@@ -25,7 +25,7 @@
 	<dependencies>
 			<dependency>
 			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-test</artifactId>
+			<artifactId>spring-security-test</artifactId>  <!-- Used to test Spring Security in JUnit -->
 			<scope>test</scope>
 		</dependency> 
 
@@ -37,7 +37,7 @@
 		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-security</artifactId>
+			<artifactId>spring-boot-starter-security</artifactId>  <!-- Includes <groupId>org.springframework.security</groupId> <artifactId>spring-security-config</artifactId>  -->
 		</dependency>
 		
 		<dependency>

@@ -19,7 +19,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true)
+@EnableGlobalMethodSecurity(prePostEnabled = true) //allows for Spring Security prePostAnnotations
 public class AuthenticationConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -31,7 +31,7 @@ public class AuthenticationConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private JwtTokenAuthorizationOncePerRequestFilter jwtAuthenticationTokenFilter;
 
-    @Value("${jwt.get.token.uri}")
+    @Value("${jwt.get.token.uri}") //Delete this but -> /authenticate
     private String authenticationPath;
 
     @Autowired
@@ -55,17 +55,17 @@ public class AuthenticationConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
-            .csrf().disable()
-            .exceptionHandling().authenticationEntryPoint(jwtUnAuthorizedResponseAuthenticationEntryPoint).and()
-            .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-            .authorizeRequests()
-            .anyRequest().authenticated();
+             // .csrf().disable()
+            .exceptionHandling().authenticationEntryPoint(jwtUnAuthorizedResponseAuthenticationEntryPoint).and() //handles any exceptions with custom handler
+            .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and() //ensures that expired sessions are cleaned up
+            .authorizeRequests() //Allows restricting access based upon the HttpServletRequest using RequestMatcher implementations 
+            .anyRequest().authenticated(); // If you are authorized you will be able to access any routes.
 
        httpSecurity
             .addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
         
         httpSecurity
-            .headers()
+            .headers() //adds security headers to response
             .frameOptions().sameOrigin()  //H2 Console Needs this setting
             .cacheControl(); //disable caching
     }
@@ -78,15 +78,15 @@ public class AuthenticationConfig extends WebSecurityConfigurerAdapter {
                 HttpMethod.POST,
                 authenticationPath
             )
-            .antMatchers(HttpMethod.OPTIONS, "/**")
-            .and()
-            .ignoring()
-            .antMatchers(
-                HttpMethod.GET,
-                "/" //Other Stuff You want to Ignore
-            )
-            .and()
-            .ignoring()
-            .antMatchers("/h2-console/**/**");//Should not be in Production!
+            .antMatchers(HttpMethod.OPTIONS, "/**");
+//            .and()
+//            .ignoring()
+//            .antMatchers(
+//                HttpMethod.GET,
+//                "/" //Other Stuff You want to Ignore
+//            )
+//            .and()
+//            .ignoring()
+//            .antMatchers("/h2-console/**/**");//Should not be in Production!
     }
 }
