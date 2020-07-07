@@ -36,13 +36,13 @@ pipeline {
             }
         }
 
-    //       stage('Install maven dependencies'){
-    //         steps{
-    //             //clean install maven
-    //             sh 'mvn clean install'
-    //         }
+          stage('Install maven dependencies'){
+            steps{
+                //clean install maven
+                sh 'mvn clean install'
+            }
 
-    //     }
+        }
 
     //     stage ('Run Spring App') {
     //         steps {
