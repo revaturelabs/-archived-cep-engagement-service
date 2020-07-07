@@ -19,7 +19,6 @@ pipeline {
               // url: url to your repo
               git branch: 'progress-dev', credentialsId: 'bf453e33-834d-41b7-bbd4-a0f1851f9d81', url: 'https://github.com/revaturelabs/cep-engagement-service.git'
            }
-
         }
       
          stage('Destroy Old Server') {
@@ -41,7 +40,6 @@ pipeline {
                 //clean install maven
                 sh 'mvn clean install'
             }
-
         }
 
         stage ('Run Spring App') {
@@ -51,5 +49,4 @@ pipeline {
             }
         }
      }
-}
 }
