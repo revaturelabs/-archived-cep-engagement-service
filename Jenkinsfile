@@ -3,7 +3,7 @@ pipeline {
     
 	
     environment{
-        // JENKINS_NODE_COOKIE = 'dontkillmeplease'
+         JENKINS_NODE_COOKIE = 'dontkillmeplease'
         PORT=8081
     } 
      stages {
@@ -57,7 +57,7 @@ pipeline {
                 //Better user this one if we're unsure of the first one
                  
                 // sh 'mvn spring-boot:run'  // This one works but cannot be accessed with postman but won't stop running
-                 //sh 'nohup mvn spring-boot:run &'
+                 //sh 'nohup mvn spring-boot:run &' 
                  sh 'JENKINS_NODE_COOKIE = dontkillmeplease nohup mvn spring-boot:run > spring-log.txt &'
                  // it would run if nohup is not included. Not tested though not sure if porrt 8081 is open or what
             }
