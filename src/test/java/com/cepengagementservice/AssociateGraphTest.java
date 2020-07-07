@@ -39,9 +39,9 @@ public class AssociateGraphTest {
 	public void testAssosicateController() throws URISyntaxException
 	{
 			
-		List<AssociateGraph> k = (List<AssociateGraph>) AGC.getMethodName("mock1.associate28f51b0f-58ea-428f-9446-63f7cb737554@mock.com", "TR-1000");
+		List<AssociateGraph> k = (List<AssociateGraph>) AGC.getAssociateGrade("mock1.associate28f51b0f-58ea-428f-9446-63f7cb737554@mock.com", "TR-1000");
 		  
-		    Assert.assertEquals(k.get(0),( (List<AssociateGraph>)AGC.getMethodName("mock1.associate28f51b0f-58ea-428f-9446-63f7cb737554@mock.com", "TR-1000")).get(0));
+		    Assert.assertEquals(k.get(0),( (List<AssociateGraph>)AGC.getAssociateGrade("mock1.associate28f51b0f-58ea-428f-9446-63f7cb737554@mock.com", "TR-1000")).get(0));
 		
 	}
 

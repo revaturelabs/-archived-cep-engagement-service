@@ -47,7 +47,7 @@ package com.cepengagementservice.Controllers;
 		
 
 		 @GetMapping(value="/graph/associate/{batchId}/{associateEmail}")
-		    public Object getMethodName(@PathVariable String associateEmail,@PathVariable String batchId) {
+		    public Object getAssociateGrade(@PathVariable String associateEmail,@PathVariable String batchId) {
 		        String uri = "http://34.82.182.44:80/mock/evaluation/grades/reports/{params2}/spider/{params}";
 		        
 		        Map<String, String> anotherId = new HashMap<String, String>();
@@ -56,7 +56,7 @@ package com.cepengagementservice.Controllers;
 		        try{		     
 		        //Grab the custom Rest Template.
 		        RestTemplate obj = restTemplate();	
-		        //Map the received data (JSON) to AssociateGraph.class
+		        //TODO: Map the received data (JSON) to AssociateGraph.class
 		        //If fields not found from AssociateGraph model, fields will be empty.
 		        //If not able to cast a field, will throw!
 		        Object fetched = obj.getForObject(uri, Object.class ,anotherId);
