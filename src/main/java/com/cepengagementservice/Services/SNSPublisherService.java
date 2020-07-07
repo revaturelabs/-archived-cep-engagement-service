@@ -38,7 +38,7 @@ public class SNSPublisherService{
 		snsClient = (AmazonSNSClient) AmazonSNSClientBuilder.standard().withRegion(Regions.US_EAST_2).build();
 
 		// Publish message to the topic
-		snsClient.publish("arn:aws:sns:us-east-2:667247404250:TalentRequest", " BatchID: "+request.getBatchId()+"\n "+"UserEmail: "+userServices.getUserById(request.getUserId().getUserId()).getEmail()+"\n "+"StartDate: "+request.getStartTime()+"\n "+
+		snsClient.publish("arn:aws:sns:us-east-2:667247404250:TalentRequest", " BatchID: "+request.getBatchId()+"\n "+"UserEmail: "+userServices.getUserById(request.getUserId()).getEmail()+"\n "+"StartDate: "+request.getStartTime()+"\n "+
 				 "EndDate: "+request.getEndTime()+"\n "+"isAllDay: "+request.getIsAllDay()+"\n "
 				+ "Status: "+request.getStatus()+"\n "+"Request type: "+request.getRequestType()
 				+"\n "+ "Description: "+request.getDescription(), request.getRequestType().toString());
