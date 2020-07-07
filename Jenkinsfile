@@ -51,14 +51,14 @@ pipeline {
 
         stage ('Run Spring App') {
             steps {
-                JENKINS_NODE_COOKIE=dontKillMe
-                sh 'nohup java -jar /home/ec2-user/.m2/repository/com/cep-engagement-service/cep-engagement-service/0.0.1-SNAPSHOT/cep-engagement-service-0.0.1-SNAPSHOT.jar &'
+                
+                //sh 'nohup java -jar /home/ec2-user/.m2/repository/com/cep-engagement-service/cep-engagement-service/0.0.1-SNAPSHOT/cep-engagement-service-0.0.1-SNAPSHOT.jar &'
 
                 //Better user this one if we're unsure of the first one
                  
                 // sh 'mvn spring-boot:run'  // This one works but cannot be accessed with postman but won't stop running
                  //sh 'nohup mvn spring-boot:run &'
-
+                 sh 'nohup mvn spring-boot:run > spring-log.txt &'
                  // it would run if nohup is not included. Not tested though not sure if porrt 8081 is open or what
             }
         }
