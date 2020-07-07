@@ -24,7 +24,7 @@ public class JwtUserDetails extends User implements UserDetails{
 private final Collection<? extends GrantedAuthority> authorities; // collection of authorities granted to the user native to UserDetails interface
 
 
- public JwtUserDetails(User user) {
+ public JwtUserDetails(User user) {  //overloaded constructor
 	 this.setUserId(user.getUserId());
 	 this.setCompany(user.getCompany());
 	 this.setFirstName(user.getFirstName());

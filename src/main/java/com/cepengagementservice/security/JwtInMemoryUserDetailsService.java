@@ -16,7 +16,7 @@ import com.cepengagementservice.Services.UserServices;
 @Service
 public class JwtInMemoryUserDetailsService extends UserServices implements UserDetailsService {
 
-  static List<JwtUserDetails> inMemoryUserList = new ArrayList<>();
+  // static List<JwtUserDetails> inMemoryUserList = new ArrayList<>(); not used.
 
   
 
@@ -33,27 +33,11 @@ public class JwtInMemoryUserDetailsService extends UserServices implements UserD
     return  new JwtUserDetails( getUserByEmail(email));
   }
 
-
-
-
-
-//@Override
-//public  UserDetails  loadUserByUsername(String email) throws UsernameNotFoundException {
-//	// TODO Auto-generated method stub
-//	    return  new JwtUserDetails(getUserByEmail(email));
-//}
-
-//@Bean
-//public UserDetailsService userDetailsService(){
-//	return userDetailsService;
-//}
-
 @Override
-public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException { // can return the user without encrypted for future functionality.
 
 	 return (UserDetails) loadUserByEmail(email);
 }
-  
-  
+   
 
 }

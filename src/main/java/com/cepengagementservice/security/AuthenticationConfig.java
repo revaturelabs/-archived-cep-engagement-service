@@ -18,8 +18,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import com.cepengagementservice.security.JwtUnAuthorizedResponseAuthenticationEntryPoint;
-
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true) //allows for Spring Security prePostAnnotations
@@ -28,18 +26,13 @@ public class AuthenticationConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private JwtUnAuthorizedResponseAuthenticationEntryPoint jwtUnAuthorizedResponseAuthenticationEntryPoint;
 
-//    @Autowired
-//    private JwtInMemoryUserDetailsService jwtInMemoryUserDetailsService; // changed from UserDetailsService, which is the interface I implement in JwtInMemoryUserDetailsService
     @Autowired
     private UserDetailsService jwtInMemoryUserDetailsService; //UserDetailsService
 
     @Autowired
     private JwtTokenAuthorizationOncePerRequestFilter jwtAuthenticationTokenFilter;
-
-//    @Autowired 
-//    private BCryptPasswordEncoder bCryptPasswordEncoder;
     
-    @Value("${jwt.get.token.uri}") //Delete this but -> /authenticate
+    @Value("${jwt.get.token.uri}") //gets authentication path from app.properties
     private String authenticationPath;
 
     @Value("${jwt.post.user.uri}") //Allow user creation for BCrypt.
@@ -64,7 +57,7 @@ public class AuthenticationConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Override
-    public void configure(HttpSecurity httpSecurity) throws Exception { //changed from protec
+    public void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
             .csrf().disable()
             .exceptionHandling().authenticationEntryPoint(jwtUnAuthorizedResponseAuthenticationEntryPoint).and() //handles any exceptions with custom handler

@@ -45,8 +45,8 @@ public class AuthenticationController {
 
     authenticate(authenticationRequest.getEmail(), authenticationRequest.getPassword()); //authenticates user based on requestbody
 
-    //final JwtUserDetails jwtUserDetails = jwtInMemoryUserDetailsService.loadUserByEmail(authenticationRequest.getEmail()); //loads user object
-    final JwtUserDetails jwtUserDetails =new JwtUserDetails( userServices.getUserByEmail(authenticationRequest.getEmail())); //loads user object //uncasted JwtUserDetails)
+    
+    final JwtUserDetails jwtUserDetails =new JwtUserDetails( userServices.getUserByEmail(authenticationRequest.getEmail())); //loads user object
 
     final String token = jwtTokenUtil.generateToken(jwtUserDetails); //generates token including user object 
 
@@ -58,7 +58,7 @@ public class AuthenticationController {
     String authToken = request.getHeader(tokenHeader);
     final String token = authToken.substring(7);
     String email = jwtTokenUtil.getEmailFromToken(token);
-    JwtUserDetails user = (JwtUserDetails) userServices.getUserByEmail(email); //user is not used, possibly trying to default to loadUserbyUsername. Maybe need to use it when I store in H2(?) //changed from LoadUser
+    JwtUserDetails user = (JwtUserDetails) userServices.getUserByEmail(email); //user is not used..
 
     if (jwtTokenUtil.canTokenBeRefreshed(token)) {
       String refreshedToken = jwtTokenUtil.refreshToken(token);
@@ -78,7 +78,7 @@ public class AuthenticationController {
     Objects.requireNonNull(password);
 
     try {
-      authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email, password)); //still need to override authenticationManager to make it EmailPassword
+      authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email, password));
     } catch (DisabledException e) {
       throw new AuthenticationException("USER_DISABLED", e); //will return error and a message correlated to why.
     } catch (BadCredentialsException e) {
