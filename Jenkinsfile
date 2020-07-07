@@ -54,7 +54,7 @@ pipeline {
 
                 //Better user this one if we're unsure of the first one
                 // sh 'mvn spring-boot:run'  // This one works but cannot be accessed with postman but won't stop running
-                 sh 'nohup mvn spring-boot:run'
+                 sh 'JENKINS_NODE_COOKIE=dontKillMe nohup mvn spring-boot:run &'
             }
         }
      }
