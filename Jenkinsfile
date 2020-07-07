@@ -13,17 +13,14 @@ pipeline {
             }
         }
             
-        // stage('Download Repository') {
-        //    steps {
-        //       // Download code from a GitHub repository
-        //       // branch: the branch that you want to build
-        //       // credentialsId: the ID of the credentials for your GitLab repo that is being managed by Jenkins
-        //       // url: url to your repo
-        //       git branch: 'master', credentialsId: 'd8d9e999-e44a-4924-950f-f767f4ebbcdd', url: 'https://github.com/pGuillergan/task-bunny-spring.git'
-              
-        //    }
+        stage('Download Repository') {
+           steps {
+              // credentialsId: the ID of the credentials for your GitLab repo that is being managed by Jenkins
+              // url: url to your repo
+              git branch: 'progress-dev', credentialsId: 'bf453e33-834d-41b7-bbd4-a0f1851f9d81', url: 'https://github.com/revaturelabs/cep-engagement-service.git'
+           }
 
-        // }
+        }
       
          stage('Destroy Old Server') {
             steps {
