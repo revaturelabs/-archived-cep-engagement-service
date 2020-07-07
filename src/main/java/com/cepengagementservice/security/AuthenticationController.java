@@ -22,6 +22,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cepengagementservice.Services.UserServices;
+
 @RestController
 @CrossOrigin(origins={ "http://localhost:3000", "http://localhost:4200", "http://localhost:8080" }) //CORS will be changed to EC2 servers
 public class AuthenticationController {
@@ -36,15 +38,17 @@ public class AuthenticationController {
   private JwtTokenUtil jwtTokenUtil;
 
   @Autowired
-  private JwtInMemoryUserDetailsService jwtInMemoryUserDetailsService;
-
+  private JwtInMemoryUserDetailsService userServices;
+  
+ 
   @RequestMapping(value = "${jwt.get.token.uri}", method = RequestMethod.POST)  //Gets Login URI from app.properties and Generates Token if valid
   public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtTokenRequest authenticationRequest)
       throws AuthenticationException { // in case the request is not valid
 
     authenticate(authenticationRequest.getEmail(), authenticationRequest.getPassword()); //authenticates user based on requestbody
 
-    final JwtUserDetails jwtUserDetails = jwtInMemoryUserDetailsService.loadUserByEmail(authenticationRequest.getEmail()); //loads user object
+    //final JwtUserDetails jwtUserDetails = jwtInMemoryUserDetailsService.loadUserByEmail(authenticationRequest.getEmail()); //loads user object
+    final JwtUserDetails jwtUserDetails =new JwtUserDetails( userServices.getUserByEmail(authenticationRequest.getEmail())); //loads user object //uncasted JwtUserDetails)
 
     final String token = jwtTokenUtil.generateToken(jwtUserDetails); //generates token including user object 
 
@@ -56,7 +60,7 @@ public class AuthenticationController {
     String authToken = request.getHeader(tokenHeader);
     final String token = authToken.substring(7);
     String email = jwtTokenUtil.getEmailFromToken(token);
-    JwtUserDetails user = (JwtUserDetails) jwtInMemoryUserDetailsService.loadUserByEmail(email); //user is not used, possibly trying to default to loadUserbyUsername. Maybe need to use it when I store in H2(?)
+    JwtUserDetails user = (JwtUserDetails) userServices.getUserByEmail(email); //user is not used, possibly trying to default to loadUserbyUsername. Maybe need to use it when I store in H2(?) //changed from LoadUser
 
     if (jwtTokenUtil.canTokenBeRefreshed(token)) {
       String refreshedToken = jwtTokenUtil.refreshToken(token);

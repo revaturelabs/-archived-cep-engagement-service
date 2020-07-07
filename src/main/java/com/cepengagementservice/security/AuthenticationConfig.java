@@ -13,6 +13,8 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.userdetails.UserDetailsService;
+//import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
@@ -25,8 +27,10 @@ public class AuthenticationConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private JwtUnAuthorizedResponseAuthenticationEntryPoint jwtUnAuthorizedResponseAuthenticationEntryPoint;
 
+//    @Autowired
+//    private JwtInMemoryUserDetailsService jwtInMemoryUserDetailsService; // changed from UserDetailsService, which is the interface I implement in JwtInMemoryUserDetailsService
     @Autowired
-    private JwtInMemoryUserDetailsService jwtInMemoryUserDetailsService; // changed from UserDetailsService, which is the interface I implement in JwtInMemoryUserDetailsService
+    private UserDetailsService jwtInMemoryUserDetailsService;
 
     @Autowired
     private JwtTokenAuthorizationOncePerRequestFilter jwtAuthenticationTokenFilter;
@@ -37,7 +41,7 @@ public class AuthenticationConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth
-            .userDetailsService(jwtInMemoryUserDetailsService)
+            .userDetailsService(jwtInMemoryUserDetailsService)    
             .passwordEncoder(passwordEncoderBean());
     }
 
@@ -55,7 +59,7 @@ public class AuthenticationConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
-            .csrf().disable()
+            //.csrf().disable()
             .exceptionHandling().authenticationEntryPoint(jwtUnAuthorizedResponseAuthenticationEntryPoint).and() //handles any exceptions with custom handler
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and() //ensures that expired sessions are cleaned up
             .authorizeRequests() //Allows restricting access based upon the HttpServletRequest using RequestMatcher implementations 

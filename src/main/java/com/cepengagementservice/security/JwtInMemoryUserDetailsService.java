@@ -4,38 +4,57 @@ package com.cepengagementservice.security;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import com.cepengagementservice.Services.UserServices;
+
+//Change from UserServices to JwtUserDetails
+
 @Service
-public class JwtInMemoryUserDetailsService implements UserDetailsService {
+public class JwtInMemoryUserDetailsService extends UserServices implements UserDetailsService {
 
   static List<JwtUserDetails> inMemoryUserList = new ArrayList<>();
 
-  static {
-    inMemoryUserList.add(new JwtUserDetails(1L, "basic@email.com",
-        "defaultpassword", "companyname", "basicuser", "0000000")); //(Long userId, String email, String password, String company, String role, String phone)
-  }
+  
 
- // @Override
-  public JwtUserDetails loadUserByEmail(String email) throws UsernameNotFoundException { //might change this to EmailNotFoundException
-    Optional<JwtUserDetails> findFirst = inMemoryUserList.stream()
-        .filter(user -> user.getEmail().equals(email)).findFirst();
+ 
+  //@Override
+//  public JwtUserDetails loadUserByEmail(String email) throws UsernameNotFoundException { //might change this to EmailNotFoundException
+	   
+////    Optional<JwtUserDetails> findFirst = inMemoryUserList.stream()
+////        .filter(user -> user.getEmail().equals(email)).findFirst();
+////
+////    if (!findFirst.isPresent()) {
+////      throw new UsernameNotFoundException(String.format("USER_NOT_FOUND '%s'.", email));
+//    }
 
-    if (!findFirst.isPresent()) {
-      throw new UsernameNotFoundException(String.format("USER_NOT_FOUND '%s'.", email));
-    }
-
-    return findFirst.get();
-  }
+  //  return (JwtUserDetails) getUserByEmail(email);
+ // }
+//
 
 @Override
-public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException { // to implement UserDetailService
-	return null;
+public  UserDetails  loadUserByUsername(String email) throws UsernameNotFoundException {
+	// TODO Auto-generated method stub
+	    return  new JwtUserDetails(getUserByEmail(email));
 }
+
+//@Bean
+//public UserDetailsService userDetailsService(){
+//	return userDetailsService;
+//}
+
+//@Override
+//public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+//
+//	 return (UserDetails) loadUserByEmail(username);
+//}
+//  
+//  
 
 }
