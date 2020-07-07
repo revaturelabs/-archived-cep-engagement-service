@@ -44,7 +44,7 @@ pipeline {
 
         stage ('Package') {
             steps {
-                sh 'nvm package'
+                sh 'mvn package'
             }
         }
 
