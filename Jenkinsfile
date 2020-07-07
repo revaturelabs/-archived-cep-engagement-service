@@ -50,8 +50,8 @@ pipeline {
 
         stage ('Run Spring App') {
             steps {
-                sh 'java -jar /home/ec2-user/.m2/repository/com/cep-engagement-service/cep-engagement-service/0.0.1-SNAPSHOT/cep-engagement-service-0.0.1-SNAPSHOT.jar'
-                // sh 'nohup mvn spring-boot:run &' 
+                //sh 'java -jar /home/ec2-user/.m2/repository/com/cep-engagement-service/cep-engagement-service/0.0.1-SNAPSHOT/cep-engagement-service-0.0.1-SNAPSHOT.jar'
+                 sh 'nohup ./mvnw spring-boot:run &' 
             }
         }
      }
