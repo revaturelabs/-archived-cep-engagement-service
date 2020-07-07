@@ -38,6 +38,9 @@ public class AuthenticationConfig extends WebSecurityConfigurerAdapter {
     @Value("${jwt.get.token.uri}") //Delete this but -> /authenticate
     private String authenticationPath;
 
+    @Value("${jwt.post.user.uri}") //Allow user creation for BCrypt.
+    private String createUserPath;
+
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth
@@ -82,6 +85,10 @@ public class AuthenticationConfig extends WebSecurityConfigurerAdapter {
             .antMatchers(
                 HttpMethod.POST,
                 authenticationPath
+            )
+            .antMatchers(
+                HttpMethod.POST,
+                createUserPath
             )
             .antMatchers(HttpMethod.OPTIONS, "/**")
             .and()

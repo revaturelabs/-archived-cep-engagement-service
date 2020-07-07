@@ -1,4 +1,4 @@
-insert into users  (user_id, first_name, last_name, email, password, company, role, phone) VALUES (1,'stubFName1', 'stubLName1', 'stubEmail_1@gmail.com', 'pass1word', 'EXXON', 'CLIENT', '888');
+/*insert into users  (user_id, first_name, last_name, email, password, company, role, phone) VALUES (1,'stubFName1', 'stubLName1', 'stubEmail_1@gmail.com', 'pass1word', 'EXXON', 'CLIENT', '888');
 insert into users  (user_id, first_name, last_name, email, password, company, role, phone) VALUES (2,'stubFName2', 'stubLName2', 'stubEmail_2@gmail.com', 'pass2word', 'TEXACO', 'CLIENT', '888');
 insert into users  (user_id, first_name, last_name, email, password, company, role, phone) VALUES (3,'stubFName3', 'stubLName3', 'stubEmail_3@gmail.com', 'pass3word', 'VALERO', 'CLIENT', '888');
 insert into users  (user_id, first_name, last_name, email, password, company, role, phone) VALUES (4,'stubFName4', 'stubLName4', 'stubEmail_4@gmail.com', 'pass4word', 'CHEVRON', 'CLIENT', '888');
@@ -31,3 +31,4 @@ insert into user_batch  (row_id, user_id, batch_id) VALUES (20, 10, 'TR-1002');
 insert into users  (user_id,first_name, last_name, email, password, company, role, phone) VALUES (11,'stubFName11', 'stubLName11', 'stubEmail_11@revature.com', 'pass11word', 'REVATURE', 'ADMIN', '888');
 insert into users  (user_id,first_name, last_name, email, password, company, role, phone) VALUES (12,'stubFName12', 'stubLName12', 'stubEmail_12@revature.com', 'pass12word', 'REVATURE', 'ADMIN', '888');
 insert into users  (user_id,first_name, last_name, email, password, company, role, phone) VALUES (13,'stubFName13', 'stubLName13', 'stubEmail_13@revature.com', 'pass13word', 'REVATURE', 'ADMIN', '888');
+*/

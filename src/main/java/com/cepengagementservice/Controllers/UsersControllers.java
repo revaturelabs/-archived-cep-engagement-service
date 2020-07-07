@@ -8,6 +8,7 @@ import com.cepengagementservice.Services.UserServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,6 +18,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(value = "/users")
 public class UsersControllers {
+    
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
     private UserServices userService;
@@ -34,6 +38,7 @@ public class UsersControllers {
     // Change logic in service.
     @RequestMapping(method = RequestMethod.POST, value = "/add")
     ResponseEntity<?> add(@RequestBody User user) {
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         if (userService.addUser(user)) {
             return new ResponseEntity<>(HttpStatus.OK);
         }
