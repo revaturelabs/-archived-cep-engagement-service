@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,6 +15,11 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 public class JwtUserDetails extends User implements UserDetails{
+	
+/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1816829060449575418L;
 	
 private final Collection<? extends GrantedAuthority> authorities; // collection of authorities granted to the user native to UserDetails interface
 

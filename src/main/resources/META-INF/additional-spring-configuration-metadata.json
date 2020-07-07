@@ -2,26 +2,31 @@
   {
     "name": "jwt.signing.key.secret",
     "type": "java.lang.String",
-    "description": "A description for 'jwt.signing.key.secret'"
+    "description": "The secret used for encryption"
   },
   {
     "name": "jwt.get.token.uri",
     "type": "java.lang.String",
-    "description": "A description for 'jwt.get.token.uri'"
+    "description": "The universal resource indicator for authenticating the user and receiving the token"
   },
   {
     "name": "jwt.refresh.token.uri",
     "type": "java.lang.String",
-    "description": "A description for 'jwt.refresh.token.uri'"
+    "description": "The Endpoint used to refresh the token"
   },
   {
     "name": "jwt.http.request.header",
     "type": "java.lang.String",
-    "description": "A description for 'jwt.http.request.header'"
+    "description": "The Header that will be on the Requests"
   },
   {
     "name": "jwt.token.expiration.in.seconds",
     "type": "java.lang.String",
-    "description": "A description for 'jwt.token.expiration.in.seconds'"
+    "description": "The constant number of seconds until a token expires"
+  },
+  {
+    "name": "jwt.post.user.uri",
+    "type": "java.lang.String",
+    "description": "The URI to add a user"
   }
 ]}

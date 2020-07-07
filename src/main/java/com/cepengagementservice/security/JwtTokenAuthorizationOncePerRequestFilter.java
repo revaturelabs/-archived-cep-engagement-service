@@ -59,7 +59,7 @@ public class JwtTokenAuthorizationOncePerRequestFilter extends OncePerRequestFil
         logger.debug("JWT_TOKEN_EMAIL_VALUE '{}'", email);
         if (email != null && SecurityContextHolder.getContext().getAuthentication() == null) { //makes sure the authentication token and email are both non-null
 
-            JwtUserDetails jwtUserDetails = (JwtUserDetails) this.jwtInMemoryUserDetailsService.getUserByEmail(email); //loads in user as a JwtUserDetails object, casted 
+            JwtUserDetails jwtUserDetails = this.jwtInMemoryUserDetailsService.loadUserByEmail(email); //loads in user as a JwtUserDetails object, casted 
 
             if (jwtTokenUtil.validateToken(jwtToken, jwtUserDetails)) {
                 UsernamePasswordAuthenticationToken emailPasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(jwtUserDetails, null, jwtUserDetails.getAuthorities());

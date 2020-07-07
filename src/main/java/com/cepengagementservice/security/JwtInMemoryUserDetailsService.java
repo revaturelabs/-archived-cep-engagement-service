@@ -4,9 +4,6 @@ package com.cepengagementservice.security;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -23,38 +20,40 @@ public class JwtInMemoryUserDetailsService extends UserServices implements UserD
 
   
 
- 
-  //@Override
-//  public JwtUserDetails loadUserByEmail(String email) throws UsernameNotFoundException { //might change this to EmailNotFoundException
+
+  public JwtUserDetails loadUserByEmail(String email) throws UsernameNotFoundException { //might change this to EmailNotFoundException
 	   
-////    Optional<JwtUserDetails> findFirst = inMemoryUserList.stream()
-////        .filter(user -> user.getEmail().equals(email)).findFirst();
-////
-////    if (!findFirst.isPresent()) {
-////      throw new UsernameNotFoundException(String.format("USER_NOT_FOUND '%s'.", email));
-//    }
+  /*  Optional<JwtUserDetails> findFirst = inMemoryUserList.stream()
+        .filter(user -> user.getEmail().equals(email)).findFirst();
 
-  //  return (JwtUserDetails) getUserByEmail(email);
- // }
-//
+    if (!findFirst.isPresent()) {
+      throw new UsernameNotFoundException(String.format("USER_NOT_FOUND '%s'.", email));
+    }*/
 
-@Override
-public  UserDetails  loadUserByUsername(String email) throws UsernameNotFoundException {
-	// TODO Auto-generated method stub
-	    return  new JwtUserDetails(getUserByEmail(email));
-}
+    return  new JwtUserDetails( getUserByEmail(email));
+  }
+
+
+
+
+
+//@Override
+//public  UserDetails  loadUserByUsername(String email) throws UsernameNotFoundException {
+//	// TODO Auto-generated method stub
+//	    return  new JwtUserDetails(getUserByEmail(email));
+//}
 
 //@Bean
 //public UserDetailsService userDetailsService(){
 //	return userDetailsService;
 //}
 
-//@Override
-//public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-//
-//	 return (UserDetails) loadUserByEmail(username);
-//}
-//  
-//  
+@Override
+public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+
+	 return (UserDetails) loadUserByEmail(email);
+}
+  
+  
 
 }

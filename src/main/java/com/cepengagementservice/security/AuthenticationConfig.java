@@ -14,10 +14,11 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
-//import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
+import com.cepengagementservice.security.JwtUnAuthorizedResponseAuthenticationEntryPoint;
 
 @Configuration
 @EnableWebSecurity
@@ -30,11 +31,14 @@ public class AuthenticationConfig extends WebSecurityConfigurerAdapter {
 //    @Autowired
 //    private JwtInMemoryUserDetailsService jwtInMemoryUserDetailsService; // changed from UserDetailsService, which is the interface I implement in JwtInMemoryUserDetailsService
     @Autowired
-    private UserDetailsService jwtInMemoryUserDetailsService;
+    private UserDetailsService jwtInMemoryUserDetailsService; //UserDetailsService
 
     @Autowired
     private JwtTokenAuthorizationOncePerRequestFilter jwtAuthenticationTokenFilter;
 
+//    @Autowired 
+//    private BCryptPasswordEncoder bCryptPasswordEncoder;
+    
     @Value("${jwt.get.token.uri}") //Delete this but -> /authenticate
     private String authenticationPath;
 
@@ -60,14 +64,14 @@ public class AuthenticationConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Override
-    protected void configure(HttpSecurity httpSecurity) throws Exception {
+    public void configure(HttpSecurity httpSecurity) throws Exception { //changed from protec
         httpSecurity
-            //.csrf().disable()
+            .csrf().disable()
             .exceptionHandling().authenticationEntryPoint(jwtUnAuthorizedResponseAuthenticationEntryPoint).and() //handles any exceptions with custom handler
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and() //ensures that expired sessions are cleaned up
-            .authorizeRequests() //Allows restricting access based upon the HttpServletRequest using RequestMatcher implementations 
-            .anyRequest().authenticated().and()// If you are authorized you will be able to access any routes.
-        	.formLogin();
+            .authorizeRequests().antMatchers("/users/all").hasAnyRole("ADMIN") //Allows restricting access based upon the HttpServletRequest using RequestMatcher implementations 
+            .anyRequest().authenticated();// If you are authorized you will be able to access any routes.
+        	//*/
 
        httpSecurity
             .addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
@@ -81,24 +85,15 @@ public class AuthenticationConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity webSecurity) throws Exception {
         webSecurity
-            .ignoring()
+             .ignoring()
             .antMatchers(
                 HttpMethod.POST,
-                authenticationPath
+                authenticationPath //allows authentication path through security without Token.
             )
             .antMatchers(
                 HttpMethod.POST,
                 createUserPath
             )
-            .antMatchers(HttpMethod.OPTIONS, "/**")
-            .and()
-            .ignoring()
-            .antMatchers(
-                HttpMethod.GET,
-                "/**" //Other Stuff You want to Ignore
-            );
-//            .and()
-//            .ignoring()
-//            .antMatchers("/h2-console/**/**");//Should not be in Production!
+            .antMatchers(HttpMethod.OPTIONS, "/**");
     }
 }

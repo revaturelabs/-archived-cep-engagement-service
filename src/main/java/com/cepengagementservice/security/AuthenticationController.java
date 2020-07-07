@@ -22,8 +22,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cepengagementservice.Services.UserServices;
-
 @RestController
 @CrossOrigin(origins={ "http://localhost:3000", "http://localhost:4200", "http://localhost:8080" }) //CORS will be changed to EC2 servers
 public class AuthenticationController {
