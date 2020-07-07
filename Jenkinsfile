@@ -1,5 +1,6 @@
 pipeline {
     agent any
+    BUILD_ID=dontKillMe
 	
     environment{
         JENKINS_NODE_COOKIE = 'dontkillmeplease'
@@ -50,7 +51,7 @@ pipeline {
 
         stage ('Run Spring App') {
             steps {
-                sh 'BUILD_ID=dontKillMe nohup java -jar /home/ec2-user/.m2/repository/com/cep-engagement-service/cep-engagement-service/0.0.1-SNAPSHOT/cep-engagement-service-0.0.1-SNAPSHOT.jar &'
+                sh 'nohup java -jar /home/ec2-user/.m2/repository/com/cep-engagement-service/cep-engagement-service/0.0.1-SNAPSHOT/cep-engagement-service-0.0.1-SNAPSHOT.jar &'
 
                 //Better user this one if we're unsure of the first one
                  
