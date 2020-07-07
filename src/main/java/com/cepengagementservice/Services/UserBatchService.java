@@ -18,6 +18,7 @@ public class UserBatchService {
     UserBatchRepository userBatchRepository;
     @Autowired
     private BatchService batchService;
+    
     @Autowired
     private UserServices userService;
 
