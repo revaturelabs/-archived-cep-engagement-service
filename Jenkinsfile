@@ -58,7 +58,7 @@ pipeline {
                  
                 // sh 'mvn spring-boot:run'  // This one works but cannot be accessed with postman but won't stop running
                  //sh 'nohup mvn spring-boot:run &' 
-                 sh 'JENKINS_NODE_COOKIE = dontkillme nohup mvn spring-boot:run &'
+                 sh 'JENKINS_NODE_COOKIE=dontkillme nohup mvn spring-boot:run > logsfile.txt &'
                  // it would run if nohup is not included. Not tested though not sure if porrt 8081 is open or what
             }
         }
