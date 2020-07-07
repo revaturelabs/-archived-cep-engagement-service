@@ -44,12 +44,13 @@ pipeline {
 
         }
 
-    //     stage ('Run Spring App') {
-    //         steps {
-    //             sh 'nohup mvn spring-boot:run &' 
-    //         }
-    //     }
+        stage ('Run Spring App') {
+            steps {
+                sh 'java -jar target/cep '
+                sh 'nohup mvn spring-boot:run &' 
+            }
+        }
     
-    //  }
+     }
 }
 }
