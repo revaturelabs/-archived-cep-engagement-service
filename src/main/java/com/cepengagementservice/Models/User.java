@@ -1,15 +1,21 @@
 package com.cepengagementservice.Models;
 
+import java.util.List;
+
 // import java.util.Set;
 
 // import javax.annotation.Generated;
 // import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 // import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 // import javax.persistence.JoinColumn;
 // import javax.persistence.JoinTable;
 // import javax.persistence.ManyToMany;
@@ -78,11 +84,15 @@ public class User {
     @NonNull
     @Column(name = "PHONE")
     private String phone;
-
-    // @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
-    // @JoinTable(name = "USER_BATCH", joinColumns = @JoinColumn(name = "USER_ID"),
-    // inverseJoinColumns = @JoinColumn(name = "BATCH_ID"))
-    // private Set<Batch> batches;
+    
+  //userId mapped to Request table
+//  	@OneToMany
+//  	@JoinColumn(name="USER_ID")
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+//    @OneToMany(fetch = FetchType.LAZY, mappedBy = "USER_ID")
+  	private List<Request> requests;
+  	
 
     public Integer getUserId() {
         return userId;

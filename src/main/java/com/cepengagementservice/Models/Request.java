@@ -51,7 +51,7 @@ public class Request {
 	@NonNull
 	@JoinColumn(name="USER_ID")
 	//@Column(name="USER_ID")
-	private User userId;
+	public User userId;
 	//private Integer userId;
 	
 	@NonNull
