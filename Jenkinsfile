@@ -53,8 +53,9 @@ pipeline {
                 //sh 'java -jar /home/ec2-user/.m2/repository/com/cep-engagement-service/cep-engagement-service/0.0.1-SNAPSHOT/cep-engagement-service-0.0.1-SNAPSHOT.jar'
 
                 //Better user this one if we're unsure of the first one
+                  export BUILD_ID=dontKillMe
                 // sh 'mvn spring-boot:run'  // This one works but cannot be accessed with postman but won't stop running
-                 sh 'JENKINS_NODE_COOKIE=dontkillmeplease nohup mvn spring-boot:run &'
+                 sh 'nohup mvn spring-boot:run &'
             }
         }
      }
