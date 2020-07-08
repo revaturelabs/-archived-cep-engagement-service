@@ -7,9 +7,12 @@ import com.cepengagementservice.Models.User;
 import com.cepengagementservice.Repositories.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
-@Service
+@Service @Primary
+
 public class UserServices {
 
     @Autowired
@@ -43,6 +46,7 @@ public class UserServices {
             return false;
     }
 
+    
     public User getUserByEmail(String email) {
         return userRepository.findByEmail(email);
     }
