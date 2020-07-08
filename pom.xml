@@ -80,7 +80,12 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 
+<<<<<<< HEAD
 			<!-- <exclusions>
+=======
+			<exclusions>
+			
+>>>>>>> 8540a424281fd0d93b48fa5ada9f2648ac54762e
 				<exclusion>
 					<groupId>org.junit.vintage</groupId>
 					<artifactId>junit-vintage-engine</artifactId>
