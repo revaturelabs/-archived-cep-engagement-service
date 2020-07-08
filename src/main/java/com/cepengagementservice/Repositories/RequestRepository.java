@@ -8,4 +8,6 @@ import com.cepengagementservice.Models.Request;
 @Repository
 public interface RequestRepository extends JpaRepository<Request,Integer> {
 
+	Request findByRequestId(int requestId);
+
 }
