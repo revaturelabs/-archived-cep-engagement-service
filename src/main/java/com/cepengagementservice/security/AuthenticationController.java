@@ -53,12 +53,12 @@ public class AuthenticationController {
     return ResponseEntity.ok(new JwtTokenResponse(token));
   }
 
-  @RequestMapping(value = "${jwt.refresh.token.uri}", method = RequestMethod.GET)  //Gets refresh URI from app.properties and refreshes token if it is expired
+  @RequestMapping(value = "${jwt.refresh.token.uri}", method = RequestMethod.GET)  //Gets refresh URI from app.properties and refreshes token if it is expired, needs fix.
   public ResponseEntity<?> refreshAndGetAuthenticationToken(HttpServletRequest request) {
     String authToken = request.getHeader(tokenHeader);
     final String token = authToken.substring(7);
-    String email = jwtTokenUtil.getEmailFromToken(token);
-    JwtUserDetails user = (JwtUserDetails) userServices.getUserByEmail(email); //user is not used..
+   // String email = jwtTokenUtil.getEmailFromToken(token); //only need token to check if it is refreshed.
+   // JwtUserDetails user = (JwtUserDetails) userServices.getUserByEmail(email); //user is not used for current functionality.
 
     if (jwtTokenUtil.canTokenBeRefreshed(token)) {
       String refreshedToken = jwtTokenUtil.refreshToken(token);

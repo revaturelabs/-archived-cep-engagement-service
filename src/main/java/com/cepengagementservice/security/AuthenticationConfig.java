@@ -1,7 +1,5 @@
 package com.cepengagementservice.security;
 
-import javax.sql.DataSource;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -64,9 +62,10 @@ public class AuthenticationConfig extends WebSecurityConfigurerAdapter {
             .csrf().disable()
             .exceptionHandling().authenticationEntryPoint(jwtUnAuthorizedResponseAuthenticationEntryPoint).and() //handles any exceptions with custom handler
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and() //ensures that expired sessions are cleaned up
-            .authorizeRequests().antMatchers("/users/all", "/interventions").hasAnyRole("ADMIN") //Allows restricting access based upon the HttpServletRequest using RequestMatcher implementations 
-            .anyRequest().authenticated();// If you are authorized you will be able to access any routes.
-        	//*/
+            .authorizeRequests()//Allows restricting access based upon the HttpServletRequest using RequestMatcher implementations 
+            .antMatchers("/v3/api-docs/**", "/configuration/**", "/swagger*/**", "/webjars/**").permitAll() // permits all users to access Swagger V3 URLS
+            .antMatchers("/users/all", "/interventions").hasAnyRole("ADMIN")  // Restricts getting all users and intervention requests to ADMIN users.
+            .anyRequest().authenticated();// If you are authorized you will be able to access any routes that aren't specified to the ADMIN role.
 
        httpSecurity
             .addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
@@ -83,12 +82,14 @@ public class AuthenticationConfig extends WebSecurityConfigurerAdapter {
              .ignoring()
             .antMatchers(
                 HttpMethod.POST,
-                authenticationPath //allows authentication path through security without Token.
+                authenticationPath //allows Post Request to authentication path through security without Token.
             )
             .antMatchers(
-                HttpMethod.POST,
+                HttpMethod.POST, //allows Post Request to Add User Endpoint without Token
                 createUserPath
             )
-            .antMatchers(HttpMethod.OPTIONS, "/**");
+            .antMatchers(HttpMethod.OPTIONS, "/**") // Permits Options requests to any URL to see your options
+            .antMatchers("/v3/**"); // Permits any type of http request to the URL starting with V3 for Swagger.
+        
     }
 }
