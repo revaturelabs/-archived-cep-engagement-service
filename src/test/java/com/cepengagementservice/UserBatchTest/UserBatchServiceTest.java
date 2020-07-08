@@ -76,7 +76,7 @@ public class UserBatchServiceTest {
         UserBatch user = new UserBatch(1, "TR-1000");
         when(UService.check(1)).thenReturn(false);
         when(BService.check("TR-1000")).thenReturn(true);
-        when(UBRepository.save(user)).thenReturn(user);
+      //  when(UBRepository.save(user)).thenReturn(user);
 
         assertEquals(null,UBService.addPair(1,"TR-1000"), "User batch must not save if user not previously stored in DB.");
       }
@@ -87,7 +87,7 @@ public class UserBatchServiceTest {
         UserBatch user = new UserBatch(1, "TR-1000");
         when(UService.check(1)).thenReturn(true);
         when(BService.check("TR-1000")).thenReturn(false);
-        when(UBRepository.save(user)).thenReturn(user);
+      //  when(UBRepository.save(user)).thenReturn(user);
 
         assertEquals(null,UBService.addPair(1,"TR-1000"), "User batch must not save if batch not previously stored in DB.");
       }

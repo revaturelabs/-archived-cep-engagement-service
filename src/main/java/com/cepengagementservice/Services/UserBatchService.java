@@ -60,7 +60,7 @@ public class UserBatchService {
 
     public UserBatch addPair(int userId, String batchId) {
         // Check User and batch
-        if (userService.check(userId) == false || batchService.check(batchId) == false) {
+        if (userService.check(userId) == false & batchService.check(batchId) == false) {
             return null;
         }
         UserBatch ub = userBatchRepository.save(new UserBatch(userId, batchId));
