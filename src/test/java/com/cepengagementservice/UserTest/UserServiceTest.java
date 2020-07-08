@@ -10,6 +10,7 @@ import static org.mockito.Mockito.when;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.cepengagementservice.Models.Request;
 import com.cepengagementservice.Models.User;
 import com.cepengagementservice.Repositories.UserRepository;
 import com.cepengagementservice.Services.UserServices;
@@ -37,7 +38,7 @@ public class UserServiceTest {
     
     @Test
     public void testAddUserIfEmailNotOccupied(){
-        User user = new User(1,"first", "last","p","pass", "comp","role", "888");
+        User user = new User(1,"first", "last","p","pass", "comp","role", "888",new ArrayList<Request>());
         
         when(USMock.findByEmail(user.getEmail())).thenReturn(null);
 
@@ -47,8 +48,8 @@ public class UserServiceTest {
 
     @Test
     public void  testAddUserIfEmailOccupied(){
-        User user = new User(1,"first", "last","p","pass", "comp","role", "888");
-        User userTwo = new User(2,"second", "last","p","pass", "comp","role", "888");
+        User user = new User(1,"first", "last","p","pass", "comp","role", "888", new ArrayList<Request>());
+        User userTwo = new User(2,"second", "last","p","pass", "comp","role", "888", new ArrayList<Request>());
         when(USMock.findByEmail(userTwo.getEmail())).thenReturn(user);
 
         assertFalse(userService.addUser(userTwo), "Users with same email shouldn't be added.");
@@ -57,8 +58,8 @@ public class UserServiceTest {
 
     @Test
     public void testGetAllUsers(){
-        User user = new User(1,"first", "last","pa@stubmail.com","pass", "comp","role", "888");
-        User userTwo = new User(2,"second", "last","pb@stubmail.com","pass", "comp","role", "888");
+        User user = new User(1,"first", "last","pa@stubmail.com","pass", "comp","role", "888", new ArrayList<Request>());
+        User userTwo = new User(2,"second", "last","pb@stubmail.com","pass", "comp","role", "888", new ArrayList<Request>());
        
         List<User> users = new ArrayList<User>();
         users.add(user);
@@ -71,9 +72,9 @@ public class UserServiceTest {
 
     @Test
     public void testGetAllUsersShouldHaveSavedUsers(){
-        User user = new User(1,"first", "last","pa@stubmail.com","pass", "comp","role", "888");
-        User userTwo = new User(2,"second", "last","pb@stubmail.com","pass", "comp","role", "888");
-        User userThree = new User(3,"third", "last","pc@stubmail.com","pass", "comp","role", "888");
+        User user = new User(1,"first", "last","pa@stubmail.com","pass", "comp","role", "888",new ArrayList<Request>());
+        User userTwo = new User(2,"second", "last","pb@stubmail.com","pass", "comp","role", "888",new ArrayList<Request>());
+        User userThree = new User(3,"third", "last","pc@stubmail.com","pass", "comp","role", "888",new ArrayList<Request>());
       
         List<User> users = new ArrayList<User>();
         List<User> usersTwo = new ArrayList<User>();
