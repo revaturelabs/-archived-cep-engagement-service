@@ -1,7 +1,7 @@
 pipeline {
     agent any
     
-	
+    
     environment{
          JENKINS_NODE_COOKIE = 'dontkillmeplease'
         PORT=8081
@@ -35,25 +35,22 @@ pipeline {
                 }
             }
         }
-
           stage('Install maven dependencies'){
             steps{
                 //clean install maven
-                sh 'mvn clean install'
+                sh 'mvn install'
             }
         }
-
-        stage ('Package') {
+        stage ('Clean & Package') {
             steps {
-                sh 'mvn package'
+                sh 'mvn clean package'
             }
         }
-
         stage ('Run Spring App') {
             steps {
                 
-                //sh 'java -jar /home/ec2-user/.jenkins/workspace/Revature_Client_Engagement_Portal/target/cep-engagement-service-0.0.1-SNAPSHOT.jar &>/dev/null &'
-               sh 'disown java -jar /home/ec2-user/.jenkins/workspace/Revature_Client_Engagement_Portal/target/cep-engagement-service-0.0.1-SNAPSHOT.jar &'
+                sh 'nohup java -jar target/cep-engagement-service-0.0.1-SNAPSHOT.jar &'
+               //sh 'disown java -jar /home/ec2-user/.jenkins/workspace/Revature_Client_Engagement_Portal/target/cep-engagement-service-0.0.1-SNAPSHOT.jar &'
                 //Better user this one if we're unsure of the first one
                  
                 // sh 'mvn spring-boot:run'  // This one works but cannot be accessed with postman but won't stop running
