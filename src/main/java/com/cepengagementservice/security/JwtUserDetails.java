@@ -13,12 +13,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import com.cepengagementservice.Models.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-
 public class JwtUserDetails extends User implements UserDetails{
 	
-/**
-	 * 
-	 */
 	private static final long serialVersionUID = -1816829060449575418L;
 	
 private final Collection<? extends GrantedAuthority> authorities; // collection of authorities granted to the user native to UserDetails interface
