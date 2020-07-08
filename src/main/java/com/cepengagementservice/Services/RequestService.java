@@ -22,4 +22,17 @@ public class RequestService {
 		ir.save(intervention);
 	}
 
+	public Request findByRequestId(int requestId) {
+		return ir.findByRequestId(requestId);
+	}
+
+    public void updateRequest(Request request) {
+		ir.save(request);
+	}
+
+	public void deleteByRequestId(int id) {
+		ir.deleteById(id);
+		
+	}
+
 }
