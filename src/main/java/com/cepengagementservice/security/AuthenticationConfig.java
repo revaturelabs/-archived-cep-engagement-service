@@ -65,7 +65,7 @@ public class AuthenticationConfig extends WebSecurityConfigurerAdapter {
             .csrf().disable()
             .exceptionHandling().authenticationEntryPoint(jwtUnAuthorizedResponseAuthenticationEntryPoint).and() //handles any exceptions with custom handler
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and() //ensures that expired sessions are cleaned up
-            .authorizeRequests().antMatchers("/users/all").hasAnyRole("ADMIN") //Allows restricting access based upon the HttpServletRequest using RequestMatcher implementations 
+            .authorizeRequests().antMatchers("/users/all", "/interventions").hasAnyRole("ADMIN") //Allows restricting access based upon the HttpServletRequest using RequestMatcher implementations 
             .anyRequest().authenticated();// If you are authorized you will be able to access any routes.
         	//*/
 
