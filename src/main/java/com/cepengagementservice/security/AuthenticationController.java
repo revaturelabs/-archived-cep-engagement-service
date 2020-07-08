@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@CrossOrigin(origins={ "http://localhost:3000", "http://localhost:4200", "http://localhost:8080" }) //CORS will be changed to EC2 servers
+@CrossOrigin(origins={ "http://localhost:3000", "http://localhost:4200", "http://localhost:8081", "http://ec2-18-232-171-89.compute-1.amazonaws.com:8081"}) //CORS will be changed to EC2 servers
 public class AuthenticationController {
 
   @Value("${jwt.http.request.header}") //grabs header from src/main/resources/app.properties 
