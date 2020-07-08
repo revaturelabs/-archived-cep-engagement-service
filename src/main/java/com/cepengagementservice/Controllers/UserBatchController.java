@@ -22,12 +22,23 @@ public class UserBatchController {
     @Autowired
     private UserBatchService userBatchService;
 
+    @GetMapping(value = "/all")
+    public ResponseEntity<List<UserBatch>> getAllUB() {
+        try {
+            List<UserBatch> batches = userBatchService.findAll();
+            return new ResponseEntity<>(batches, HttpStatus.OK);
+
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+    }
     /**
      * 
      * @param userId
      * @return list of Batch objects
      */
-    @GetMapping(value = "/all")
+    @GetMapping(value = "/batchesbyuser")
     public ResponseEntity<List<Batch>> getAllMyBatches(@RequestParam int userId) {
         try {
             List<Batch> batches = userBatchService.getBatchesByUserId(userId);
@@ -39,7 +50,7 @@ public class UserBatchController {
 
     }
 
-    @GetMapping(value = "/all/DTO")
+    @GetMapping(value = "/batchesbyuser/DTO")
     public ResponseEntity<List<BatchDTO>> getAllMyBatchesDTO(@RequestParam int userId) {
         try {
             List<BatchDTO> batches = userBatchService.getBatchesDTOByUserId(userId);
@@ -51,7 +62,7 @@ public class UserBatchController {
 
     }
     @PostMapping(value = "/addPair")
-    public ResponseEntity<UserBatch> getAllMyBatches(@RequestParam int userId, @RequestParam String batchId) {
+    public ResponseEntity<UserBatch> makeUB(@RequestParam int userId, @RequestParam String batchId) {
         try {
             UserBatch ub = userBatchService.addPair(userId, batchId);
             return new ResponseEntity<>(ub, HttpStatus.OK);

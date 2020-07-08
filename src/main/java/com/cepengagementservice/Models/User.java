@@ -1,15 +1,20 @@
 package com.cepengagementservice.Models;
 
+import java.util.List;
+
 // import java.util.Set;
 
 // import javax.annotation.Generated;
 // import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 // import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 // import javax.persistence.JoinColumn;
 // import javax.persistence.JoinTable;
 // import javax.persistence.ManyToMany;
@@ -49,6 +54,15 @@ public class User {
     @Column(name = "USER_ID")
     private Integer userId;
 
+
+    @NonNull
+    @Column(name = "FIRST_NAME")
+    private String firstName;
+
+    @NonNull
+    @Column(name = "LAST_NAME")
+    private String lastName;
+
     @NonNull
     @Column(name = "EMAIL")
     private String email;
@@ -68,11 +82,12 @@ public class User {
     @NonNull
     @Column(name = "PHONE")
     private String phone;
-
-    // @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
-    // @JoinTable(name = "USER_BATCH", joinColumns = @JoinColumn(name = "USER_ID"),
-    // inverseJoinColumns = @JoinColumn(name = "BATCH_ID"))
-    // private Set<Batch> batches;
+    
+  //userId mapped to Request table
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+  	public List<Request> requests;
+  	
 
     public Integer getUserId() {
         return userId;
@@ -80,6 +95,23 @@ public class User {
 
     public void setUserId(Integer userId) {
         this.userId = userId;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+
+    public String getLastName() {
+        return firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getEmail() {
