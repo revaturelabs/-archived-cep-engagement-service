@@ -18,7 +18,7 @@ pipeline {
            steps {
               // credentialsId: the ID of the credentials for your GitLab repo that is being managed by Jenkins
               // url: url to your repo
-              git branch: 'progress-dev', credentialsId: 'bf453e33-834d-41b7-bbd4-a0f1851f9d81', url: 'https://github.com/revaturelabs/cep-engagement-service.git'
+              git branch: 'dev', credentialsId: 'bf453e33-834d-41b7-bbd4-a0f1851f9d81', url: 'https://github.com/revaturelabs/cep-engagement-service.git'
            }
         }
       
