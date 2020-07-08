@@ -90,6 +90,12 @@ public class AuthenticationConfig extends WebSecurityConfigurerAdapter {
                 HttpMethod.POST,
                 createUserPath
             )
-            .antMatchers(HttpMethod.OPTIONS, "/**");
+            .antMatchers(HttpMethod.OPTIONS, "/**")
+            .and()
+            .ignoring()
+            .antMatchers(
+                HttpMethod.GET,
+                "/**" //Other Stuff You want to Ignore
+            );
     }
 }
