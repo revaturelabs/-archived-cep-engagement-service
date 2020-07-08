@@ -7,7 +7,6 @@ import com.cepengagementservice.Models.User;
 import com.cepengagementservice.Repositories.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
