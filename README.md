@@ -18,6 +18,10 @@ http://localhost:8080/swagger-ui.html#/
 
 ```
 java -jar target/cep-engagement-service-0.0.1-SNAPSHOT.jar
+```
+
+ALL DOCUMENTATION
+https://drive.google.com/drive/folders/10wCBNKw3K1fegAQU771U0MYrsIdPa_fC?usp=sharing
 
 > The below button is a collection from postman to simple test the Logic
 
