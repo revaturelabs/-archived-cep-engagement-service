@@ -1,24 +1,16 @@
 package com.cepengagementservice.Models;
 
-
-
-
-
-
 import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
+//import com.fasterxml.jackson.annotation.JsonIgnore;
+//import com.fasterxml.jackson.annotation.JsonProperty;
 
-import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
 @Entity
@@ -47,12 +39,16 @@ public class Request {
 	private String batchId;
 	
 	//userId mapped to User's table userId
-	@ManyToOne
+//	@ManyToOne
+//	@NonNull
+//	@JoinColumn(name="USERS USER_ID")
+//	//@Column(name="USER_ID")
+//	public Integer userId;
+//	//private Integer userId;
+	
 	@NonNull
-	@JoinColumn(name="USER_ID")
-	//@Column(name="USER_ID")
-	private User userId;
-	//private Integer userId;
+    @Column(name = "user_id")
+    private Integer userId;
 	
 	@NonNull
 	@Column(name="START_TIME")
@@ -84,7 +80,7 @@ public class Request {
 		
 	}
 	
-	public Request(String batchId, User userId, Date startTime, Date endTime, Boolean isAllDay,Status status,RequestType requestType,String description) {
+	public Request(String batchId, int userId, Date startTime, Date endTime, Boolean isAllDay,Status status,RequestType requestType,String description) {
 		this.batchId=batchId;
 		this.userId=userId;
 		this.startTime=startTime;
@@ -102,7 +98,7 @@ public class Request {
 	public void setBatchId(String batchId) {
 		this.batchId=batchId;
 	}
-	public void setUserId(User userId) {
+	public void setUserId(int userId) {
 		this.userId=userId;
 	}
 	public void setStartTime(Date startTime) {
@@ -131,7 +127,7 @@ public class Request {
 	public String getBatchId() {
 		return this.batchId;
 	}
-	public User getUserId() {
+	public int getUserId() {
 		return this.userId;
 	}
 	public Date getStartTime() {
@@ -152,11 +148,11 @@ public class Request {
 	public String getDescription() {
 		return this.description;
 	}
-	
-	@JsonProperty("userId")
-	private void unPack(Integer userId)
-	{
-		this.userId = new User();
-		this.userId.setUserId(userId);
-	}
+//	
+//	@JsonProperty("userId")
+//	private void unPack(Integer userId)
+//	{
+//		this.userId = new User();
+//		this.userId.setUserId(userId);
+//	}
 }
