@@ -26,13 +26,15 @@ public class UserBatch {
     int userId;
     @Column(name = "batch_id")
     String batchId;
-
+    
     public UserBatch(int userId, String batchId) {
         this.userId = userId;
         this.batchId = batchId;
     }
 
+    //added setters and getters to be able to return with a GET request
     public String getBatchId() {
         return batchId;
     }
+
 }

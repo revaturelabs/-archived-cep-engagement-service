@@ -25,26 +25,16 @@ public class Request {
 	public enum RequestType{
 		Intervention, Talent, Help
 	}
-	
-	//fields
+
 	@Id
 	@NonNull
 	@GeneratedValue
 	@Column(name = "REQUEST_ID")
 	private Integer requestId;
 	
-	//batchId needs to be a foreign key to User_Batches' batchId
 	@NonNull
 	@Column(name= "BATCH_ID")
 	private String batchId;
-	
-	//userId mapped to User's table userId
-//	@ManyToOne
-//	@NonNull
-//	@JoinColumn(name="USERS USER_ID")
-//	//@Column(name="USER_ID")
-//	public Integer userId;
-//	//private Integer userId;
 	
 	@NonNull
     @Column(name = "user_id")
@@ -75,7 +65,6 @@ public class Request {
 	private String description;
 	
 	
-	//constructor
 	public Request() {
 		
 	}
@@ -91,7 +80,6 @@ public class Request {
 		this.description=description;
 	}
 	
-	//setters
 	public void setRequestId(Integer requestId) {
 		this.requestId=requestId;
 	}
@@ -120,7 +108,7 @@ public class Request {
 		this.description=description;
 	}
 	
-	//getters
+	
 	public Integer getRequestId() {
 		return this.requestId;
 	}
@@ -148,11 +136,5 @@ public class Request {
 	public String getDescription() {
 		return this.description;
 	}
-//	
-//	@JsonProperty("userId")
-//	private void unPack(Integer userId)
-//	{
-//		this.userId = new User();
-//		this.userId.setUserId(userId);
-//	}
+
 }

@@ -24,11 +24,6 @@ import com.cepengagementservice.Services.UserServices;
 public class SNSPublisherService{
 	@Autowired
 	UserServices userServices;
-	//private final String TOPIC_ARN = "arn:aws:sns:us-east-2:667247404250:TalentRequest";
-
-	//private final String EMAIL_SUBJECT = "E-Mail Notification";
-	
-	//private final String EMAIL_MESSAGE = "You are getting this mail since the endpoint works";
 	
 	private AmazonSNSClient snsClient = null;
 
