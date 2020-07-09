@@ -18,19 +18,19 @@ import com.cepengagementservice.Services.SNSPublisherService;
 public class RequestController {
 	
 	@Autowired
-	private RequestService RequestService;
+	private RequestService requestService;
 	
 	@Autowired
 	private SNSPublisherService snsPublisherService;
 	
 	@GetMapping("/interventions")
 	public List<Request> getAllInterventions(){
-		return RequestService.findAll();
+		return requestService.findAll();
 	}
 	
 	@PostMapping("/interventions")
 	public String addIntervention(@RequestBody Request request) {
-		RequestService.addIntervention(request);
+		requestService.addIntervention(request);
 		
 		//Email functionality
 		snsPublisherService.publisher(request);
