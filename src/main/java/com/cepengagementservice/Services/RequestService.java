@@ -12,26 +12,26 @@ import com.cepengagementservice.Repositories.RequestRepository;
 public class RequestService {
 	
 	@Autowired
-	private RequestRepository RequestRepository;
+	private RequestRepository requestRepository;
 	
 	public List<Request> findAll(){
-		return RequestRepository.findAll();
+		return requestRepository.findAll();
 	}
 	
 	public void addIntervention(Request intervention){
-		RequestRepository.save(intervention);
+		requestRepository.save(intervention);
 	}
 
 	public Request findByRequestId(int requestId) {
-		return RequestRepository.findByRequestId(requestId);
+		return requestRepository.findByRequestId(requestId);
 	}
 
     public void updateRequest(Request request) {
-		RequestRepository.save(request);
+		requestRepository.save(request);
 	}
 
 	public void deleteByRequestId(int id) {
-		RequestRepository.deleteById(id);
+		requestRepository.deleteById(id);
 		
 	}
 
