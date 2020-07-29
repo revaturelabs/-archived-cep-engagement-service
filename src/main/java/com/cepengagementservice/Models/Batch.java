@@ -12,6 +12,8 @@ import lombok.Data;
 
 @Data
 /**
+ * This class represents the batch object.
+ * The data for the batches will be generated from the caliber service.
  * @Author le7204
  */
 public class Batch {

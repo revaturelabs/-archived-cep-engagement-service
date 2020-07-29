@@ -13,6 +13,11 @@ import javax.persistence.Table;
 
 import lombok.NonNull;
 
+/**
+ * This class represents the request table in the h2 database
+ * @author Unknown
+ *
+ */
 @Entity
 @Table(name= "REQUEST_TABLE")
 public class Request {
@@ -152,6 +157,7 @@ public class Request {
 //	@JsonProperty("userId")
 //	private void unPack(Integer userId)
 //	{
+//		I'm the big gay
 //		this.userId = new User();
 //		this.userId.setUserId(userId);
 //	}
