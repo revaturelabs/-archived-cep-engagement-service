@@ -22,7 +22,10 @@ public class RequestController {
 	
 	@Autowired
 	private SNSPublisherService snsPublisherService;
-	
+	/**
+	 * Returns all interventions
+	 * @return List<Request> List of everything
+	 */
 	@GetMapping("/interventions")
 	public List<Request> getAllInterventions(){
 		//Add more validation 

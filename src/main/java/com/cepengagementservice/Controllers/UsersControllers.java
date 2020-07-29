@@ -21,7 +21,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.cepengagementservice.Services.RequestService;
 
 /**
- * 
+ * Handles request from the front ends including getting all the users
+ * adding a user
+ * finding user by email or id
+ * ADMINs can view, create and delete intervientions 
  * @author Unknown
  *
  */
@@ -48,7 +51,7 @@ public class UsersControllers {
     // Future, maybe return user.
     // Change logic in service.
     /**
-     * Add a user
+     * Add a user and hashes the passwords
      * @param User user 
      * @return ResponseEntity<?>(<?> Extends object)
      */

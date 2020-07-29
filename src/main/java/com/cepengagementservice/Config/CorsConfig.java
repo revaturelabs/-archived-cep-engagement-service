@@ -6,13 +6,19 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
- * Allows for CORS
+ * WebMvcConfigurer takes no parameters which overrides aaCorsMapping to take in
+ * a CorsRegistry as a parameter. The registry then added GET POST PUT and DELETE methods
+ * Allows all headers and allow origins from localhost:3000
  * @author Unknown
  *
  */
 @Configuration
 public class CorsConfig {
 
+	/**
+	 * 
+	 * @return
+	 */
 	@Bean
 	public WebMvcConfigurer corsConfigurer() {
 		return new WebMvcConfigurer() {

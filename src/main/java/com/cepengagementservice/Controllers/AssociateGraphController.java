@@ -23,6 +23,8 @@ import org.springframework.web.client.RestTemplate;
 
 /**
  * Functions used to retrive Associate's graphing
+ * custom restTemplate to make an all accepting restTemplate
+ * getting the associate graph using said custom restTemplate
  * @author Unknown
  *
  */

@@ -16,9 +16,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * Handles request from the front end.
+ * Getting all User Batches
+ * Adding someone into a batch
+ * Getting users by their batch
+ * @author Unknown
+ *
+ */
 @RestController
 @RequestMapping(value = "/UB")
 public class UserBatchController {
+	
     @Autowired
     private UserBatchService userBatchService;
 
