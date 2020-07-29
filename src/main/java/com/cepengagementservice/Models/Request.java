@@ -13,6 +13,11 @@ import javax.persistence.Table;
 
 import lombok.NonNull;
 
+/**
+ * This class represents the request table in the h2 database
+ * @author Unknown
+ *
+ */
 @Entity
 @Table(name= "REQUEST_TABLE")
 public class Request {

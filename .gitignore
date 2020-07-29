@@ -4,6 +4,7 @@ target/
 !**/src/main/**
 !**/src/test/**
 !**/Servers/**
+!/bin/
 
 ### STS ###
 .apt_generated

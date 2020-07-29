@@ -1,6 +1,10 @@
 package com.cepengagementservice.Models;
 
-
+/**
+ * This model is used to setup the skills graph for the associates
+ * @author Unknown
+ *
+ */
 public class AssociateGraph {
 	
 
@@ -16,6 +20,12 @@ public class AssociateGraph {
 		public void setSpiderTraineeGrades(GradeCategories spiderTraineeGrades) {
 			this.spiderTraineeGrades = spiderTraineeGrades;
 		}
+		
+		/**
+		 * This class represents the different skill categories
+		 * @author Unknown
+		 *
+		 */
 		public class GradeCategories{
 				@Override
 			public String toString() {
