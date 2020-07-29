@@ -13,6 +13,11 @@ import com.cepengagementservice.Models.Request;
 import com.cepengagementservice.Services.RequestService;
 import com.cepengagementservice.Services.SNSPublisherService;
 
+/**
+ * Returns All interventions or Adds an intervention
+ * @author Unknown
+ *
+ */
 @RestController
 @CrossOrigin
 public class RequestController {
