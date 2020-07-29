@@ -34,6 +34,8 @@ public class SNSPublisherService{
 
 	public void publisher(Request request) {
 		try{
+			System.out.println("In inside SNSPublisher publisher");
+
 		// creating SNS client
 		snsClient = (AmazonSNSClient) AmazonSNSClientBuilder.standard().withRegion(Regions.US_EAST_2).build();
 

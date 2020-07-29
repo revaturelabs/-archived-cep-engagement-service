@@ -25,11 +25,14 @@ public class RequestController {
 	
 	@GetMapping("/interventions")
 	public List<Request> getAllInterventions(){
+		System.out.println("In get addIntervention");
+
 		return is.findAll();
 	}
 	
 	@PostMapping("/interventions")
 	public String addIntervention(@RequestBody Request request) {
+		System.out.println("In addIntervention");
 		is.addIntervention(request);
 		snsPublisherService.publisher(request);
 		return "Intervention added";
