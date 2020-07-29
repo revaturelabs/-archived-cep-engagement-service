@@ -37,6 +37,11 @@ import lombok.NonNull;
 //Not handling logic inside of it, neither storing several.
 //enum Companies {COMPANY1, COMPANY2, COMPANY3};
 
+/**
+ * This class represents the users table in the h2 database
+ * @author Unknown
+ *
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

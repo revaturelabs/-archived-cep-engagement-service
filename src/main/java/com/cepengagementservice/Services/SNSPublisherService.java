@@ -1,5 +1,6 @@
 package com.cepengagementservice.Services;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -20,6 +21,16 @@ import com.cepengagementservice.Models.Request.RequestType;
 import com.cepengagementservice.Models.Request.Status;
 
 import com.cepengagementservice.Services.UserServices;
+
+
+/**
+ * Publish messages to AmazonSNS
+ * @author Unknown
+ *this is for the messenger client service.  It basically creates a SNS client
+ *in AWS and then publishes a message including all kinds of data.  This is to
+ *publish requests.  However this has a few flaws including a catch block with nothing
+ *in it
+ */
 @Service
 public class SNSPublisherService{
 	@Autowired
@@ -32,8 +43,19 @@ public class SNSPublisherService{
 	
 	private AmazonSNSClient snsClient = null;
 
+
+	/**
+	 * Publish message containing users info and token to SNS
+	 * So this is the method to publish all information about a request to the SNS client
+	 * as previously we create a null snsClient value before we initially create a new
+	 * SNS client using the SNS client builder in central region and then print all
+	 * the information to that client so that it has all the information regarding a new
+	 * request
+	 * @param request is a request/intervention with all the required values associated with it
+	 */
 	public void publisher(Request request) {
 		try{
+
 		// creating SNS client
 		snsClient = (AmazonSNSClient) AmazonSNSClientBuilder.standard().withRegion(Regions.US_EAST_2).build();
 

@@ -68,7 +68,11 @@
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
-			<scope>runtime</scope>
+			<!-- Allows for h2-console to be use
+				can be commented out 
+			 -->
+
+			<!-- <scope>runtime</scope> -->
 		</dependency>
 		
 		<dependency>

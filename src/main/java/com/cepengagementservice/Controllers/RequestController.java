@@ -13,6 +13,11 @@ import com.cepengagementservice.Models.Request;
 import com.cepengagementservice.Services.RequestService;
 import com.cepengagementservice.Services.SNSPublisherService;
 
+/**
+ * Returns All interventions or Adds an intervention
+ * @author Unknown
+ *
+ */
 @RestController
 @CrossOrigin
 public class RequestController {
@@ -22,12 +27,21 @@ public class RequestController {
 	
 	@Autowired
 	private SNSPublisherService snsPublisherService;
-	
+	/**
+	 * Returns all interventions
+	 * @return List<Request> List of everything
+	 */
 	@GetMapping("/interventions")
 	public List<Request> getAllInterventions(){
+		//Add more validation 
 		return is.findAll();
 	}
 	
+	/**
+	 * Adds a new intervention and publish to Simple Notification Service 
+	 * @param request
+	 * @return String "Intervention added"
+	 */
 	@PostMapping("/interventions")
 	public String addIntervention(@RequestBody Request request) {
 		is.addIntervention(request);
