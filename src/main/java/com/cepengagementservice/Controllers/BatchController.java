@@ -19,7 +19,14 @@ public class BatchController {
     @Autowired
     private BatchService batchService;
 
-    @Cacheable("GetAssociateGrade")
+    /**
+     * Receives a String of the batchId
+     * Retrieves the batch object and sends to Client Side
+     * @param batchId
+     * @return Returns a ResponseEntity<?>(ResponseEntity that extends an object)
+     * @apiNote Using <?> is not recommended and should be changed to <Batch> soon
+     */
+	@Cacheable("GetAssociateGrade")
     @RequestMapping(method = RequestMethod.GET, value = "/id")
     public ResponseEntity<?> getFullBatch(@RequestParam String batchId) {
         try {
@@ -32,6 +39,12 @@ public class BatchController {
 
     }
 
+    /**
+     * Accepts a string of the batchId and gets the DTO of the batch
+     * @param batchId
+     * @return ResponseEntity<?>(ResponseEntity that extends an object)
+     * @apiNote ResponseEntity<?> is bad practices and should be changed
+     */
     @RequestMapping(method = RequestMethod.GET, value = "/DTO/id")
     public ResponseEntity<?> getDTOBatch(@RequestParam String batchId) {
         try {

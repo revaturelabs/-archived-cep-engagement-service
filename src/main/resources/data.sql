@@ -7,7 +7,7 @@ insert into users  (user_id, first_name, last_name, email, password, company, ro
 insert into users  (user_id, first_name, last_name, email, password, company, role, phone) VALUES (7,'stubFName7', 'stubLName7', 'stubEmail_7@gmail.com', 'pass7word', 'VALERO', 'CLIENT', '888');
 insert into users  (user_id, first_name, last_name, email, password, company, role, phone) VALUES (8,'stubFName8', 'stubLName8', 'stubEmail_8@gmail.com', 'pass8word', 'CHEVRON', 'CLIENT', '888');
 insert into users  (user_id, first_name, last_name, email, password, company, role, phone) VALUES (9,'stubFName9', 'stubLName9', 'stubEmail_9@gmail.com', 'pass9word', 'EXXON', 'CLIENT', '888');
-insert into users  (user_id, first_name, last_name, email, password, company, role, phone) VALUES (10,'stubFName10', 'stubLName10', 'stubEmail_10@gmail.com', 'pass10word', 'TEXACO', 'CLIENT', '888');*/
+insert into users  (user_id, first_name, last_name, email, password, company, role, phone) VALUES (10,'stubFName10', 'stubLName10', 'stubEmail_10@gmail.com', 'pass10word', 'TEXACO', 'CLIENT', '888'); */
 insert into user_batch  (row_id, user_id, batch_id) VALUES (1, 1, 'TR-1001');
 insert into user_batch  (row_id, user_id, batch_id) VALUES (2, 2, 'TR-1002');
 insert into user_batch  (row_id, user_id, batch_id) VALUES (3, 3, 'TR-1002');

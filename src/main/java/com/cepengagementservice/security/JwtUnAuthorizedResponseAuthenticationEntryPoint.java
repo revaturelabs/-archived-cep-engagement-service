@@ -1,6 +1,6 @@
 package com.cepengagementservice.security;
 
-//Used when a valid token is not provided with a REST API call @author Nicholas Larkin
+// Used when a valid token is not provided with a REST API call @author Nicholas Larkin
 
 import java.io.IOException;
 import java.io.Serializable;

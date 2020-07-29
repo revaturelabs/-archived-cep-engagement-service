@@ -9,6 +9,15 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
+/**
+
+ * Interface that extends JpaReository
+ * For SQL queries 
+ * This interface deals with UserBatch related functionality
+
+ * @author Unknown
+ *
+ */
 @Repository
 public interface UserBatchRepository extends JpaRepository<UserBatch, Integer> {
 
