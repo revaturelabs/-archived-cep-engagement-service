@@ -43,7 +43,6 @@ public class JwtTokenAuthorizationOncePerRequestFilter extends OncePerRequestFil
 
         String email = null; //changed from username
         String jwtToken = null;
-        System.out.println(requestTokenHeader);
         if (requestTokenHeader != null && requestTokenHeader.startsWith("Bearer ")) { // checks to make sure header is Authorization header that look like: Bearer <token>
             jwtToken = requestTokenHeader.substring(7); //7 to pass bearer and space, to start reading Token when it starts. Sets token.
             try {
@@ -54,7 +53,6 @@ public class JwtTokenAuthorizationOncePerRequestFilter extends OncePerRequestFil
                 logger.warn("JWT_TOKEN_EXPIRED", e);
             }
         } else {
-        	System.out.println("if the requestTokenHeader does not exist and/or doesn't start with Bearer");
             logger.warn("JWT_TOKEN_DOES_NOT_START_WITH_BEARER_STRING");
         }
 

@@ -72,13 +72,11 @@ System.out.println("Creat Authentication Token");
 
   @ExceptionHandler({ AuthenticationException.class })
   public ResponseEntity<String> handleAuthenticationException(AuthenticationException e) {
-	  System.out.println("handle  Authentication Token");
 
     return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(e.getMessage());
   }
 
   private void authenticate(String email, String password) {
-	  System.out.println("authenticate");
 
     Objects.requireNonNull(email);
     Objects.requireNonNull(password);
