@@ -1,5 +1,6 @@
 package com.cepengagementservice.Services;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -20,6 +21,12 @@ import com.cepengagementservice.Models.Request.RequestType;
 import com.cepengagementservice.Models.Request.Status;
 
 import com.cepengagementservice.Services.UserServices;
+
+/**
+ * Publish messages to AmazonSNS
+ * @author Unknown
+ *
+ */
 @Service
 public class SNSPublisherService{
 	@Autowired
@@ -32,6 +39,10 @@ public class SNSPublisherService{
 	
 	private AmazonSNSClient snsClient = null;
 
+	/**
+	 * Publish message containing users info and token to SNS
+	 * @param request
+	 */
 	public void publisher(Request request) {
 		try{
 
