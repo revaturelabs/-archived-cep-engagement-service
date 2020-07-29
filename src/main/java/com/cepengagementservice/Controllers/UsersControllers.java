@@ -20,6 +20,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.cepengagementservice.Services.RequestService;
 
+/**
+ * 
+ * @author Unknown
+ *
+ */
 @RestController
 @RequestMapping(value = "/users")
 public class UsersControllers {
@@ -42,8 +47,14 @@ public class UsersControllers {
 
     // Future, maybe return user.
     // Change logic in service.
+    /**
+     * Add a user
+     * @param User user 
+     * @return ResponseEntity<?>(<?> Extends object)
+     */
     @RequestMapping(method = RequestMethod.POST, value = "/add")
     public ResponseEntity<?> add(@RequestBody User user) {
+    	// Encoding password
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         if (userService.addUser(user)) {
             return new ResponseEntity<>(HttpStatus.OK);
