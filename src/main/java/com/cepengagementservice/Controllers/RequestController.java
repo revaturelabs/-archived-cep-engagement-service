@@ -25,14 +25,17 @@ public class RequestController {
 	
 	@GetMapping("/interventions")
 	public List<Request> getAllInterventions(){
-		System.out.println("In get addIntervention");
-
+		//Add more validation 
 		return is.findAll();
 	}
 	
+	/**
+	 * Adds a new intervention and publish to Simple Notification Service 
+	 * @param request
+	 * @return String "Intervention added"
+	 */
 	@PostMapping("/interventions")
 	public String addIntervention(@RequestBody Request request) {
-		System.out.println("In addIntervention");
 		is.addIntervention(request);
 		snsPublisherService.publisher(request);
 		return "Intervention added";
