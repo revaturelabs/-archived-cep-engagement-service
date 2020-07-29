@@ -10,7 +10,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 /**
+
+ * Interface that extends JpaReository
+ * For SQL queries 
  * This interface deals with UserBatch related functionality
+
  * @author Unknown
  *
  */

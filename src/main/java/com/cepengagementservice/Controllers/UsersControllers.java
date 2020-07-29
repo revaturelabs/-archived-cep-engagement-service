@@ -20,6 +20,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.cepengagementservice.Services.RequestService;
 
+/**
+ * Handles request from the front ends including getting all the users
+ * adding a user
+ * finding user by email or id
+ * ADMINs can view, create and delete intervientions 
+ * @author Unknown
+ *
+ */
 @RestController
 @RequestMapping(value = "/users")
 public class UsersControllers {
@@ -30,6 +38,7 @@ public class UsersControllers {
     @Autowired
     private UserServices userService;
 
+    
     @RequestMapping(method = RequestMethod.GET, value = "/all")
     public ResponseEntity<?> getAll() {
         List<User> users = userService.getAllUsers();
@@ -41,8 +50,14 @@ public class UsersControllers {
 
     // Future, maybe return user.
     // Change logic in service.
+    /**
+     * Add a user and hashes the passwords
+     * @param User user 
+     * @return ResponseEntity<?>(<?> Extends object)
+     */
     @RequestMapping(method = RequestMethod.POST, value = "/add")
     public ResponseEntity<?> add(@RequestBody User user) {
+    	// Encoding password
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         if (userService.addUser(user)) {
             return new ResponseEntity<>(HttpStatus.OK);
@@ -92,8 +107,8 @@ public class UsersControllers {
     // }
     
     
-    //below is admin role
-    // admin can update, delete the request status
+    //////////////////    ADMIN ROLES     /////////////////////
+    // ADMINs can update and delete the request status
     @Autowired
     RequestService requestService;
     
@@ -102,7 +117,12 @@ public class UsersControllers {
 		return requestService.findAll();
 	}
     
-    //update a request
+	/**
+	 * Returns a Request model by its Id
+	 * @param int requestId
+	 * @param request
+	 * @return
+	 */
  	@PutMapping("/admin/request/update/{requestId}")
      public ResponseEntity<?> updateRequest(@PathVariable("requestId") int requestId, @RequestBody Request request) {
         
@@ -118,7 +138,11 @@ public class UsersControllers {
      }
     
  	
- 	// delete a reqeust 
+ 	/**
+ 	 * Removes a Request object by its ID
+ 	 * @param int requestId
+ 	 * @return
+ 	 */
 	@DeleteMapping("/admin/request/delete/{requestId}")
     public ResponseEntity<?> deleteRequest(@PathVariable("requestId") int requestId) {
 	       

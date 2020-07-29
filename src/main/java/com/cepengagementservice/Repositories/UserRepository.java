@@ -10,6 +10,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 /**
+
+ * Interface extends JpaRepositry
+ * For SQL queries 
  * This interface deals with User related functionality
  * @author Unknown
  *

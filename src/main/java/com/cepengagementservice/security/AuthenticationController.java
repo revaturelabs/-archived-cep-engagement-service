@@ -54,7 +54,6 @@ public class AuthenticationController {
   @RequestMapping(value = "${jwt.get.token.uri}", method = RequestMethod.POST)  //Gets Login URI from app.properties and Generates Token if valid
   public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtTokenRequest authenticationRequest)
       throws AuthenticationException { // in case the request is not valid
-
     authenticate(authenticationRequest.getEmail(), authenticationRequest.getPassword()); //authenticates user based on requestbody
 
     
@@ -72,6 +71,7 @@ public class AuthenticationController {
    */
   @RequestMapping(value = "${jwt.refresh.token.uri}", method = RequestMethod.GET)  //Gets refresh URI from app.properties and refreshes token if it is expired, needs fix.
   public ResponseEntity<?> refreshAndGetAuthenticationToken(HttpServletRequest request) {
+
     String authToken = request.getHeader(tokenHeader);
     final String token = authToken.substring(7);
    // String email = jwtTokenUtil.getEmailFromToken(token); //only need token to check if it is refreshed.
@@ -93,6 +93,7 @@ public class AuthenticationController {
    */
   @ExceptionHandler({ AuthenticationException.class })
   public ResponseEntity<String> handleAuthenticationException(AuthenticationException e) {
+
     return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(e.getMessage());
   }
 
@@ -104,6 +105,7 @@ public class AuthenticationController {
    * disabled or invalid credentials
    */
   private void authenticate(String email, String password) {
+
     Objects.requireNonNull(email);
     Objects.requireNonNull(password);
 

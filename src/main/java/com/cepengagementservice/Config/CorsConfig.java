@@ -5,21 +5,32 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-    @Configuration
-    public class CorsConfig{
+/**
+ * configurations for the CORS issues
+ * Has WebMvcConfigurere and within that is addCorsMapping
+ * @author Unknown
+ *
+ */
+@Configuration
+public class CorsConfig {
 
-        @Bean
-        public WebMvcConfigurer corsConfigurer(){
-            return new WebMvcConfigurer(){
+	/**
+	 * WebMvcConfigurer takes no parameters which overrides aaCorsMapping to take in
+	 * a CorsRegistry as a parameter. The registry then added GET POST PUT and DELETE methods
+	 * Allows all headers and allow origins from localhost:3000
+	 * @author Unknown
+	 *
+	 */
+	@Bean
+	public WebMvcConfigurer corsConfigurer() {
+		return new WebMvcConfigurer() {
 
-                @Override
-                public void addCorsMappings(CorsRegistry registry){
+			@Override
+			public void addCorsMappings(CorsRegistry registry) {
 
-                    registry.addMapping("/**")
-                    .allowedMethods("GET","POST","PUT", "DELETE")
-                    .allowedHeaders("*")
-                    .allowedOrigins("http://localhost:3000");
-                }
-            };
-        }
-    }
+				registry.addMapping("/**").allowedMethods("GET", "POST", "PUT", "DELETE").allowedHeaders("*")
+						.allowedOrigins("http://localhost:3000");
+			}
+		};
+	}
+}

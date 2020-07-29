@@ -16,12 +16,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * Handles request from the front end.
+ * Getting all User Batches
+ * Adding someone into a batch
+ * Getting users by their batch
+ * @author Unknown
+ *
+ */
 @RestController
 @RequestMapping(value = "/UB")
 public class UserBatchController {
+	
     @Autowired
     private UserBatchService userBatchService;
 
+    /**
+     * Retrieves all of the user batches
+     * @return ResponseEntity with the List of UserBatches
+     */
     @GetMapping(value = "/all")
     public ResponseEntity<List<UserBatch>> getAllUB() {
         try {
@@ -34,9 +47,9 @@ public class UserBatchController {
 
     }
     /**
-     * 
-     * @param userId
-     * @return list of Batch objects
+     * Returns a list of batches associated with the userId
+     * @param int userId
+     * @return ResponseEntity<List<Batch>> list of Batch objects
      */
     @GetMapping(value = "/batchesbyuser")
     public ResponseEntity<List<Batch>> getAllMyBatches(@RequestParam int userId) {
@@ -50,6 +63,11 @@ public class UserBatchController {
 
     }
 
+    /**
+     * Returns a list of batchesDTOs associated with the userId
+     * @param int userId
+     * @return ResponseEntity<List<BatchDTO>> A list of BatchDTO objects
+     */
     @GetMapping(value = "/batchesbyuser/DTO")
     public ResponseEntity<List<BatchDTO>> getAllMyBatchesDTO(@RequestParam int userId) {
         try {
@@ -61,6 +79,12 @@ public class UserBatchController {
         }
 
     }
+    /**
+     * Adds a user to a batch by their respective Ids, User can only see those batches
+     * @param int userId
+     * @param String batchId
+     * @return ResponseEntity<UserBatch> 
+     */
     @PostMapping(value = "/addPair")
     public ResponseEntity<UserBatch> makeUB(@RequestParam int userId, @RequestParam String batchId) {
         try {
