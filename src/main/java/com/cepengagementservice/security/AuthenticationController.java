@@ -42,7 +42,6 @@ public class AuthenticationController {
   @RequestMapping(value = "${jwt.get.token.uri}", method = RequestMethod.POST)  //Gets Login URI from app.properties and Generates Token if valid
   public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtTokenRequest authenticationRequest)
       throws AuthenticationException { // in case the request is not valid
-System.out.println("Creat Authentication Token");
     authenticate(authenticationRequest.getEmail(), authenticationRequest.getPassword()); //authenticates user based on requestbody
 
     
@@ -55,7 +54,6 @@ System.out.println("Creat Authentication Token");
 
   @RequestMapping(value = "${jwt.refresh.token.uri}", method = RequestMethod.GET)  //Gets refresh URI from app.properties and refreshes token if it is expired, needs fix.
   public ResponseEntity<?> refreshAndGetAuthenticationToken(HttpServletRequest request) {
-	  System.out.println("refresh  Authentication Token");
 
     String authToken = request.getHeader(tokenHeader);
     final String token = authToken.substring(7);
