@@ -6,15 +6,17 @@ import java.io.Serializable;
 
 public class JwtTokenResponse implements Serializable {
 
-  private static final long serialVersionUID = 1651650916454508L;
+	private static final long serialVersionUID = 1651650916454508L;
 
-  private final String token;
+	private final String token;
 
-    public JwtTokenResponse(String token) {
-        this.token = token;
-    }
+	// stores the token
+	public JwtTokenResponse(String token) {
+		this.token = token;
+	}
 
-    public String getToken() {
-        return this.token;
-    }
+	// returns the stored token
+	public String getToken() {
+		return this.token;
+	}
 }

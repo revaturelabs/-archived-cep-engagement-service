@@ -9,6 +9,11 @@ import javax.persistence.Table;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * This class represents the junction table for the users-batch relationship
+ * @author Unknown
+ *
+ */
 @Data
 @Entity
 @NoArgsConstructor

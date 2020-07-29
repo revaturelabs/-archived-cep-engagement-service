@@ -38,7 +38,7 @@ public class JwtTokenAuthorizationOncePerRequestFilter extends OncePerRequestFil
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws ServletException, IOException {
         logger.debug("Authentication Request For '{}'", request.getRequestURL());
-
+        
         final String requestTokenHeader = request.getHeader(this.tokenHeader); // If request header doesn't match this.tokenHeader it returns null
 
         String email = null; //changed from username
