@@ -68,9 +68,12 @@
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
+<<<<<<< HEAD
 			<!-- Allows for h2-console to be use
 				can be commented out 
 			 -->
+=======
+>>>>>>> JDocs
 			<!-- <scope>runtime</scope> -->
 		</dependency>
 		

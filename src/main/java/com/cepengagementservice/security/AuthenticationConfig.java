@@ -18,6 +18,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+/**
+ * 
+ * @author Unknown
+ * This class will setup the configuration for authenticating a user
+ */
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true) //allows for Spring Security prePostAnnotations
@@ -45,27 +50,42 @@ public class AuthenticationConfig extends WebSecurityConfigurerAdapter {
             .passwordEncoder(passwordEncoderBean());
     }
 
+    /**
+     * 
+     * @return a new BCryptPasswordEncoder
+     */
     @Bean
     public PasswordEncoder passwordEncoderBean() {
         return new BCryptPasswordEncoder();
     }
 
+    /**
+     * returns the parent classes Authentication Manager
+     */
     @Bean
     @Override
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }
 
+    /**
+     * This will configure the the level of access a user will have. 
+     * Every user has access to web based utilities such as swagger, 
+     * 		h2 console, webjars, configuration, and api-docs.
+     * If the user is of type ADMIN they will be able to use the 
+     * 		get /interventions route and the /users/all route.
+     */
     @Override
     public void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
             .csrf().disable()
             .exceptionHandling().authenticationEntryPoint(jwtUnAuthorizedResponseAuthenticationEntryPoint).and() //handles any exceptions with custom handler
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and() //ensures that expired sessions are cleaned up
-            .authorizeRequests()//Allows restricting access based upon the HttpServletRequest using RequestMatcher implementations 
-            .antMatchers("/v3/api-docs/**", "/configuration/**", "/swagger*/**", "/webjars/**","/", "console/**").permitAll(); // permits all users to access Swagger V3 URLS
-            //.antMatchers("/users/all", "/interventions").hasAnyRole()//("ADMIN")  // Restricts getting all users and intervention requests to ADMIN users.
+            .authorizeRequests()//Allows restricting access based upon the HttpServletRequest using RequestMatcher implementations
+            .antMatchers("/v3/api-docs/**", "/configuration/**", "/swagger*/**", "/webjars/**", "/", "/console/**").permitAll(); // permits all users to access Swagger V3 URLS
+            //.antMatchers("/users/all", "/interventions").hasAnyRole("ADMIN")  // Restricts getting all users and intervention requests to ADMIN users.
             //.anyRequest().authenticated();// If you are authorized you will be able to access any routes that aren't specified to the ADMIN role.
+
 
        httpSecurity
             .addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
@@ -76,6 +96,12 @@ public class AuthenticationConfig extends WebSecurityConfigurerAdapter {
             .cacheControl(); //disable caching
     }
 
+    /**
+     * This will allow the people to do a post request for createUserPath and
+     * 		authenticationPath without needing a token.
+     * It also allows request for the OPTIONS Http Method and any type of 
+     * 		Http request for V3 and Swagger
+     */
     @Override
     public void configure(WebSecurity webSecurity) throws Exception {
         webSecurity
