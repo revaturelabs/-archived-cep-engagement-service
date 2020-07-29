@@ -20,6 +20,14 @@ import com.cepengagementservice.Models.Request.RequestType;
 import com.cepengagementservice.Models.Request.Status;
 
 import com.cepengagementservice.Services.UserServices;
+/**
+ * 
+ * @author Unknown
+ *this is for the messanger client service.  It basically creates a SNS client
+ *in AWS and then publishes a message including all kinds of data.  This is to
+ *publish requests.  However this has a few flaws including a catch block with nothing
+ *in it
+ */
 @Service
 public class SNSPublisherService{
 	@Autowired
