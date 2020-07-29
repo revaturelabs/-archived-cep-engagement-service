@@ -4,35 +4,37 @@ package com.cepengagementservice.security;
 
 import java.io.Serializable;
 
-public class  JwtTokenRequest implements Serializable {
-  
-  private static final long serialVersionUID = -56716819845615L;
+public class JwtTokenRequest implements Serializable {
 
-  private String email;
-    private String password;
+	private static final long serialVersionUID = -56716819845615L;
 
-    public JwtTokenRequest() {
-        super();
-    }
+	private String email;
+	private String password;
 
-    public JwtTokenRequest(String email, String password) { //takes email and password from request body and sets them on JWT
-        this.setEmail(email);
-        this.setPassword(password);
-    }
+	public JwtTokenRequest() {
+		super();
+	}
 
-    public String getEmail() {
-        return this.email;
-    }
+	// takes email and password from request body and sets them on JWT
+	public JwtTokenRequest(String email, String password) { 
+		this.setEmail(email);
+		this.setPassword(password);
+	}
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+	
+	public String getEmail() {
+		return this.email;
+	}
 
-    public String getPassword() {
-        return this.password;
-    }
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+	public String getPassword() {
+		return this.password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
 }

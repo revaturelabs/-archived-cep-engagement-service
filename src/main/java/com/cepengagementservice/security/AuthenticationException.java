@@ -3,8 +3,9 @@ package com.cepengagementservice.security;
 //Use to throw invalid credentials or token exception @author Nicholas Larkin
 
 /**
- * @author Unknown
  * This will throw an RuntimeException when an invalid credentials or token appears
+ * @author Unknown
+ * 
  */
 public class AuthenticationException extends RuntimeException {   
 	

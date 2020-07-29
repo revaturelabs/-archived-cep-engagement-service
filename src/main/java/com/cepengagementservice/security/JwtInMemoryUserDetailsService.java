@@ -11,17 +11,20 @@ import com.cepengagementservice.Services.UserServices;
 
 @Service
 public class JwtInMemoryUserDetailsService extends UserServices implements UserDetailsService {
+	// Loads the user by email
+	public JwtUserDetails loadUserByEmail(String email) throws UsernameNotFoundException { // Loads user in
+																							// JwtUserDetails Format.
 
-  public JwtUserDetails loadUserByEmail(String email) throws UsernameNotFoundException { // Loads user in JwtUserDetails Format.
+		return new JwtUserDetails(getUserByEmail(email));
+	}
 
-    return  new JwtUserDetails( getUserByEmail(email));
-  }
+	// loads the user by username
+	@Override
+	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException { // can return the user
+																							// without encrypted for
+																							// future functionality.
 
-@Override
-public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException { // can return the user without encrypted for future functionality.
-
-	 return (UserDetails) loadUserByEmail(email);
-}
-   
+		return (UserDetails) loadUserByEmail(email);
+	}
 
 }

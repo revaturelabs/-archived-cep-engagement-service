@@ -19,9 +19,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 /**
- * 
- * @author Unknown
  * This class will setup the configuration for authenticating a user
+ * @author Unknown
  */
 @Configuration
 @EnableWebSecurity
@@ -43,6 +42,12 @@ public class AuthenticationConfig extends WebSecurityConfigurerAdapter {
     @Value("${jwt.post.user.uri}") //Allow user creation for BCrypt.
     private String createUserPath;
 
+    /**
+     * This will configure an Authentication Manager based on the a password encoder
+     * and jwtInMemoryUserDetailService
+     * @param auth the AuthenticationManagerBuilder object
+     * @throws Exception if creating an Authentication Manager fails
+     */
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth

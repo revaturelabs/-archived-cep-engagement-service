@@ -12,6 +12,8 @@ import lombok.Data;
 
 @Data
 /**
+ * This class represents the batch object.
+ * The data for the batches will be generated from the caliber service.
  * @Author le7204
  */
 public class Batch {
@@ -29,6 +31,11 @@ public class Batch {
     List<?> employeeAssignments;
     List<?> associateAssignments;
 
+    /**
+     * This method will get the batches by id from caliber (this may not be used)
+     * @param id is the batch id
+     * @return the specific batch
+     */
     // TODO: abstract URIs
     public static Batch getBatchById(String id) {
         final String uri = "http://34.82.182.44:80/mock/training/batch/{id}";
@@ -42,6 +49,11 @@ public class Batch {
         return result;
     }
 
+    /**
+     * This method will get the batches by id from caliber
+     * @param id is the batch id
+     * @return the specific batch by it's id
+     */
     public static BatchDTO getBatchDTOById(String id) {
         final String uri = "http://34.82.182.44:80/mock/training/batch/{id}";
 
