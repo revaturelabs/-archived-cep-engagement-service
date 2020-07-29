@@ -19,9 +19,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 /**
- * 
- * @author Unknown
  * This class will setup the configuration for authenticating a user
+ * @author Unknown
  */
 @Configuration
 @EnableWebSecurity
