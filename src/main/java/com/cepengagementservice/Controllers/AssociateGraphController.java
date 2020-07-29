@@ -15,6 +15,7 @@ import org.apache.http.conn.ssl.TrustStrategy;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -64,22 +65,23 @@ public class AssociateGraphController {
 	 * @param batchId
 	 * @return Object
 	 */
-	@GetMapping(value = "/graph/associate/{batchId}/{associateEmail}")
-	public Object getAssociateGrade(@PathVariable String associateEmail, @PathVariable String batchId) {
-		String uri = "http://34.82.182.44:80/mock/evaluation/grades/reports/{params2}/spider/{params}";
-
-		Map<String, String> anotherId = new HashMap<String, String>();
-		anotherId.put("params", associateEmail);
-		anotherId.put("params2", batchId);
-		try {
-			// Grab the custom Rest Template.
-			RestTemplate obj = restTemplate();
-			// TODO: Map the received data (JSON) to AssociateGraph.class
-			// If fields not found from AssociateGraph model, fields will be empty.
-			// If not able to cast a field, will throw!
-			Object fetched = obj.getForObject(uri, Object.class, anotherId);
-
-			return fetched;
+		 @GetMapping(value="/graph/associate/{batchId}/{associateEmail}")
+		 @Cacheable("GetAssociateGrade")
+		    public Object getAssociateGrade(@PathVariable String associateEmail,@PathVariable String batchId) {
+		        String uri = "http://34.82.182.44:80/mock/evaluation/grades/reports/{params2}/spider/{params}";
+		        
+		        Map<String, String> anotherId = new HashMap<String, String>();
+		        anotherId.put("params", associateEmail);
+		        anotherId.put("params2", batchId);
+		        try{		     
+		        //Grab the custom Rest Template.
+		        RestTemplate obj = restTemplate();	
+		        //TODO: Map the received data (JSON) to AssociateGraph.class
+		        //If fields not found from AssociateGraph model, fields will be empty.
+		        //If not able to cast a field, will throw!
+		        Object fetched = obj.getForObject(uri, Object.class ,anotherId);
+	
+		        return fetched;
 
 		} catch (Exception exception) {
 			System.out.println(exception.getMessage());

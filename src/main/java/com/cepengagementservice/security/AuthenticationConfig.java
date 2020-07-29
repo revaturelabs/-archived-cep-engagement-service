@@ -90,8 +90,7 @@ public class AuthenticationConfig extends WebSecurityConfigurerAdapter {
             .antMatchers("/v3/api-docs/**", "/configuration/**", "/swagger*/**", "/webjars/**", "/", "/console/**").permitAll(); // permits all users to access Swagger V3 URLS
             //.antMatchers("/users/all", "/interventions").hasAnyRole("ADMIN")  // Restricts getting all users and intervention requests to ADMIN users.
             //.anyRequest().authenticated();// If you are authorized you will be able to access any routes that aren't specified to the ADMIN role.
-
-
+        
        httpSecurity
             .addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
         
