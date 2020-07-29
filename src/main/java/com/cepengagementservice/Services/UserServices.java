@@ -7,6 +7,7 @@ import com.cepengagementservice.Models.User;
 import com.cepengagementservice.Repositories.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +18,7 @@ public class UserServices {
     @Autowired
     private UserRepository userRepository;
 
+    @Cacheable("GetAllUsers")
     public List<User> getAllUsers() {
         List<User> users = new ArrayList<>();
         userRepository.findAll().forEach(users::add);
@@ -51,6 +53,7 @@ public class UserServices {
     }
 
     // Either do Optional<Users> or check yourself.
+    @Cacheable("GetUserById")
     public User getUserById(Integer id) {
         return userRepository.findById(id).get();
     }

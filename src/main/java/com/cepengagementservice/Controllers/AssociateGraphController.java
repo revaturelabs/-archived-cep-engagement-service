@@ -16,7 +16,8 @@ package com.cepengagementservice.Controllers;
 	import org.apache.http.impl.client.CloseableHttpClient;
 	import org.apache.http.impl.client.HttpClients;
 	import org.springframework.beans.factory.annotation.Autowired;
-	import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 	import org.springframework.web.bind.annotation.GetMapping;
 	import org.springframework.web.bind.annotation.PathVariable;
 	import org.springframework.web.bind.annotation.RestController;
@@ -47,6 +48,7 @@ package com.cepengagementservice.Controllers;
 		
 
 		 @GetMapping(value="/graph/associate/{batchId}/{associateEmail}")
+		 @Cacheable("GetAssociateGrade")
 		    public Object getAssociateGrade(@PathVariable String associateEmail,@PathVariable String batchId) {
 		        String uri = "http://34.82.182.44:80/mock/evaluation/grades/reports/{params2}/spider/{params}";
 		        
