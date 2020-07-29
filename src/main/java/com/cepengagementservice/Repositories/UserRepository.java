@@ -9,6 +9,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 // import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+/**
+ * This interface deals with User related functionality
+ * @author Unknown
+ *
+ */
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer> {
 

@@ -157,7 +157,6 @@ public class Request {
 //	@JsonProperty("userId")
 //	private void unPack(Integer userId)
 //	{
-//		I'm the big gay
 //		this.userId = new User();
 //		this.userId.setUserId(userId);
 //	}

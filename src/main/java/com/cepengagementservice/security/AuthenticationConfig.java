@@ -42,6 +42,12 @@ public class AuthenticationConfig extends WebSecurityConfigurerAdapter {
     @Value("${jwt.post.user.uri}") //Allow user creation for BCrypt.
     private String createUserPath;
 
+    /**
+     * This will configure an Authentication Manager based on the a password encoder
+     * and jwtInMemoryUserDetailService
+     * @param auth the AuthenticationManagerBuilder object
+     * @throws Exception if creating an Authentication Manager fails
+     */
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth

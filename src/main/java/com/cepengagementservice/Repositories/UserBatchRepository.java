@@ -9,6 +9,11 @@ import org.springframework.stereotype.Repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
+/**
+ * This interface deals with UserBatch related functionality
+ * @author Unknown
+ *
+ */
 @Repository
 public interface UserBatchRepository extends JpaRepository<UserBatch, Integer> {
 
