@@ -4,13 +4,19 @@ import com.cepengagementservice.Models.Batch;
 import com.cepengagementservice.Models.dto.BatchDTO;
 
 import org.springframework.stereotype.Service;
-
+/**
+ * 
+ * @author unknown
+ * This service is used to get the batches
+ *
+ */
 @Service
 public class BatchService {
 
     /**
      * 
-     * @param String batchid
+     * this is the method to fetch a single batch
+     * @param String id
      * @return Batch
      */
     public Batch getSingleBatch(String id) {
@@ -19,7 +25,8 @@ public class BatchService {
 
     /**
      * 
-     * @param String batchid
+     * this is the method to get a single batch from the DTO
+     * @param String id
      * @return Batch
      */
     public BatchDTO getSingleBatchDTO(String id) {
@@ -27,6 +34,12 @@ public class BatchService {
 
     }
 
+    /**
+     * 
+     * this is a check method used to figure out if the batch actually exists for the ID input.  Checks the batch not the DTO
+     * @param batchId
+     * @return boolean
+     */
 	public boolean check(String batchId) {
 		if (getSingleBatch(batchId)!=null)
 			return true;
