@@ -75,7 +75,7 @@ public class UserServices {
     /**
      * this is a method to find the user by their ID number
      * @param id
-     * @return a user
+     * @return a user or null
      */
     // Either do Optional<Users> or check yourself.
     public User getUserById(Integer id) {

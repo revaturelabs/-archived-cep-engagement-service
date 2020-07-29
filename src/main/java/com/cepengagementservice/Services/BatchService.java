@@ -7,7 +7,8 @@ import org.springframework.stereotype.Service;
 /**
  * 
  * @author unknown
- * This service is used to get the batches
+ * This is the service layer for Batches.  You utilize this in order to
+ * pull batches by ID and to check if batches exist
  *
  */
 @Service
