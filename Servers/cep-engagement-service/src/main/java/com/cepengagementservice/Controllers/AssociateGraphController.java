@@ -31,7 +31,7 @@ import org.springframework.web.client.RestTemplate;
  *
  */
 @RestController
-@CrossOrigin(origins={ "http://localhost:3000"})
+@CrossOrigin
 public class AssociateGraphController {
 
 	/**

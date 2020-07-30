@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(value = "/batch")
-@CrossOrigin(origins={ "http://localhost:3000"})
+@CrossOrigin
 public class BatchController {
     @Autowired
     private BatchService batchService;

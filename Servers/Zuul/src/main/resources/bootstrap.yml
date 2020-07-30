@@ -15,7 +15,10 @@ eureka:
     register-with-eureka: true
     service-url:
       defaultZone: http://localhost:9999/eureka
-      
+
+ribbon:
+  ReadTimeout: 60000
+
       
 zuul: 
   routes: 

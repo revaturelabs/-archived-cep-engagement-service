@@ -31,7 +31,7 @@ import com.cepengagementservice.Services.RequestService;
  */
 @RestController
 @RequestMapping(value = "/users")
-@CrossOrigin(origins={ "http://localhost:3000"})
+@CrossOrigin
 public class UsersControllers {
     
     @Autowired
