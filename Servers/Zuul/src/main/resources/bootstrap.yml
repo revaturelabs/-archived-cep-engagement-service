@@ -3,7 +3,7 @@
 server:
   port: 9015
   
-spring:
+spring: 
   application:
     name: zuul
 
@@ -17,8 +17,8 @@ eureka:
       defaultZone: http://localhost:9999/eureka
       
       
-zuul:
-  routes:
+zuul: 
+  routes: 
     register: 
       path: /api/getUsers
       service-id: register-user
@@ -31,3 +31,10 @@ zuul:
       path: /authenticate
       service-id: cep-engagement-service
       strip-prefix: false 
+    test1:
+      path: /UB/batchesbyuser
+      service-id: cep-engagement-service
+      strip-prefix: false 
+      
+      
+ 

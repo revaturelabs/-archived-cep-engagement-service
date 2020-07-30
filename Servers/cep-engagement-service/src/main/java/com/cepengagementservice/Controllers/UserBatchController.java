@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,6 +27,7 @@ import com.cepengagementservice.Services.UserBatchService;
  *
  */
 @RestController
+@CrossOrigin
 @RequestMapping(value = "/UB")
 public class UserBatchController {
 	
@@ -56,6 +58,7 @@ public class UserBatchController {
     @GetMapping(value = "/batchesbyuser")
     public ResponseEntity<List<Batch>> getAllMyBatches(@RequestParam int userId) {
         try {
+        	System.out.println(1);
             List<Batch> batches = userBatchService.getBatchesByUserId(userId);
             return new ResponseEntity<>(batches, HttpStatus.OK);
 
