@@ -7,11 +7,7 @@ insert into users  (user_id, first_name, last_name, email, password, company, ro
 insert into users  (user_id, first_name, last_name, email, password, company, role, phone) VALUES (7,'stubFName7', 'stubLName7', 'stubEmail_7@gmail.com', 'pass7word', 'VALERO', 'CLIENT', '888');
 insert into users  (user_id, first_name, last_name, email, password, company, role, phone) VALUES (8,'stubFName8', 'stubLName8', 'stubEmail_8@gmail.com', 'pass8word', 'CHEVRON', 'CLIENT', '888');
 insert into users  (user_id, first_name, last_name, email, password, company, role, phone) VALUES (9,'stubFName9', 'stubLName9', 'stubEmail_9@gmail.com', 'pass9word', 'EXXON', 'CLIENT', '888');
-<<<<<<< HEAD
-insert into users  (user_id, first_name, last_name, email, password, company, role, phone) VALUES (10,'stubFName10', 'stubLName10', 'stubEmail_10@gmail.com', 'pass10word', 'TEXACO', 'CLIENT', '888');
-=======
-insert into users  (user_id, first_name, last_name, email, password, company, role, phone) VALUES (10,'stubFName10', 'stubLName10', 'stubEmail_10@gmail.com', 'pass10word', 'TEXACO', 'CLIENT', '888');*/
->>>>>>> dev-trev
+insert into users  (user_id, first_name, last_name, email, password, company, role, phone) VALUES (10,'stubFName10', 'stubLName10', 'stubEmail_10@gmail.com', 'pass10word', 'TEXACO', 'CLIENT', '888'); */
 insert into user_batch  (row_id, user_id, batch_id) VALUES (1, 1, 'TR-1001');
 insert into user_batch  (row_id, user_id, batch_id) VALUES (2, 2, 'TR-1002');
 insert into user_batch  (row_id, user_id, batch_id) VALUES (3, 3, 'TR-1002');
@@ -39,14 +35,8 @@ insert into user_batch  (row_id, user_id, batch_id) VALUES (24, 1, '14');
 insert into user_batch  (row_id, user_id, batch_id) VALUES (26, 1, '15');
 insert into user_batch  (row_id, user_id, batch_id) VALUES (27, 1, '16');
 insert into user_batch  (row_id, user_id, batch_id) VALUES (28, 1, '17');
-<<<<<<< HEAD
+/*
 insert into users  (user_id,first_name, last_name, email, password, company, role, phone) VALUES (11,'stubFName11', 'stubLName11', 'stubEmail_11@revature.com', 'pass11word', 'REVATURE', 'ADMIN', '888');
 insert into users  (user_id,first_name, last_name, email, password, company, role, phone) VALUES (12,'stubFName12', 'stubLName12', 'stubEmail_12@revature.com', 'pass12word', 'REVATURE', 'ADMIN', '888');
 insert into users  (user_id,first_name, last_name, email, password, company, role, phone) VALUES (13,'stubFName13', 'stubLName13', 'stubEmail_13@revature.com', 'pass13word', 'REVATURE', 'ADMIN', '888');
 */
-=======
-/*insert into users  (user_id,first_name, last_name, email, password, company, role, phone) VALUES (11,'stubFName11', 'stubLName11', 'stubEmail_11@revature.com', 'pass11word', 'REVATURE', 'ADMIN', '888');
-insert into users  (user_id,first_name, last_name, email, password, company, role, phone) VALUES (12,'stubFName12', 'stubLName12', 'stubEmail_12@revature.com', 'pass12word', 'REVATURE', 'ADMIN', '888');
-insert into users  (user_id,first_name, last_name, email, password, company, role, phone) VALUES (13,'stubFName13', 'stubLName13', 'stubEmail_13@revature.com', 'pass13word', 'REVATURE', 'ADMIN', '888');
-*/
->>>>>>> dev-trev
