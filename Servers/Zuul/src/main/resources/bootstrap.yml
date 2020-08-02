@@ -21,6 +21,7 @@ ribbon:
 
       
 zuul: 
+  sensitiveHeaders: Cookie, Set-Cookie #Zuul will block these and only these headers from continuing to other services.
   routes: 
     register: 
       path: /api/getUsers
