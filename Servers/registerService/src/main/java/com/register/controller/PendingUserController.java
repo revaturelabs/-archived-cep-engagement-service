@@ -40,13 +40,13 @@ public class PendingUserController {
 	//Controller Methods
 	
 	/**
-	 * 	Need to rework this to only show pending status users
+	 * 	Needs testing
 	 * @return List of all PendingUser where status = "Pending"
 	 */
 	@GetMapping("/all")
 	public ResponseEntity<List<PendingUser>> allUsers() {
 		try {
-			List<PendingUser> users = pendingUserService.allUsers();
+			List<PendingUser> users = pendingUserService.allPendingUsers();
 			return new ResponseEntity<List<PendingUser>> (users, HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<List<PendingUser>> (HttpStatus.BAD_REQUEST);
@@ -72,7 +72,7 @@ public class PendingUserController {
 	}
 	
 	/**
-	 * Need to rework so it updates status and does not delete
+	 * Needs testing
 	 * @param id of user being approved
 	 * @return user object
 	 */
@@ -81,7 +81,7 @@ public class PendingUserController {
 		try {
 			PendingUser user = pendingUserService.findById(id);
 			user.setStatus("Approved");
-			//Add update functionality 
+			pendingUserService.updateUser(user);
 			return new ResponseEntity<String> ("Success", HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<String> (HttpStatus.BAD_REQUEST);
@@ -89,6 +89,7 @@ public class PendingUserController {
 	}
 	
 	/**
+	 * Needs Testing
 	 *  Deletes PendingUser from table
 	 * @param id of user to be denied
 	 * @return string "Success" if works
@@ -104,8 +105,13 @@ public class PendingUserController {
 		}
 	}
 	
+	/**
+	 * Needs to fix
+	 * @param password
+	 * @return
+	 */
 	@PostMapping("/register")
-	public ResponseEntity<String> registerUser(@RequestBody String password){
+	public ResponseEntity<String> registerUser(@RequestBody ){
 		try {
 			//add functionality to update password, delete from PendingUser table, and RestTemplate /add
 			return new ResponseEntity<String> ("Success", HttpStatus.OK);
