@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
@@ -26,6 +27,7 @@ import com.register.service.PendingUserServiceImpl;
  *
  */
 @RestController
+@RequestMapping("/pending")
 @CrossOrigin(origins="*")
 public class PendingUserController {
 
@@ -47,7 +49,7 @@ public class PendingUserController {
 	 * 	Needs testing
 	 * @return List of all PendingUser where status = "Pending"
 	 */
-	@GetMapping("/pending/all")
+	@GetMapping("/all")
 	public ResponseEntity<List<PendingUser>> allUsers() {
 		try {
 			List<PendingUser> users = pendingUserService.allPendingUsers();
@@ -64,7 +66,7 @@ public class PendingUserController {
 	 * @param user
 	 * @return
 	 */
-	@PostMapping("/pending/add")
+	@PostMapping("/add")
 	public ResponseEntity<String> addUser(@RequestBody PendingUser user) {
 		try {
 			//Rest Template is used to verify email is unique by querying DB in cep-service
@@ -86,7 +88,7 @@ public class PendingUserController {
 	 * @param id of user being approved
 	 * @return user object
 	 */
-	@GetMapping("/pending/approve")
+	@GetMapping("/approve")
 	public ResponseEntity<String> approveUser(@RequestParam("id") int id){
 		try {
 			PendingUser user = pendingUserService.findById(id);
@@ -104,7 +106,7 @@ public class PendingUserController {
 	 * @param id of user to be denied
 	 * @return string "Success" if works
 	 */
-	@GetMapping("/pending/deny")
+	@GetMapping("/deny")
 	public ResponseEntity<String> denyUser(@RequestParam("id") int id) {
 		try {
 			PendingUser user = pendingUserService.findById(id);
@@ -120,13 +122,13 @@ public class PendingUserController {
 	 * @param password
 	 * @return
 	 */
-	@PostMapping("/pending/register")
+	@PostMapping("/register")
 	public ResponseEntity<String> registerUser(@RequestBody RegisterInfo register ){
 		try {
 			PendingUser user = pendingUserService.findByEmail(register.getEmail());
 			user.setPassword(register.getPassword());
 			RestTemplate rest = new RestTemplate();
-			rest.postForObject("localhost:9015/cep-engagement-service/users/add", user, null);
+			rest.postForObject("http://localhost:9015/cep-engagement-service/users/add", user, String.class);
 			return new ResponseEntity<String> ("Success", HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<String> (HttpStatus.BAD_REQUEST);
