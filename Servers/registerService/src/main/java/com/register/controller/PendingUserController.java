@@ -20,7 +20,7 @@ import com.register.model.RegisterInfo;
 import com.register.service.PendingUserServiceImpl;
 
 /**
- * Need to test all the methods
+ * 
  * H2 Needs to be setup
  * Proper paths from cep-engagement need to be set
  * @author
@@ -46,7 +46,7 @@ public class PendingUserController {
 	//Controller Methods
 	
 	/**
-	 * 	Needs testing
+	 *
 	 * @return List of all PendingUser where status = "Pending"
 	 */
 	@GetMapping("/all")
@@ -62,7 +62,7 @@ public class PendingUserController {
 	
 
 	/**
-	 * Needs testing
+	 *
 	 * @param user
 	 * @return
 	 */
@@ -71,7 +71,7 @@ public class PendingUserController {
 		try {
 			//Rest Template is used to verify email is unique by querying DB in cep-service
 			RestTemplate rest = new RestTemplate();
-			Email email = rest.getForObject("http://localhost:9015/cep-engagement-service/users/email/?email={email}", Email.class, user.getEmail());
+			Email email = rest.getForObject("http://localhost:9015/users/email/?email={email}", Email.class, user.getEmail());
 			if (email != null) {
 				return new ResponseEntity<String> ("Email taken", HttpStatus.BAD_REQUEST);
 			}
@@ -84,7 +84,7 @@ public class PendingUserController {
 	}
 	
 	/**
-	 * Needs testing
+	 *
 	 * @param id of user being approved
 	 * @return user object
 	 */
@@ -101,7 +101,6 @@ public class PendingUserController {
 	}
 	
 	/**
-	 * Needs Testing
 	 *  Deletes PendingUser from table
 	 * @param id of user to be denied
 	 * @return string "Success" if works
@@ -118,7 +117,6 @@ public class PendingUserController {
 	}
 	
 	/**
-	 * Needs to test
 	 * @param password
 	 * @return
 	 */
@@ -128,7 +126,7 @@ public class PendingUserController {
 			PendingUser user = pendingUserService.findByEmail(register.getEmail());
 			user.setPassword(register.getPassword());
 			RestTemplate rest = new RestTemplate();
-			rest.postForObject("http://localhost:9015/cep-engagement-service/users/add", user, String.class);
+			rest.postForObject("http://localhost:9015/users/add", user, String.class);
 			return new ResponseEntity<String> ("Success", HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<String> (HttpStatus.BAD_REQUEST);
