@@ -12,6 +12,8 @@ public interface PendingUserService {
 	
 	public PendingUser findById(int userId);
 	
+	public PendingUser findByEmail(String email);
+	
 	public List<PendingUser> allPendingUsers();
 	
 	public void updateUser(PendingUser user);

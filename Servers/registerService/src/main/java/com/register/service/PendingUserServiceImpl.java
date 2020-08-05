@@ -56,6 +56,12 @@ public class PendingUserServiceImpl implements PendingUserService {
 		pendingUserRepo.save(user);
 		
 	}
+
+	@Override
+	public PendingUser findByEmail(String email) {
+		
+		return pendingUserRepo.findByEmail(email);
+	}
 	
 	
 }

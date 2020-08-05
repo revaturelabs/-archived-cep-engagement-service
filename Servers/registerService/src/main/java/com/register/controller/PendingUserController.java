@@ -11,13 +11,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
+import com.register.model.Email;
 import com.register.model.PendingUser;
+import com.register.model.RegisterInfo;
 import com.register.service.PendingUserServiceImpl;
 
 /**
- * Controller layer for register service
- * Need to fix /approve and add /register
+ * Need to test all the methods
+ * H2 Needs to be setup
+ * Proper paths from cep-engagement need to be set
  * @author
  *
  */
@@ -43,7 +47,7 @@ public class PendingUserController {
 	 * 	Needs testing
 	 * @return List of all PendingUser where status = "Pending"
 	 */
-	@GetMapping("/all")
+	@GetMapping("/pending/all")
 	public ResponseEntity<List<PendingUser>> allUsers() {
 		try {
 			List<PendingUser> users = pendingUserService.allPendingUsers();
@@ -56,17 +60,23 @@ public class PendingUserController {
 	
 
 	/**
-	 * Needs to implement Rest Template to query cep-engagement DB to ensure email is unique
+	 * Needs testing
 	 * @param user
 	 * @return
 	 */
-	@PostMapping("/add")
+	@PostMapping("/pending/add")
 	public ResponseEntity<String> addUser(@RequestBody PendingUser user) {
 		try {
-			//Implement RestTemplate here, use the /email path on cep-engagement
+			//Rest Template is used to verify email is unique by querying DB in cep-service
+			RestTemplate rest = new RestTemplate();
+			Email email = rest.getForObject("http://localhost:9015/cep-engagement-service/users/email/?email={email}", Email.class, user.getEmail());
+			if (email != null) {
+				return new ResponseEntity<String> ("Email taken", HttpStatus.BAD_REQUEST);
+			}
 			pendingUserService.addUser(user);
 			return new ResponseEntity<String> ("Success", HttpStatus.OK);
 		} catch (Exception e) {
+			//System.out.println(e.getMessage());
 			return new ResponseEntity<String> (HttpStatus.BAD_REQUEST);
 		}
 	}
@@ -76,7 +86,7 @@ public class PendingUserController {
 	 * @param id of user being approved
 	 * @return user object
 	 */
-	@GetMapping("/approve")
+	@GetMapping("/pending/approve")
 	public ResponseEntity<String> approveUser(@RequestParam("id") int id){
 		try {
 			PendingUser user = pendingUserService.findById(id);
@@ -94,7 +104,7 @@ public class PendingUserController {
 	 * @param id of user to be denied
 	 * @return string "Success" if works
 	 */
-	@GetMapping("/deny")
+	@GetMapping("/pending/deny")
 	public ResponseEntity<String> denyUser(@RequestParam("id") int id) {
 		try {
 			PendingUser user = pendingUserService.findById(id);
@@ -106,14 +116,17 @@ public class PendingUserController {
 	}
 	
 	/**
-	 * Needs to fix
+	 * Needs to test
 	 * @param password
 	 * @return
 	 */
-	@PostMapping("/register")
-	public ResponseEntity<String> registerUser(@RequestBody ){
+	@PostMapping("/pending/register")
+	public ResponseEntity<String> registerUser(@RequestBody RegisterInfo register ){
 		try {
-			//add functionality to update password, delete from PendingUser table, and RestTemplate /add
+			PendingUser user = pendingUserService.findByEmail(register.getEmail());
+			user.setPassword(register.getPassword());
+			RestTemplate rest = new RestTemplate();
+			rest.postForObject("localhost:9015/cep-engagement-service/users/add", user, null);
 			return new ResponseEntity<String> ("Success", HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<String> (HttpStatus.BAD_REQUEST);

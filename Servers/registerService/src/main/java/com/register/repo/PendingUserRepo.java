@@ -10,6 +10,8 @@ public interface PendingUserRepo extends JpaRepository<PendingUser, Integer> {
 
 	public PendingUser findByUserId(int userId);
 	
+	public PendingUser findByEmail(String email);
+	
 	public List<PendingUser> findByStatus(String status);
 	
 }
