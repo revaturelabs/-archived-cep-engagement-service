@@ -2,24 +2,28 @@ package com.cepengagementservice.Controllers;
 
 import java.util.List;
 
-import com.cepengagementservice.Models.User;
-import com.cepengagementservice.Services.UserServices;
-import com.cepengagementservice.Models.Request;
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.cepengagementservice.Models.Request;
+import com.cepengagementservice.Models.User;
 import com.cepengagementservice.Services.RequestService;
+import com.cepengagementservice.Services.UserServices;
 
 /**
  * Handles request from the front ends including getting all the users
@@ -33,6 +37,9 @@ import com.cepengagementservice.Services.RequestService;
 @RequestMapping(value = "/users")
 @CrossOrigin
 public class UsersControllers {
+	
+	@Value("${jwt.http.request.header}") //grabs header from src/main/resources/app.properties 
+	private String tokenHeader;
     
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -88,6 +95,21 @@ public class UsersControllers {
             return new ResponseEntity<User>(user, HttpStatus.OK);
         }
         return new ResponseEntity<User>(user, HttpStatus.NO_CONTENT);
+    }
+    
+    @RequestMapping(method = RequestMethod.GET, value = "/email/all")
+    public ResponseEntity<?> getAllEmail(HttpServletRequest request) {
+        String authKey = request.getHeader(tokenHeader);
+        try {
+        	if (authKey == "pass") {
+        		List<String> emails = userService.allEmail();
+        		return new ResponseEntity<List<String>>(emails, HttpStatus.OK);
+        	}
+        	return new ResponseEntity<String>("Invalid key", HttpStatus.BAD_REQUEST);
+        } catch (Exception e) {
+        	return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/user/")
