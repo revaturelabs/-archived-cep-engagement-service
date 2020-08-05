@@ -26,17 +26,21 @@ public class PendingUser {
 	@Column(name="email", nullable=false, unique=true)
 	private String email;
 	
-	@Column(name="password", nullable=false)
+	@Column(name="password", nullable=true)
 	private String password;
 	
 	@Column(name="company", nullable=false)
 	private String company;
 	
 	@Column(name="role", nullable=false)
-	private String role;
+	private String role = "Client";
 	
 	@Column(name="phone", nullable=false)
 	private String phone;
+	
+	//default is "Pending", gets set to "Approved" when approved
+	@Column(name="status", nullable=false)
+	private String status = "Pending";
 	
 	//No args
 	public PendingUser(){
@@ -45,7 +49,7 @@ public class PendingUser {
 
 	//All args
 	public PendingUser(int userId, String firstName, String lastName, String email, String password, String company,
-			String role, String phone) {
+			String role, String phone, String status) {
 		super();
 		this.userId = userId;
 		this.firstName = firstName;
@@ -55,11 +59,12 @@ public class PendingUser {
 		this.company = company;
 		this.role = role;
 		this.phone = phone;
+		this.status = status;
 	}
 
 	//All args w/o userId
 	public PendingUser(String firstName, String lastName, String email, String password, String company, String role,
-			String phone) {
+			String phone, String status) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -68,6 +73,7 @@ public class PendingUser {
 		this.company = company;
 		this.role = role;
 		this.phone = phone;
+		this.status = status;
 	}
 
 	public int getUserId() {
@@ -134,12 +140,21 @@ public class PendingUser {
 		this.phone = phone;
 	}
 
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
 	@Override
 	public String toString() {
 		return "PendingUser [userId=" + userId + ", firstName=" + firstName + ", lastName=" + lastName + ", email="
 				+ email + ", password=" + password + ", company=" + company + ", role=" + role + ", phone=" + phone
-				+ "]";
+				+ ", status=" + status + "]";
 	}
+	
 	
 	
 	
