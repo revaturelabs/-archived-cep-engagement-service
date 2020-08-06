@@ -119,9 +119,13 @@ public class AuthenticationConfig extends WebSecurityConfigurerAdapter {
                 createUserPath
             )
             .antMatchers(
-                HttpMethod.GET, //allows Post Request to Add User Endpoint without Token
+                HttpMethod.GET,
                  "/users/email/all"
             )
+            .antMatchers(
+                    HttpMethod.GET,
+                     "/users/email/admin"
+                )
             .antMatchers(HttpMethod.OPTIONS, "/**") // Permits Options requests to any URL to see your options
             .antMatchers("/v3/**"); // Permits any type of http request to the URL starting with V3 for Swagger.
         

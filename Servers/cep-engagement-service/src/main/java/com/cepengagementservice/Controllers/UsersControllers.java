@@ -105,10 +105,24 @@ public class UsersControllers {
 	@RequestMapping(method = RequestMethod.GET, value = "/email/all")
 	public ResponseEntity<List<String>> getAllEmail(HttpServletRequest request) {
 		String authKey = request.getHeader(tokenHeader);
-		System.out.println(emailKey);
 		try {
 			if (authKey.equals(emailKey)) {
 				List<String> emails = userService.allEmail();
+				return new ResponseEntity<List<String>>(emails, HttpStatus.OK);
+			}
+			return new ResponseEntity<List<String>>(HttpStatus.BAD_REQUEST);
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+
+	}
+	
+	@RequestMapping(method = RequestMethod.GET, value = "/email/admin")
+	public ResponseEntity<List<String>> getAdminEmail(HttpServletRequest request) {
+		String authKey = request.getHeader(tokenHeader);
+		try {
+			if (authKey.equals(emailKey)) {
+				List<String> emails = userService.adminEmail();
 				return new ResponseEntity<List<String>>(emails, HttpStatus.OK);
 			}
 			return new ResponseEntity<List<String>>(HttpStatus.BAD_REQUEST);
