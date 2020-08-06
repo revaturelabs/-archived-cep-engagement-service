@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 import com.register.model.PendingUser;
+import com.register.model.PendingUserSend;
 import com.register.service.PendingUserServiceImpl;
 import com.register.util.EmailSender;
 
@@ -135,7 +136,8 @@ public class PendingUserController {
 			PendingUser user = pendingUserService.findById(id);
 			user.setPassword(generateRandomPassword(8));
 			RestTemplate rest = new RestTemplate();
-			rest.postForObject("http://localhost:9015/users/add", user, String.class);
+			PendingUserSend pend = new PendingUserSend(user.getFirstName(), user.getLastName(), user.getEmail(), user.getPassword(), user.getCompany(), user.getRole(), user.getPhone());
+			rest.postForObject("http://localhost:9015/users/add", pend, String.class);
 			System.out.println(user);
 			pendingUserService.deleteUser(user);
 			System.out.println(0);
@@ -152,11 +154,11 @@ public class PendingUserController {
 	 * @return string "Success" if works
 	 */
 	@GetMapping("/deny")
-	public ResponseEntity<String> denyUser(@RequestParam("id") int id) {
+	public ResponseEntity<String> denyUser(@RequestParam("id") int id, @RequestBody String str) {
 		try {
 			PendingUser user = pendingUserService.findById(id);
 			pendingUserService.deleteUser(user);
-			EmailSender.sendAsHtml(user.getEmail(), "Your Revature CEP account has been denied!", "<h1>Sorry you have been denied please try again with different credentials</h1>");
+			EmailSender.sendAsHtml(user.getEmail(), "Your Revature CEP account has been denied!", "Sorry, you have been denied for the following reason(s): " + str);
 			return new ResponseEntity<String> ("Success", HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<String> (HttpStatus.BAD_REQUEST);

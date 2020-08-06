@@ -21,6 +21,8 @@ public class EmailSender {
       System.out.println("Sending email to " + to);
 
       Session session = createSession();
+      
+      System.out.println("after session");
 
       //create message using session
       MimeMessage message = new MimeMessage(session);
