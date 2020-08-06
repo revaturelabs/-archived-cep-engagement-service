@@ -42,6 +42,9 @@ public class UsersControllers {
 
 	@Value("${jwt.http.request.header}") // grabs header from src/main/resources/app.properties
 	private String tokenHeader;
+	
+	@Value("${key.allemail}") // grabs header from src/main/resources/app.properties
+	private String emailKey;
 
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -102,8 +105,9 @@ public class UsersControllers {
 	@RequestMapping(method = RequestMethod.GET, value = "/email/all")
 	public ResponseEntity<List<String>> getAllEmail(HttpServletRequest request) {
 		String authKey = request.getHeader(tokenHeader);
+		System.out.println(emailKey);
 		try {
-			if (authKey.equals("pass")) {
+			if (authKey.equals(emailKey)) {
 				List<String> emails = userService.allEmail();
 				return new ResponseEntity<List<String>>(emails, HttpStatus.OK);
 			}

@@ -7,6 +7,7 @@ import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -45,6 +46,9 @@ public class PendingUserController {
 
 	//Field
 	public PendingUserServiceImpl pendingUserService;
+	
+	@Value("${key.allemail}") // grabs value from src/main/resources/app.properties
+	private String emailKey;
 	
 	//Constructors
 	public PendingUserController() {}
@@ -101,7 +105,7 @@ public class PendingUserController {
 			headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
 
 			// example of custom header
-			headers.set("Authorization", "pass");
+			headers.set("Authorization", emailKey);
 
 			// build the request
 			HttpEntity<?> request = new HttpEntity<>(headers);
