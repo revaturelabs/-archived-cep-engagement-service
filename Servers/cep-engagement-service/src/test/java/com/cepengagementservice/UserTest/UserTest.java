@@ -15,7 +15,7 @@ public class UserTest {
     @Test
     void createUser(){
 
-        User test = new User(1,"first", "last","p","pass", "comp","role", "888", new ArrayList<Request>());
+        User test = new User(1,"first", "last","p","pass", "comp","role", "888", true, new ArrayList<Request>());
         assertNotNull(test, "The constructor must create an object");
     
 
