@@ -56,7 +56,7 @@ public class User {
     // No provided user_id
     @Id
     @NonNull
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "USER_ID")
     private Integer userId;
 
@@ -164,6 +164,20 @@ public class User {
     public void setPhone(String phone) {
         this.phone = phone;
     }
+
+	public User(@NonNull String firstName, @NonNull String lastName, @NonNull String email, @NonNull String password,
+			@NonNull String company, @NonNull String role, @NonNull String phone) {
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.password = password;
+		this.company = company;
+		this.role = role;
+		this.phone = phone;
+	}
+    
+    
 
     // public Set<Batch> getBatches() {
     // return batches;

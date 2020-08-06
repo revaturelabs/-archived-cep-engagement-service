@@ -23,10 +23,6 @@ ribbon:
 zuul: 
   sensitiveHeaders: Cookie, Set-Cookie #Zuul will block these and only these headers from continuing to other services.
   routes: 
-    register: 
-      path: /api/getUsers
-      service-id: register-user
-      strip-prefix: true
     newUser: 
       path: /users/add
       service-id: cep-engagement-service
@@ -39,8 +35,20 @@ zuul:
       path: /UB/batchesbyuser
       service-id: cep-engagement-service
       strip-prefix: true
-    newpending:
+    add-pending:
       path: /pending/add
+      service-id: register-user
+      strip-prefix: true
+    all-pending:
+      path: /pending/all
+      service-id: register-user
+      strip-prefix: true
+    approve-pending:
+      path: /pending/approve
+      service-id: register-user
+      strip-prefix: true
+    deny-pending:
+      path: /pending/deny
       service-id: register-user
       strip-prefix: true
     catch-all:

@@ -27,6 +27,7 @@ import org.springframework.web.client.RestTemplate;
 
 import com.register.model.PendingUser;
 import com.register.service.PendingUserServiceImpl;
+import com.register.util.EmailSender;
 
 /**
  * 
@@ -60,8 +61,11 @@ public class PendingUserController {
 	 */
 	@GetMapping("/all")
 	public ResponseEntity<List<PendingUser>> allUsers() {
+		System.out.println(0);
 		try {
+			System.out.println(1 + " " + pendingUserService.allPendingUsers());
 			List<PendingUser> users = pendingUserService.allPendingUsers();
+			System.out.println(2 + " " + users);
 			return new ResponseEntity<List<PendingUser>> (users, HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<List<PendingUser>> (HttpStatus.BAD_REQUEST);
@@ -112,7 +116,6 @@ public class PendingUserController {
 			if (emailList.contains(user.getEmail()) || pendingUserService.findByEmail(user.getEmail()) != null) {
 				return new ResponseEntity<String> ("Email taken", HttpStatus.BAD_REQUEST);
 			}
-			user.setPassword(generateRandomPassword(8));
 			pendingUserService.addUser(user);
 			return new ResponseEntity<String> ("Success", HttpStatus.OK);
 		} catch (Exception e) {
@@ -130,10 +133,13 @@ public class PendingUserController {
 	public ResponseEntity<String> approveUser(@RequestParam("id") int id){
 		try {
 			PendingUser user = pendingUserService.findById(id);
-			user.setStatus("Approved");
-			pendingUserService.updateUser(user);
+			user.setPassword(generateRandomPassword(8));
 			RestTemplate rest = new RestTemplate();
 			rest.postForObject("http://localhost:9015/users/add", user, String.class);
+			System.out.println(user);
+			pendingUserService.deleteUser(user);
+			System.out.println(0);
+			EmailSender.sendAsHtml(user.getEmail(), "Your Revature CEP account has been approved!", "Congrats, you have been approved and your password is: " + user.getPassword());
 			return new ResponseEntity<String> ("Success", HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<String> (HttpStatus.BAD_REQUEST);
@@ -150,6 +156,7 @@ public class PendingUserController {
 		try {
 			PendingUser user = pendingUserService.findById(id);
 			pendingUserService.deleteUser(user);
+			EmailSender.sendAsHtml(user.getEmail(), "Your Revature CEP account has been denied!", "<h1>Sorry you have been denied please try again with different credentials</h1>");
 			return new ResponseEntity<String> ("Success", HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<String> (HttpStatus.BAD_REQUEST);

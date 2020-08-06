@@ -47,7 +47,7 @@ public class PendingUserServiceImpl implements PendingUserService {
 	@Override
 	public List<PendingUser> allPendingUsers() {
 		
-		return pendingUserRepo.findByStatus("Pending");
+		return pendingUserRepo.findAll();
 	}
 
 	@Override

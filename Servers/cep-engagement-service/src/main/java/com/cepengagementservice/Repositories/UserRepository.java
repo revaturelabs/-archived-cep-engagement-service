@@ -25,6 +25,8 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     
     @Query("select u.email from User u")
     List<String> getAllEmail();
+    
+    void addUser(User user);
 
     // @Query(value = "SELECT u FROM User u INNER JOIN u.batches ub WHERE ub.batchId
     // = :batchId")
