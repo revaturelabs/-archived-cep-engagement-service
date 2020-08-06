@@ -101,7 +101,7 @@ public class UsersControllers {
     public ResponseEntity<?> getAllEmail(HttpServletRequest request) {
         String authKey = request.getHeader(tokenHeader);
         try {
-        	if (authKey == "pass") {
+        	if (authKey.equals("pass")) {
         		List<String> emails = userService.allEmail();
         		return new ResponseEntity<List<String>>(emails, HttpStatus.OK);
         	}

@@ -1,9 +1,15 @@
 package com.register.controller;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
-import com.register.model.Email;
 import com.register.model.PendingUser;
 import com.register.model.RegisterInfo;
 import com.register.service.PendingUserServiceImpl;
@@ -66,13 +71,35 @@ public class PendingUserController {
 	 * @param user
 	 * @return
 	 */
+	@SuppressWarnings("unlikely-arg-type")
 	@PostMapping("/add")
 	public ResponseEntity<String> addUser(@RequestBody PendingUser user) {
 		try {
 			//Rest Template is used to verify email is unique by querying DB in cep-service
 			RestTemplate rest = new RestTemplate();
-			Email email = rest.getForObject("http://localhost:9015/users/email/?email={email}", Email.class, user.getEmail());
-			if (email != null) {
+			//String[] str = rest.getForObject("http://localhost:9015/users/email/all", String[].class);
+			// create headers
+			HttpHeaders headers = new HttpHeaders();
+
+			// set Content-Type and Accept headers
+			headers.setContentType(MediaType.APPLICATION_JSON);
+			headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+
+			// example of custom header
+			headers.set("Authorization", "pass");
+
+			// build the request
+			HttpEntity<?> request = new HttpEntity<>(headers);
+
+			// make an HTTP GET request with headers
+			ResponseEntity<String[]> str = rest.exchange(
+					"http://localhost:9015/users/email/all",
+			        HttpMethod.GET,
+			        request,
+			        String[].class
+			);
+			System.out.println(str);
+			if (Arrays.asList(str).contains(user.getEmail())) {
 				return new ResponseEntity<String> ("Email taken", HttpStatus.BAD_REQUEST);
 			}
 			pendingUserService.addUser(user);
