@@ -145,8 +145,6 @@ public class UsersControllers {
 			return new ResponseEntity<String>("Passwords do not match", HttpStatus.BAD_REQUEST);
 		}
 		
-//		String email = "";
-		
 		user.setPassword(bCryptPasswordEncoder.encode(reset.getConfirmedPassword()));
 		userService.updateUser(user);
 		return new ResponseEntity<String>("Success", HttpStatus.OK);
