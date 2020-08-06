@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import com.register.model.DenyMessage;
 import com.register.model.PendingUser;
 import com.register.model.PendingUserSend;
 import com.register.service.PendingUserServiceImpl;
@@ -153,12 +154,14 @@ public class PendingUserController {
 	 * @param id of user to be denied
 	 * @return string "Success" if works
 	 */
-	@GetMapping("/deny")
-	public ResponseEntity<String> denyUser(@RequestParam("id") int id, @RequestBody String str) {
+	@PostMapping("/deny")
+	public ResponseEntity<String> denyUser(@RequestParam("id") int id, @RequestBody DenyMessage denyMessage) {
 		try {
+			System.out.println(denyMessage);
 			PendingUser user = pendingUserService.findById(id);
+			System.out.println(user);
 			pendingUserService.deleteUser(user);
-			EmailSender.sendAsHtml(user.getEmail(), "Your Revature CEP account has been denied!", "Sorry, you have been denied for the following reason(s): " + str);
+			EmailSender.sendAsHtml(user.getEmail(), "Your Revature CEP account has been denied!", "Sorry, you have been denied for the following reason(s): " + denyMessage.getDenyMessage());
 			return new ResponseEntity<String> ("Success", HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<String> (HttpStatus.BAD_REQUEST);

@@ -146,6 +146,7 @@ public class UsersControllers {
 		}
 		
 		user.setPassword(bCryptPasswordEncoder.encode(reset.getConfirmedPassword()));
+		user.setResetPassword(false);
 		userService.updateUser(user);
 		return new ResponseEntity<String>("Success", HttpStatus.OK);
 	}
