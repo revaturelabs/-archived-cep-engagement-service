@@ -90,6 +90,10 @@ public class User {
     @Column(name = "PHONE")
     private String phone;
     
+    @NonNull
+    @Column(name = "RESETPASSWORD")
+    private Boolean resetPassword = true;
+    
   //userId mapped to Request table
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")

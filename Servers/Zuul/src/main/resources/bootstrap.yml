@@ -39,6 +39,10 @@ zuul:
       path: /UB/batchesbyuser
       service-id: cep-engagement-service
       strip-prefix: true
+    newpending:
+      path: /pending/add
+      service-id: register-user
+      strip-prefix: true
     catch-all:
       path: /**
       service-id: cep-engagement-service

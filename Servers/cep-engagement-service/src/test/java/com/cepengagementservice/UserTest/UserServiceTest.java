@@ -29,62 +29,67 @@ However, it cannot be used if another, i.e. SpringRunners.
 
 @ExtendWith(SpringExtension.class)
 public class UserServiceTest {
-    
-    @Mock
-    UserRepository USMock = mock(UserRepository.class);
 
-    @InjectMocks
-    UserServices userService;
-    
-    @Test
-    public void testAddUserIfEmailNotOccupied(){
-        User user = new User(1,"first", "last","p","pass", "comp","role", "888",new ArrayList<Request>());
-        
-        when(USMock.findByEmail(user.getEmail())).thenReturn(null);
+	@Mock
+	UserRepository USMock = mock(UserRepository.class);
 
-        assertTrue(userService.addUser(user),"User should be created if email not in database.");
+	@InjectMocks
+	UserServices userService;
 
-    }
+	@Test
+	public void testAddUserIfEmailNotOccupied() {
+		User user = new User(1, "first", "last", "p", "pass", "comp", "role", "888", true, new ArrayList<Request>());
 
-    @Test
-    public void  testAddUserIfEmailOccupied(){
-        User user = new User(1,"first", "last","p","pass", "comp","role", "888", new ArrayList<Request>());
-        User userTwo = new User(2,"second", "last","p","pass", "comp","role", "888", new ArrayList<Request>());
-        when(USMock.findByEmail(userTwo.getEmail())).thenReturn(user);
+		when(USMock.findByEmail(user.getEmail())).thenReturn(null);
 
-        assertFalse(userService.addUser(userTwo), "Users with same email shouldn't be added.");
-    }
+		assertTrue(userService.addUser(user), "User should be created if email not in database.");
 
+	}
 
-    @Test
-    public void testGetAllUsers(){
-        User user = new User(1,"first", "last","pa@stubmail.com","pass", "comp","role", "888", new ArrayList<Request>());
-        User userTwo = new User(2,"second", "last","pb@stubmail.com","pass", "comp","role", "888", new ArrayList<Request>());
-       
-        List<User> users = new ArrayList<User>();
-        users.add(user);
-        users.add(userTwo);
+	@Test
+	public void testAddUserIfEmailOccupied() {
+		User user = new User(1, "first", "last", "p", "pass", "comp", "role", "888", true, new ArrayList<Request>());
+		User userTwo = new User(2, "second", "last", "p", "pass", "comp", "role", "888", true,
+				new ArrayList<Request>());
+		when(USMock.findByEmail(userTwo.getEmail())).thenReturn(user);
 
-        when(USMock.findAll()).thenReturn(users);
-  
-        assertEquals( users,userService.getAllUsers(), "getAll should return a list of Users");
-    }
+		assertFalse(userService.addUser(userTwo), "Users with same email shouldn't be added.");
+	}
 
-    @Test
-    public void testGetAllUsersShouldHaveSavedUsers(){
-        User user = new User(1,"first", "last","pa@stubmail.com","pass", "comp","role", "888",new ArrayList<Request>());
-        User userTwo = new User(2,"second", "last","pb@stubmail.com","pass", "comp","role", "888",new ArrayList<Request>());
-        User userThree = new User(3,"third", "last","pc@stubmail.com","pass", "comp","role", "888",new ArrayList<Request>());
-      
-        List<User> users = new ArrayList<User>();
-        List<User> usersTwo = new ArrayList<User>();
-        users.add(user);
-        users.add(userTwo);
-        usersTwo.add(user);
-        usersTwo.add(userTwo);
-        usersTwo.add(userThree);
-        when(USMock.findAll()).thenReturn(users);
- 
-        assertNotEquals( usersTwo,userService.getAllUsers(), "getAll should not return users not saved");
-    }
+	@Test
+	public void testGetAllUsers() {
+		User user = new User(1, "first", "last", "pa@stubmail.com", "pass", "comp", "role", "888", true,
+				new ArrayList<Request>());
+		User userTwo = new User(2, "second", "last", "pb@stubmail.com", "pass", "comp", "role", "888", true,
+				new ArrayList<Request>());
+
+		List<User> users = new ArrayList<User>();
+		users.add(user);
+		users.add(userTwo);
+
+		when(USMock.findAll()).thenReturn(users);
+
+		assertEquals(users, userService.getAllUsers(), "getAll should return a list of Users");
+	}
+
+	@Test
+	public void testGetAllUsersShouldHaveSavedUsers() {
+		User user = new User(1, "first", "last", "pa@stubmail.com", "pass", "comp", "role", "888", true,
+				new ArrayList<Request>());
+		User userTwo = new User(2, "second", "last", "pb@stubmail.com", "pass", "comp", "role", "888", true,
+				new ArrayList<Request>());
+		User userThree = new User(3, "third", "last", "pc@stubmail.com", "pass", "comp", "role", "888", true,
+				new ArrayList<Request>());
+
+		List<User> users = new ArrayList<User>();
+		List<User> usersTwo = new ArrayList<User>();
+		users.add(user);
+		users.add(userTwo);
+		usersTwo.add(user);
+		usersTwo.add(userTwo);
+		usersTwo.add(userThree);
+		when(USMock.findAll()).thenReturn(users);
+
+		assertNotEquals(usersTwo, userService.getAllUsers(), "getAll should not return users not saved");
+	}
 }
