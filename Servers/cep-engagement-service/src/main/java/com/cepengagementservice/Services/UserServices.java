@@ -97,5 +97,9 @@ public class UserServices {
     public User updateUser(User user) {
         return userRepository.save(user);
     }
+    
+    public List<String> allEmail() {
+    	return userRepository.getAllEmail();
+    }
 
 }
