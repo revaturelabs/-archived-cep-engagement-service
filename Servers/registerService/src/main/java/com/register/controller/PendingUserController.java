@@ -88,15 +88,12 @@ public class PendingUserController {
 	@SuppressWarnings("unlikely-arg-type")
 	@PostMapping("/add")
 	public ResponseEntity<String> addUser(@RequestBody PendingUser user) {
-		System.out.println("before");
 		try {
-			System.out.println("inside");
 			
 			ClientHttpRequestFactory factory = new BufferingClientHttpRequestFactory(new SimpleClientHttpRequestFactory());
 
 			//Rest Template is used to verify email is unique by querying DB in cep-service
 			RestTemplate rest = new RestTemplate(factory);
-			//String[] str = rest.getForObject("http://localhost:9015/users/email/all", String[].class);
 			// create headers
 			HttpHeaders headers = new HttpHeaders();
 
@@ -154,7 +151,6 @@ public class PendingUserController {
 			
 			return new ResponseEntity<String> ("Success", HttpStatus.OK);
 		} catch (Exception e) {
-			//System.out.println(e.getMessage());
 			return new ResponseEntity<String> (HttpStatus.BAD_REQUEST);
 		}
 	}
@@ -172,7 +168,6 @@ public class PendingUserController {
 			RestTemplate rest = new RestTemplate();
 			PendingUserSend pend = new PendingUserSend(user.getFirstName(), user.getLastName(), user.getEmail(), user.getPassword(), user.getCompany(), user.getRole(), user.getPhone());
 			rest.postForObject("http://localhost:9015/users/add", pend, String.class);
-			System.out.println(user);
 			pendingUserService.deleteUser(user);
 			EmailSender.sendAsHtml(user.getEmail(), "Your Revature CEP account has been approved!", "Congrats, you have been approved and your password is: " + user.getPassword());
 			return new ResponseEntity<String> ("Success", HttpStatus.OK);
