@@ -32,7 +32,7 @@ public class JwtUserDetails extends User implements UserDetails {
 		this.setEmail(user.getEmail());
 
 		List<SimpleGrantedAuthority> authorities = new ArrayList<SimpleGrantedAuthority>();
-		authorities.add(new SimpleGrantedAuthority("ROLE_" + getRole()));
+		authorities.add(new SimpleGrantedAuthority(getRole()));
 		this.authorities = authorities;
 	}
 
@@ -41,7 +41,7 @@ public class JwtUserDetails extends User implements UserDetails {
 		super();
 
 		List<SimpleGrantedAuthority> authorities = new ArrayList<SimpleGrantedAuthority>();
-		authorities.add(new SimpleGrantedAuthority("ROLE_" + getRole()));
+		authorities.add(new SimpleGrantedAuthority(getRole()));
 		this.authorities = authorities;
 	}
 

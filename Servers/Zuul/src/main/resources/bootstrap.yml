@@ -2,8 +2,8 @@
 
 server:
   port: 9015
-  
-spring: 
+
+spring:
   application:
     name: zuul
 
@@ -14,20 +14,20 @@ eureka:
     fetch-registry: true
     register-with-eureka: true
     service-url:
-      defaultZone: http://localhost:9999/eureka
+      defaultZone: http://${EUREKA_HOSTED_IP:127.0.0.1}:9999/eureka
 
 ribbon:
   ReadTimeout: 60000
 
-      
-zuul: 
+
+zuul:
   sensitiveHeaders: Cookie, Set-Cookie #Zuul will block these and only these headers from continuing to other services.
   routes: 
     newUser: 
       path: /users/add
       service-id: cep-engagement-service
       strip-prefix: true
-    login: 
+    login:
       path: /authenticate
       service-id: cep-engagement-service
       strip-prefix: true
@@ -55,6 +55,4 @@ zuul:
       path: /**
       service-id: cep-engagement-service
       strip-prefix: true
-      
-      
- 
+
