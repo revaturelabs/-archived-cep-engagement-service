@@ -170,6 +170,18 @@ public class User {
     public void setPhone(String phone) {
         this.phone = phone;
     }
+    
+    public User(@NonNull String firstName, @NonNull String lastName, @NonNull String email, @NonNull String password,
+			@NonNull String company, @NonNull String role, @NonNull String phone, @NonNull Boolean resetPassword) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email.toLowerCase();
+		this.password = password;
+		this.company = company;
+		this.role = role;
+		this.phone = phone;
+		this.resetPassword = resetPassword;
+    }
 
 	public User(@NonNull String firstName, @NonNull String lastName, @NonNull String email, @NonNull String password,
 			@NonNull String company, @NonNull String role, @NonNull String phone) {
