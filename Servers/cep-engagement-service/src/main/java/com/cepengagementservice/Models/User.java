@@ -97,7 +97,6 @@ public class User {
     private Boolean resetPassword = true;
     
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "USER_ID")
     private UserProfile profile;
     
   //userId mapped to Request table
