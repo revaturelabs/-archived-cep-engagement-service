@@ -1,8 +1,11 @@
 package com.cepengagementservice.Services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cepengagementservice.Models.ProfileCategory;
 import com.cepengagementservice.Repositories.ProfileCategoryRepository;
 
 @Service
@@ -27,5 +30,7 @@ public class ProfileCategoryService {
 		this.categoryService = categoryService;
 	}
 	
-	
+	public List<ProfileCategory> getAllPCs(){
+		return null;
+	}
 }

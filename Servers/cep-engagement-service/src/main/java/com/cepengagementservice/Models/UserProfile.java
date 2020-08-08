@@ -1,10 +1,10 @@
 package com.cepengagementservice.Models;
 
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -21,28 +21,22 @@ public class UserProfile {
     @Column(name = "PROFILE_ID", updatable=false)
     private Integer profileId;
 	
-	@OneToOne(mappedBy = "profile")
+	@OneToOne(fetch = FetchType.LAZY, optional = true, mappedBy = "profile")
+	@JoinColumn(name = "user_id", nullable = false)
 	@MapsId
 	private User user;
 	
 	@Column(name = "DEADLINE")
-	private String batchDeadline;
+	private String batchDeadline = null;
 	
 	@Column(name = "ASSOCIATE_COUNT")
-	private Integer associateCount;
+	private Integer associateCount = null;
 	
 	public UserProfile() {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public UserProfile(User user) {
-		this.user = user;
-		this.batchDeadline = null;
-		this.associateCount = null;
-	}
-	
-	public UserProfile(User user, String batchDeadline, Integer associateCount) {
-		this.user = user;
+	public UserProfile(String batchDeadline, Integer associateCount) {
 		this.batchDeadline = batchDeadline;
 		this.associateCount = associateCount;
 	}
