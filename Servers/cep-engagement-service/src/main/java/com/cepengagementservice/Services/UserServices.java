@@ -101,5 +101,9 @@ public class UserServices {
     public List<String> allEmail() {
     	return userRepository.getAllEmail();
     }
+    
+    public List<String> adminEmail() {
+    	return userRepository.getAdminEmail();
+    }
 
 }

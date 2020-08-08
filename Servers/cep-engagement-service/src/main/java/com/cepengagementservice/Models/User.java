@@ -136,7 +136,7 @@ public class User {
     }
 
     public void setEmail(String email) {
-        this.email = email;
+        this.email = email.toLowerCase();
     }
 
     public String getPassword() {
@@ -176,7 +176,7 @@ public class User {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.email = email;
+		this.email = email.toLowerCase();
 		this.password = password;
 		this.company = company;
 		this.role = role;

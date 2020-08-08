@@ -28,5 +28,10 @@
     "name": "jwt.post.user.uri",
     "type": "java.lang.String",
     "description": "The URI to add a user"
+  },
+  {
+    "name": "key.allemail",
+    "type": "java.lang.String",
+    "description": "The key that is required from the request header"
   }
 ]}
