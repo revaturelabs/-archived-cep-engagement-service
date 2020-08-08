@@ -31,6 +31,19 @@ public class ProfileCategoryService {
 	}
 	
 	public List<ProfileCategory> getAllPCs(){
-		return null;
+		return pcRepo.findAll();
+	}
+	
+	public List<ProfileCategory> getPCsByProfileId(int profileId) {
+		return pcRepo.findByProfileId(profileId);
+	}
+	
+	public List<ProfileCategory> getPCsByCategoryId(int categoryId) {
+		return pcRepo.findByCategoryId(categoryId);
+	}
+	
+	public void deletePCsByProfileId(int profileId) {
+		pcRepo.deleteByProfileId(profileId);
+		return;
 	}
 }
