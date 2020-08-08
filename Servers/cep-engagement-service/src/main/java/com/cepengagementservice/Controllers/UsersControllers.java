@@ -105,6 +105,7 @@ public class UsersControllers {
 	@RequestMapping(method = RequestMethod.GET, value = "/email/all")
 	public ResponseEntity<List<String>> getAllEmail(HttpServletRequest request) {
 		String authKey = request.getHeader(tokenHeader);
+		System.out.println(authKey);
 		try {
 			if (authKey.equals(emailKey)) {
 				List<String> emails = userService.allEmail();

@@ -33,7 +33,7 @@ public class PendingUser {
 	private String company;
 	
 	@Column(name="role", nullable=false)
-	private String role = "Client";
+	private String role = "ROLE_CLIENT";
 	
 	@Column(name="phone", nullable=false)
 	private String phone;
