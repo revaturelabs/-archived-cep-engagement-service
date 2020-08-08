@@ -26,9 +26,6 @@ public class PendingUser {
 	@Column(name="email", nullable=false, unique=true)
 	private String email;
 	
-	@Column(name="password", nullable=true)
-	private String password;
-	
 	@Column(name="company", nullable=false)
 	private String company;
 	
@@ -44,27 +41,25 @@ public class PendingUser {
 	}
 
 	//All args
-	public PendingUser(int userId, String firstName, String lastName, String email, String password, String company,
+	public PendingUser(int userId, String firstName, String lastName, String email, String company,
 			String role, String phone) {
 		super();
 		this.userId = userId;
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.email = email;
-		this.password = password;
+		this.email = email.toLowerCase();
 		this.company = company;
 		this.role = role;
 		this.phone = phone;
 	}
 
 	//All args w/o userId
-	public PendingUser(String firstName, String lastName, String email, String password, String company, String role,
+	public PendingUser(String firstName, String lastName, String email, String company, String role,
 			String phone) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
-		this.password = password;
 		this.company = company;
 		this.role = role;
 		this.phone = phone;
@@ -99,15 +94,7 @@ public class PendingUser {
 	}
 
 	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
+		this.email = email.toLowerCase();
 	}
 
 	public String getCompany() {
@@ -137,12 +124,8 @@ public class PendingUser {
 	@Override
 	public String toString() {
 		return "PendingUser [userId=" + userId + ", firstName=" + firstName + ", lastName=" + lastName + ", email="
-				+ email + ", password=" + password + ", company=" + company + ", role=" + role + ", phone=" + phone
+				+ email + ", company=" + company + ", role=" + role + ", phone=" + phone
 				 + "]";
 	}
-	
-	
-	
-	
 	
 }
