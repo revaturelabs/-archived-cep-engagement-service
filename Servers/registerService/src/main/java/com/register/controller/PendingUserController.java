@@ -185,6 +185,7 @@ public class PendingUserController {
 			System.out.println("look");
 			PendingUser user = pendingUserService.findById(id);
 			pendingUserService.deleteUser(user);
+			System.out.println(0);
 			EmailSender.sendAsHtml(user.getEmail(), "Your Revature CEP account has been denied!",
 					"Sorry, you have been denied for the following reason(s): " + denyMessage.getDenyMessage());
 			return new ResponseEntity<String>("Success", HttpStatus.OK);

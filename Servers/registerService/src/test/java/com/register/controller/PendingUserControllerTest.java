@@ -35,6 +35,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.register.model.DenyMessage;
 import com.register.model.PendingUser;
 import com.register.service.PendingUserServiceImpl;
 import com.register.util.EmailSender;
@@ -55,7 +56,7 @@ public class PendingUserControllerTest {
 
 	@Mock
 	private RestTemplate restTemplate;
-	
+
 	@Mock
 	private EmailSender email;
 
@@ -84,30 +85,30 @@ public class PendingUserControllerTest {
 		PendingUser user = new PendingUser(3, "simon", "nardos", "email@gmail.com", "company", "ROLE_CLIENT",
 				"1234567890");
 
-		ClientHttpRequestFactory factory = new BufferingClientHttpRequestFactory(new SimpleClientHttpRequestFactory());
+//		ClientHttpRequestFactory factory = new BufferingClientHttpRequestFactory(new SimpleClientHttpRequestFactory());
 
-		System.out.println(2);
+//		System.out.println(2);
 
 		// Rest Template is used to verify email is unique by querying DB in cep-service
-		RestTemplate rest = new RestTemplate(factory);
+//		RestTemplate rest = new RestTemplate(factory);
 
 		// create headers
-		HttpHeaders headers = new HttpHeaders();
+//		HttpHeaders headers = new HttpHeaders();
 
 		// set Content-Type and Accept headers
-		headers.setContentType(MediaType.APPLICATION_JSON);
+//		headers.setContentType(MediaType.APPLICATION_JSON);
 
 		// example of custom header
-		headers.set("Authorization", emailKey);
+//		headers.set("Authorization", emailKey);
 
 		// build the request
-		HttpEntity<?> request = new HttpEntity<>(headers);
+//		HttpEntity<?> request = new HttpEntity<>(headers);
 
 		String[] str = {};
 
 		ResponseEntity<String[]> res = new ResponseEntity<String[]>(str, HttpStatus.OK);
 
-		System.out.println("WTG");
+//		System.out.println("WTG");
 
 		Mockito.when(restTemplate.exchange(ArgumentMatchers.any(URI.class), ArgumentMatchers.any(HttpMethod.class),
 				ArgumentMatchers.<HttpEntity<?>>any(), ArgumentMatchers.<Class<String[]>>any())).thenReturn(res);
@@ -124,17 +125,38 @@ public class PendingUserControllerTest {
 		assertEquals(str.length(), 8);
 	}
 
-	
-//	Not working yet
-//	@Test
-//	void testDenyUser() throws Exception {
-//		
+	@Test
+	void testDenyUser() throws Exception {
+
 //		Mockito.when(EmailSender.sendAsHtml("simonnardos@gmail.com", "Your Revature CEP account has been denied!",
 //				"Sorry, you have been denied for the following reason(s): " + "hi"));
-//		
-//		this.mockMvc.perform(MockMvcRequestBuilders.post("/deny").param("id", "1")
-//				.content(objectMapper.writeValueAsString("hi")).contentType(MediaType.APPLICATION_JSON)
-//				.accept(MediaType.APPLICATION_JSON).characterEncoding("utf-8")).andExpect(status().isOk());
-//	}
+
+		DenyMessage mess = new DenyMessage("hi");
+
+		PendingUser user = new PendingUser(3, "simon", "nardos", "simonnardos@gmail.com", "company", "ROLE_CLIENT",
+				"1234567890");
+
+		Mockito.when(pendingUserService.findById(1)).thenReturn(user);
+
+		this.mockMvc.perform(MockMvcRequestBuilders.post("/pending/deny").param("id", "1")
+				.content(objectMapper.writeValueAsString(mess)).contentType(MediaType.APPLICATION_JSON)
+				.accept(MediaType.APPLICATION_JSON).characterEncoding("utf-8")).andExpect(status().isOk());
+	}
+
+	@Test
+	void testApproveUser() throws Exception {
+		PendingUser user = new PendingUser(3, "simon", "nardos", "simonnardos@gmail.com", "company", "ROLE_CLIENT",
+				"1234567890");
+
+		Mockito.when(pendingUserService.findById(1)).thenReturn(user);
+		
+		RestTemplate rest = new RestTemplate();
+		
+		
+		
+		this.mockMvc.perform(MockMvcRequestBuilders.post("/pending/approve").param("id", "1")
+				.content(objectMapper.writeValueAsString(null)).contentType(MediaType.APPLICATION_JSON)
+				.accept(MediaType.APPLICATION_JSON).characterEncoding("utf-8")).andExpect(status().isOk());
+	}
 
 }
