@@ -5,12 +5,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.cepengagementservice.Models.Assessment;
 import com.cepengagementservice.Models.Batch;
 import com.cepengagementservice.Models.Category;
-import com.cepengagementservice.Models.UserBatch;
 import com.cepengagementservice.Models.UserProfile;
 import com.cepengagementservice.Models.dto.BatchDTO;
 
@@ -33,6 +33,7 @@ public class BatchService {
 	 * @param String id
 	 * @return Batch
 	 */
+	@Cacheable("GetSingleBatch")
 	public Batch getSingleBatch(String id) {
 		return Batch.getBatchById(id);
 	}
@@ -57,6 +58,7 @@ public class BatchService {
 	 * @param batchId
 	 * @return boolean
 	 */
+	@Cacheable("GetSingleBatchDTO")
 	public boolean check(String batchId) {
 		if (getSingleBatch(batchId) != null)
 			return true;
@@ -64,6 +66,7 @@ public class BatchService {
 			return false;
 	}
 
+	@Cacheable("GetCurrentBatches")
 	public List<Batch> getCurrentBatches() {
 		return Batch.getCurrentBatches();
 	}

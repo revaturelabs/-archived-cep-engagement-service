@@ -36,6 +36,9 @@ public class UserServices {
 
 	@Autowired
 	private CategoryService categoryService;
+	
+	@Autowired
+	private UserBatchService userBatchService;
 
 	/**
 	 * this is to get all registered users
@@ -108,11 +111,14 @@ public class UserServices {
 	// }
 	/**
 	 * this is a method to update the user
+	 * NOTE: Right now, this does NOT update the user's User-Category pairs or User-Batch pairs.
 	 * 
 	 * @param user
 	 * @return the user repository with the new user having been saved(updated)
 	 */
 	public User updateUser(User user) {
+		
+		
 		return userRepository.save(user);
 	}
 
@@ -180,6 +186,8 @@ public class UserServices {
 
 			ucService.deleteUCsByUserId(userId);
 			ucService.addUCsAsGroup(userId, newProfile.getNeededCategories());
+			
+			userBatchService.refreshUserBatchesForUser(userId);
 
 			return true;
 		}

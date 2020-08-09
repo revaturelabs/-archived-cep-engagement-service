@@ -56,7 +56,6 @@ public class UserBatchController {
      * @param int userId
      * @return ResponseEntity<List<Batch>> list of Batch objects
      */
-    @Cacheable("GetAssociateGrade")
     @GetMapping(value = "/batchesbyuser")
     public ResponseEntity<List<Batch>> getAllMyBatches(@RequestParam int userId) {
         try {
