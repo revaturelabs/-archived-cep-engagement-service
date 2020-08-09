@@ -70,7 +70,7 @@ public class Category {
 			idList.append(tempId + ",");
 		}
 
-		final String uri = "http://34.82.182.44:80/mock/category/category/id/" + idList;
+		final String uri = "http://34.82.182.44:80/mock/category/category/ids/" + idList;
 
 		RestTemplate restTemplate = new RestTemplate();
 		Category[] resultArr = restTemplate.getForObject(uri, Category[].class);
@@ -86,7 +86,7 @@ public class Category {
 			idList.append(tempId + ",");
 		}
 
-		final String uri = "http://34.82.182.44:80/mock/category/category/id/" + idList;
+		final String uri = "http://34.82.182.44:80/mock/category/category/ids/" + idList;
 
 		RestTemplate restTemplate = new RestTemplate();
 		CategoryDTO[] resultArr = restTemplate.getForObject(uri, CategoryDTO[].class);
