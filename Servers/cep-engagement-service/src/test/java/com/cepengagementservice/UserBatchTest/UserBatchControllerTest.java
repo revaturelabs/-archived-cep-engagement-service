@@ -1,4 +1,4 @@
-package com.cepengagementservice.UserTest;
+package com.cepengagementservice.UserBatchTest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
@@ -27,6 +27,7 @@ import com.cepengagementservice.Models.Batch;
 import com.cepengagementservice.Models.Request;
 import com.cepengagementservice.Models.User;
 import com.cepengagementservice.Models.UserBatch;
+import com.cepengagementservice.Models.dto.BatchDTO;
 import com.cepengagementservice.Services.RequestService;
 import com.cepengagementservice.Services.UserBatchService;
 import com.cepengagementservice.Services.UserServices;
@@ -37,44 +38,44 @@ import com.cepengagementservice.Services.UserServices;
 public class UserBatchControllerTest {
 
     @Mock
-    private UserServices userServices = mock(UserServices.class);
-    @Mock
     private UserBatchService userBatchService = mock(UserBatchService.class);
     
-    @Mock
-    private BCrypt mockBCrypt = mock (BCrypt.class); 
-    @Mock
-    private BCryptPasswordEncoder BCPEncoder = mock (BCryptPasswordEncoder.class);
-    @Mock
-    private RequestService requestService = mock (RequestService.class);
-    @InjectMocks
-    private UsersControllers usersControllers;
     @InjectMocks
     private UserBatchController userBatchController;
 
 
     @Test
-    public void testGetAllBatches(){
+    public void testGetAllUB(){
     	UserBatch UB1 = new UserBatch();
     	UserBatch UB2 = new UserBatch();
     	List<UserBatch> batches = new ArrayList<UserBatch>();
     	batches.add(UB1);
     	batches.add(UB2);
     	when(userBatchService.findAll()).thenReturn(batches);
+    	assertEquals(new ResponseEntity<List<UserBatch>>(batches,  HttpStatus.OK), userBatchController.getAllUB(), "List of all batches in database should be returned.");
     }
     @Test
-    public void testGetAllBatches2(){
-        final String uri = "http://34.82.182.44:80/mock/training/batch/{id}";
-
-        Map<String, String> params = new HashMap<String, String>();
-        Map<String, String> params2 = new HashMap<String, String>();
-        params.put("id", "1");
-        params2.put("id", "2");
-
-        RestTemplate restTemplate = new RestTemplate();
-        Batch b1 = restTemplate.getForObject(uri, Batch.class, params);
-        Batch b2 = restTemplate.getForObject(uri, Batch.class, params2);
+    public void testGetAllMyBatches(){
+        User user = new User(1,"first", "last","p","pass", "comp","role", "888", true, new ArrayList<Request>());
+    	Batch B1 = new Batch();
+    	Batch B2 = new Batch();
+    	List<Batch> batches = new ArrayList<Batch>();
+    	batches.add(B1);
+    	batches.add(B2);
+    	when(userBatchService.getBatchesByUserId(1)).thenReturn(batches);
+    	assertEquals(new ResponseEntity<List<Batch>>(batches,  HttpStatus.OK), userBatchController.getAllMyBatches(user.getUserId()), "List of all batches tied to user.");
     }
-    
+    @Test
+    public void testGetAllMyBatchesDTO(){
+        User user = new User(1,"first", "last","p","pass", "comp","role", "888", true, new ArrayList<Request>());
+    	BatchDTO BD1 = new BatchDTO();
+    	BatchDTO BD2 = new BatchDTO();
+    	List<BatchDTO> batches = new ArrayList<BatchDTO>();
+    	batches.add(BD1);
+    	batches.add(BD2);
+    	when(userBatchService.getBatchesDTOByUserId(1)).thenReturn(batches);
+    	assertEquals(new ResponseEntity<List<BatchDTO>>(batches,  HttpStatus.OK), userBatchController.getAllMyBatchesDTO(user.getUserId()), "List of all batches' DTO tied to user.");
+    }
+
  
 }
