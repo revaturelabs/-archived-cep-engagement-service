@@ -39,6 +39,7 @@ import com.register.model.DenyMessage;
 import com.register.model.PendingUser;
 import com.register.service.PendingUserServiceImpl;
 import com.register.util.EmailSender;
+import com.sun.jersey.api.client.ClientResponse.Status;
 
 @WebMvcTest(controllers = PendingUserController.class)
 @ActiveProfiles("test")
@@ -145,16 +146,20 @@ public class PendingUserControllerTest {
 
 	@Test
 	void testApproveUser() throws Exception {
-		PendingUser user = new PendingUser(3, "simon", "nardos", "simonnardos@gmail.com", "company", "ROLE_CLIENT",
+		PendingUser user = new PendingUser(3, "simon", "nardos", "simonnados@gmail.com", "company", "ROLE_CLIENT",
 				"1234567890");
 
 		Mockito.when(pendingUserService.findById(1)).thenReturn(user);
 		
-		RestTemplate rest = new RestTemplate();
+//		Mockito.when(pendingUserService.deleteUser(Mockito.any(PendingUser.class)));
 		
 		
 		
-		this.mockMvc.perform(MockMvcRequestBuilders.post("/pending/approve").param("id", "1")
+		Mockito.when(restTemplate.postForObject(Mockito.any(URI.class), Mockito.any(Object.class),
+				Mockito.any())).thenReturn("ok");		
+		
+		
+		this.mockMvc.perform(MockMvcRequestBuilders.get("/pending/approve").param("id", "1")
 				.content(objectMapper.writeValueAsString(null)).contentType(MediaType.APPLICATION_JSON)
 				.accept(MediaType.APPLICATION_JSON).characterEncoding("utf-8")).andExpect(status().isOk());
 	}

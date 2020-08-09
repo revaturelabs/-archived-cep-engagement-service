@@ -162,9 +162,10 @@ public class PendingUserController {
 			String randPassword = generateRandomPassword(8);
 			RestTemplate rest = new RestTemplate();
 			PendingUserSend pend = new PendingUserSend(user.getFirstName(), user.getLastName(), user.getEmail(), randPassword, user.getCompany(), user.getRole(), user.getPhone());
+			System.out.println(0);
 			rest.postForObject("http://localhost:9015/users/add", pend, String.class);
 			pendingUserService.deleteUser(user);
-
+System.out.println(1);
 			EmailSender.sendAsHtml(user.getEmail(), "Your Revature CEP account has been approved!", "Congrats, you have been approved and your password is: " + randPassword);
 			return new ResponseEntity<String> ("Success", HttpStatus.OK);
 		} catch (Exception e) {
