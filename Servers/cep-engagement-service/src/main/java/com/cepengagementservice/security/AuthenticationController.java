@@ -54,7 +54,7 @@ public class AuthenticationController {
   @RequestMapping(value = "${jwt.get.token.uri}", method = RequestMethod.POST)  //Gets Login URI from app.properties and Generates Token if valid
   public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtTokenRequest authenticationRequest)
       throws AuthenticationException { // in case the request is not valid
-    authenticate(authenticationRequest.getEmail(), authenticationRequest.getPassword()); //authenticates user based on requestbody
+    authenticate(authenticationRequest.getEmail().toLowerCase(), authenticationRequest.getPassword()); //authenticates user based on requestbody
 
     
     final JwtUserDetails jwtUserDetails =new JwtUserDetails( userServices.getUserByEmail(authenticationRequest.getEmail())); //loads user object

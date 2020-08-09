@@ -27,6 +27,9 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     @Query("select u.email from User u")
     List<String> getAllEmail();
     
+    @Query("select u.email from User u where u.role = 'ROLE_ADMIN'")
+    List<String> getAdminEmail();
+    
 //    @Transactional
 //    default void addUser(User user) {
 //    	this.

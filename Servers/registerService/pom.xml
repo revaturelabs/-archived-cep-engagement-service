@@ -99,7 +99,7 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
-					<mainClass>com.example.RegisterServiceApplication</mainClass>
+					<mainClass>com.register.RegisterServiceApplication</mainClass>
 				</configuration>
 				<executions>
 					<execution>

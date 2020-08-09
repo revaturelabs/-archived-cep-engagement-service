@@ -7,6 +7,7 @@ import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -46,9 +47,12 @@ public class PendingUserController {
 	// Field
 	public PendingUserServiceImpl pendingUserService;
 
-	// Constructors
-	public PendingUserController() {
-	}
+	
+	@Value("${key.allemail}") // grabs value from src/main/resources/app.properties
+	private String emailKey;
+	
+	//Constructors
+	public PendingUserController() {}
 
 	@Autowired
 	public PendingUserController(PendingUserServiceImpl pendingUserService) {
@@ -81,17 +85,14 @@ public class PendingUserController {
 	@SuppressWarnings("unlikely-arg-type")
 	@PostMapping("/add")
 	public ResponseEntity<String> addUser(@RequestBody PendingUser user) {
-		System.out.println("before");
 		try {
-			System.out.println("inside");
 
 			ClientHttpRequestFactory factory = new BufferingClientHttpRequestFactory(
 					new SimpleClientHttpRequestFactory());
 
 			// Rest Template is used to verify email is unique by querying DB in cep-service
 			RestTemplate rest = new RestTemplate(factory);
-			// String[] str = rest.getForObject("http://localhost:9015/users/email/all",
-			// String[].class);
+
 			// create headers
 			HttpHeaders headers = new HttpHeaders();
 
@@ -100,11 +101,10 @@ public class PendingUserController {
 			headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
 
 			// example of custom header
-			headers.set("Authorization", "pass");
+			headers.set("Authorization", emailKey);
 
 			// build the request
 			HttpEntity<?> request = new HttpEntity<>(headers);
-			System.out.println("before request");
 			// make an HTTP GET request with headers
 			ResponseEntity<String[]> str = rest.exchange("http://localhost:9015/users/email/all", HttpMethod.GET,
 					request, String[].class);
@@ -114,10 +114,39 @@ public class PendingUserController {
 				return new ResponseEntity<String>("Email taken", HttpStatus.BAD_REQUEST);
 			}
 			pendingUserService.addUser(user);
-			return new ResponseEntity<String>("Success", HttpStatus.OK);
+			
+			//Sending a notification email to all Admins of a new pending user
+			
+			RestTemplate rest2 = new RestTemplate(factory);
+			HttpHeaders headers2 = new HttpHeaders();
+
+			// set Content-Type and Accept headers
+			headers2.setContentType(MediaType.APPLICATION_JSON);
+			headers2.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+
+			headers2.set("Authorization", emailKey);
+
+			HttpEntity<?> request2 = new HttpEntity<>(headers2);
+			// make an HTTP GET request with headers
+			ResponseEntity<String[]> str2 = rest2.exchange(
+					"http://localhost:9015/users/email/admin",
+			        HttpMethod.GET,
+			        request2,
+			        String[].class
+			);
+			String[] emails2 = str2.getBody();
+			ArrayList<String>emailList2 = new ArrayList<String>(Arrays.asList(emails2));
+			
+			for(String email: emailList2) {
+				EmailSender.sendAsHtml(email, "New CEP Registration", "A new client has registered for the CEP. <br/>Name: "
+			+user.getFirstName()+ " "+user.getLastName()+ "<br/>Company: "+user.getCompany()+"<br/>Email: "+user.getEmail()+"<br/>Phone: "+user.getPhone());
+			}
+			
+			
+			return new ResponseEntity<String> ("Success", HttpStatus.OK);
 		} catch (Exception e) {
-			// System.out.println(e.getMessage());
-			return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<String> (HttpStatus.BAD_REQUEST);
+
 		}
 	}
 
@@ -130,17 +159,14 @@ public class PendingUserController {
 	public ResponseEntity<String> approveUser(@RequestParam("id") int id) {
 		try {
 			PendingUser user = pendingUserService.findById(id);
-			user.setPassword(generateRandomPassword(8));
+			String randPassword = generateRandomPassword(8);
 			RestTemplate rest = new RestTemplate();
-			PendingUserSend pend = new PendingUserSend(user.getFirstName(), user.getLastName(), user.getEmail(),
-					user.getPassword(), user.getCompany(), user.getRole(), user.getPhone());
+			PendingUserSend pend = new PendingUserSend(user.getFirstName(), user.getLastName(), user.getEmail(), randPassword, user.getCompany(), user.getRole(), user.getPhone());
 			rest.postForObject("http://localhost:9015/users/add", pend, String.class);
-			System.out.println(user);
 			pendingUserService.deleteUser(user);
-			System.out.println(0);
-			EmailSender.sendAsHtml(user.getEmail(), "Your Revature CEP account has been approved!",
-					"Congrats, you have been approved and your password is: " + user.getPassword());
-			return new ResponseEntity<String>("Success", HttpStatus.OK);
+
+			EmailSender.sendAsHtml(user.getEmail(), "Your Revature CEP account has been approved!", "Congrats, you have been approved and your password is: " + randPassword);
+			return new ResponseEntity<String> ("Success", HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
 		}
@@ -154,10 +180,10 @@ public class PendingUserController {
 	 */
 	@PostMapping("/deny")
 	public ResponseEntity<String> denyUser(@RequestParam("id") int id, @RequestBody DenyMessage denyMessage) {
+		System.out.println(0);
 		try {
-			System.out.println(denyMessage);
+			System.out.println("look");
 			PendingUser user = pendingUserService.findById(id);
-			System.out.println(user);
 			pendingUserService.deleteUser(user);
 			EmailSender.sendAsHtml(user.getEmail(), "Your Revature CEP account has been denied!",
 					"Sorry, you have been denied for the following reason(s): " + denyMessage.getDenyMessage());
