@@ -134,6 +134,7 @@ public class UsersControllers {
 	public ResponseEntity<String> resetPassword(@RequestBody ResetPassword reset, HttpServletRequest request) {
 
 		User user = userService.getUserByEmail(reset.getEmail());
+		
 		System.out.println(user.getPassword());
 		
 		
