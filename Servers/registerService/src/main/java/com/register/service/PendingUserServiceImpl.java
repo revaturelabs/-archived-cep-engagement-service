@@ -26,7 +26,6 @@ public class PendingUserServiceImpl implements PendingUserService {
 
 	@Override
 	public void addUser(PendingUser user) {
-		System.out.println(user);
 		pendingUserRepo.save(user);
 		
 	}
