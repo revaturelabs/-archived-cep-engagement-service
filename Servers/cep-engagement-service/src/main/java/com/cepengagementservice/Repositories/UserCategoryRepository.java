@@ -2,10 +2,14 @@ package com.cepengagementservice.Repositories;
 
 import java.util.List;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import javax.persistence.Cacheable;
 
-import com.cepengagementservice.Models.ProfileCategory;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.cepengagementservice.Models.UserCategory;
 
 /**
  * Repository for accessing ProfileCategory objects from database via SpringData
@@ -14,7 +18,7 @@ import com.cepengagementservice.Models.ProfileCategory;
  *
  */
 @Repository
-public interface ProfileCategoryRepository extends JpaRepository<ProfileCategory, Integer> {
+public interface UserCategoryRepository extends JpaRepository<UserCategory, Integer> {
 
 	/**
 	 * Finds ProfileCategory pairs from the database by profileId
@@ -24,7 +28,7 @@ public interface ProfileCategoryRepository extends JpaRepository<ProfileCategory
 	 */
 //	@Query("select pc from #{#entityName} pc where pc.profileId = ?1")
 //	@Cacheable()
-	public List<ProfileCategory> findByProfileId(int profileId);
+	public List<UserCategory> findByUserId(int userId);
 
 	/**
 	 * Finds ProfileCategory pairs from the database
@@ -35,13 +39,13 @@ public interface ProfileCategoryRepository extends JpaRepository<ProfileCategory
 	 */
 //	@Query("select pc from #{#entityName} pc where pc.categoryId = ?1")
 //	@Cacheable()
-	public List<ProfileCategory> findByCategoryId(int categoryId);
+	public List<UserCategory> findByCategoryId(int categoryId);
 
 	/**
 	 * @return All ProfileCategory objects
 	 */
 //	@Cacheable()
-	public List<ProfileCategory> findAll();
+	public List<UserCategory> findAll();
 
 	/**
 	 * This method deletes all of the ProfileCategory pairs with a certain
@@ -51,5 +55,7 @@ public interface ProfileCategoryRepository extends JpaRepository<ProfileCategory
 	 * 
 	 * @param userId
 	 */
-	public void deleteByProfileId(int id);
+	@Transactional
+	@Modifying
+	public void deleteByUserId(int userId);
 }

@@ -2,6 +2,7 @@ package com.cepengagementservice.Services;
 
 import java.util.List;
 
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.cepengagementservice.Models.Category;
@@ -14,6 +15,7 @@ public class CategoryService {
 	 * Returns all Categories as a List
 	 * @return
 	 */
+	@Cacheable("AllCategories")
 	public List<Category> getAllCategories() {
 		return Category.getAllCategories();
 	}
@@ -22,6 +24,7 @@ public class CategoryService {
 	 * Returns all CategoryDTOs as a List
 	 * @return
 	 */
+	@Cacheable("AllCategoryDTOs")
 	public List<CategoryDTO> getAllCategoryDTOs() {
 		return Category.getAllCategoriesDTO();
 	}
@@ -31,6 +34,7 @@ public class CategoryService {
 	 * @param categoryIds the array of IDs of categories to be returned
 	 * @return
 	 */
+	@Cacheable("SomeCategories")
 	public List<Category> getCategoriesByIds(int[] categoryIds) {
 		return Category.getCategoriesByIds(categoryIds);
 	}
@@ -40,6 +44,7 @@ public class CategoryService {
 	 * @param categoryIds the array of IDs of categories to be returned
 	 * @return
 	 */
+	@Cacheable("SomeCategoryDTOs")
 	public List<CategoryDTO> getCategoryDTOsByIds(int[] categoryIds) {
 		return Category.getCategoryDTOsByIds(categoryIds);
 	}
@@ -49,6 +54,7 @@ public class CategoryService {
 	 * @param categoryId
 	 * @return
 	 */
+	@Cacheable("SingleCategory")
 	public Category getCategoryById(int categoryId) {
 		return Category.getCategory(categoryId);
 	}
@@ -58,6 +64,7 @@ public class CategoryService {
 	 * @param categoryId
 	 * @return
 	 */
+	@Cacheable("SingleCategoryDTO")
 	public CategoryDTO getCategoryDTOById(int categoryId) {
 		return Category.getCategoryDTO(categoryId);
 	}

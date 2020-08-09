@@ -39,7 +39,7 @@ public class UserServiceTest {
 
 	@Test
 	public void testAddUserIfEmailNotOccupied() {
-		User user = new User(1, "first", "last", "p", "pass", "comp", "role", "888", true, null, new ArrayList<Request>());
+		User user = new User("first", "last","p","pass", "comp","role", "888");
 
 		when(USMock.findByEmail(user.getEmail())).thenReturn(null);
 
@@ -49,9 +49,8 @@ public class UserServiceTest {
 
 	@Test
 	public void testAddUserIfEmailOccupied() {
-		User user = new User(1, "first", "last", "p", "pass", "comp", "role", "888", true, null, new ArrayList<Request>());
-		User userTwo = new User(2, "second", "last", "p", "pass", "comp", "role", "888", true, null,
-				new ArrayList<Request>());
+		User user = new User("first", "last","p","pass", "comp","role", "888");
+		User userTwo = new User("second", "last", "p", "pass", "comp", "role", "888");
 		when(USMock.findByEmail(userTwo.getEmail())).thenReturn(user);
 
 		assertFalse(userService.addUser(userTwo), "Users with same email shouldn't be added.");
@@ -59,10 +58,8 @@ public class UserServiceTest {
 
 	@Test
 	public void testGetAllUsers() {
-		User user = new User(1, "first", "last", "pa@stubmail.com", "pass", "comp", "role", "888", true, null,
-				new ArrayList<Request>());
-		User userTwo = new User(2, "second", "last", "pb@stubmail.com", "pass", "comp", "role", "888", true, null,
-				new ArrayList<Request>());
+		User user = new User("first", "last","p","pass", "comp","role", "888");
+		User userTwo = new User("second", "last", "pb@stubmail.com", "pass", "comp", "role", "888");
 
 		List<User> users = new ArrayList<User>();
 		users.add(user);
@@ -75,12 +72,9 @@ public class UserServiceTest {
 
 	@Test
 	public void testGetAllUsersShouldHaveSavedUsers() {
-		User user = new User(1, "first", "last", "pa@stubmail.com", "pass", "comp", "role", "888", true, null,
-				new ArrayList<Request>());
-		User userTwo = new User(2, "second", "last", "pb@stubmail.com", "pass", "comp", "role", "888", true, null,
-				new ArrayList<Request>());
-		User userThree = new User(3, "third", "last", "pc@stubmail.com", "pass", "comp", "role", "888", true, null,
-				new ArrayList<Request>());
+		User user = new User("first", "last","p","pass", "comp","role", "888");
+		User userTwo = new User("second", "last", "pb@stubmail.com", "pass", "comp", "role", "888");
+		User userThree = new User("third", "last", "pc@stubmail.com", "pass", "comp", "role", "888");
 
 		List<User> users = new ArrayList<User>();
 		List<User> usersTwo = new ArrayList<User>();

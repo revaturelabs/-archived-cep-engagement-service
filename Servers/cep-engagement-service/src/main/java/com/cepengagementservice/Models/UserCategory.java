@@ -19,22 +19,22 @@ import lombok.NoArgsConstructor;
 @Data
 @Entity
 @NoArgsConstructor
-@Table(name = "profile_category")
-public class ProfileCategory {
+@Table(name = "user_category")
+public class UserCategory {
 
 	@Id
 	@GeneratedValue
 	@Column(name = "row_id")
 	private int rowId;
 
-	@Column(name = "profile_id")
-	int profileId;
+	@Column(name = "user_id")
+	int userId;
 
 	@Column(name = "category_id")
 	int categoryId;
 
-	public ProfileCategory(int profileId, int categoryId) {
-		this.profileId = profileId;
+	public UserCategory(int userId, int categoryId) {
+		this.userId = userId;
 		this.categoryId = categoryId;
 	}
 }

@@ -20,9 +20,14 @@ import lombok.Data;
 public class Category {
 
 	Integer categoryId;
-	Boolean active;
 	String skillCategory;
+	Boolean active;
 
+	/**
+	 * Retrieves all categories from Caliber's Category API
+	 * 
+	 * @return
+	 */
 	public static List<Category> getAllCategories() {
 		final String uri = "http://34.82.182.44:80/mock/category/category"; // Hits Caliber's gatAllCategories route
 
@@ -34,6 +39,11 @@ public class Category {
 		return resultList;
 	}
 
+	/**
+	 * Retrieves all categories from Caliber's Category API as DTOs
+	 * 
+	 * @return
+	 */
 	public static List<CategoryDTO> getAllCategoriesDTO() {
 		final String uri = "http://34.82.182.44:80/mock/category/category"; // Hits Caliber's gatAllCategories route
 
@@ -45,6 +55,11 @@ public class Category {
 		return resultList;
 	}
 
+	/**
+	 * Retrieves one category by its id from Caliber's Category API
+	 * 
+	 * @return
+	 */
 	public static Category getCategory(int id) {
 		final String uri = "http://34.82.182.44:80/mock/category/category/" + id;
 
@@ -54,6 +69,11 @@ public class Category {
 		return result;
 	}
 
+	/**
+	 * Retrieves one category by its id from Caliber's Category API as DTO
+	 * 
+	 * @return
+	 */
 	public static CategoryDTO getCategoryDTO(int id) {
 		final String uri = "http://34.82.182.44:80/mock/category/category/" + id;
 
@@ -63,6 +83,11 @@ public class Category {
 		return result;
 	}
 
+	/**
+	 * Retrieves a list of categories by a given list of ids
+	 * 
+	 * @return
+	 */
 	public static List<Category> getCategoriesByIds(int[] ids) {
 		StringBuilder idList = new StringBuilder();
 
@@ -70,7 +95,8 @@ public class Category {
 			idList.append(tempId + ",");
 		}
 
-		final String uri = "http://34.82.182.44:80/mock/category/category/id/" + idList;
+		final String uri = "http://34.82.182.44:80/mock/category/category/ids/" + idList.toString();
+//		System.out.println(uri);
 
 		RestTemplate restTemplate = new RestTemplate();
 		Category[] resultArr = restTemplate.getForObject(uri, Category[].class);
@@ -78,7 +104,12 @@ public class Category {
 
 		return resultList;
 	}
-	
+
+	/**
+	 * Retrieves one category by its id from Caliber's Category API as DTOs
+	 * 
+	 * @return
+	 */
 	public static List<CategoryDTO> getCategoryDTOsByIds(int[] ids) {
 		StringBuilder idList = new StringBuilder();
 
@@ -86,7 +117,7 @@ public class Category {
 			idList.append(tempId + ",");
 		}
 
-		final String uri = "http://34.82.182.44:80/mock/category/category/id/" + idList;
+		final String uri = "http://34.82.182.44:80/mock/category/category/ids/" + idList;
 
 		RestTemplate restTemplate = new RestTemplate();
 		CategoryDTO[] resultArr = restTemplate.getForObject(uri, CategoryDTO[].class);

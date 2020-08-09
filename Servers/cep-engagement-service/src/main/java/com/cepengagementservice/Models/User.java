@@ -96,8 +96,16 @@ public class User {
     @Column(name = "RESETPASSWORD")
     private Boolean resetPassword = true;
     
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private UserProfile profile;
+	/*
+	 * @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy =
+	 * "user", optional = true) private UserProfile profile;
+	 */
+    
+    @Column(name = "PROFILE_DEADLINE")
+    private String profileDeadline = null;
+    
+    @Column(name = "PROFILE_ASSOCIATE_COUNT")
+    private Integer profileCount = null;
     
   //userId mapped to Request table
     @OneToMany(fetch = FetchType.LAZY)
@@ -170,6 +178,48 @@ public class User {
         this.phone = phone;
     }
     
+    public void setProfileDeadline(String batchDeadline) {
+    	this.profileDeadline = batchDeadline;
+    }
+    
+    public String getProfileDeadline() {
+    	return profileDeadline;
+    }
+    
+    public void setProfileCount(int associateCount) {
+    	this.profileCount = associateCount;
+    }
+    
+    public int getProfileCount() {
+    	return profileCount;
+    }
+    
+    public User(@NonNull String firstName, @NonNull String lastName, @NonNull String email, @NonNull String password,
+    		@NonNull String company, @NonNull String role, @NonNull String phone) {
+    	super();
+    	this.firstName = firstName;
+    	this.lastName = lastName;
+    	this.email = email.toLowerCase();
+    	this.password = password;
+    	this.company = company;
+    	this.role = role;
+    	this.phone = phone;
+    }
+    
+    public User(@NonNull String firstName, @NonNull String lastName, @NonNull String email, @NonNull String password,
+    		@NonNull String company, @NonNull String role, @NonNull String phone, String batchDeadline, int associateCount) {
+    	super();
+    	this.firstName = firstName;
+    	this.lastName = lastName;
+    	this.email = email.toLowerCase();
+    	this.password = password;
+    	this.company = company;
+    	this.role = role;
+    	this.phone = phone;
+    	this.profileDeadline = batchDeadline;
+    	this.profileCount = associateCount;
+    }
+    
     public User(@NonNull String firstName, @NonNull String lastName, @NonNull String email, @NonNull String password,
 			@NonNull String company, @NonNull String role, @NonNull String phone, @NonNull Boolean resetPassword) {
 		this.firstName = firstName;
@@ -181,20 +231,6 @@ public class User {
 		this.phone = phone;
 		this.resetPassword = resetPassword;
     }
-
-	public User(@NonNull String firstName, @NonNull String lastName, @NonNull String email, @NonNull String password,
-			@NonNull String company, @NonNull String role, @NonNull String phone) {
-		super();
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.email = email.toLowerCase();
-		this.password = password;
-		this.company = company;
-		this.role = role;
-		this.phone = phone;
-	}
-    
-    
 
     // public Set<Batch> getBatches() {
     // return batches;
