@@ -44,7 +44,7 @@ public class CategoryController {
 	}
 
 	/**
-	 * 
+	 * Gets the category by its id
 	 * @param id
 	 * @return the category that you gave
 	 */
@@ -53,7 +53,7 @@ public class CategoryController {
 		return  catServ.getCategoryById(id);
 	}
 	/**
-	 * 
+	 * Gets an array of the categories from a user inputed list
 	 * @param ids, this is how we tested it in postman : http://localhost:9015/getCatIds?categoryIds=1,2,3
 	 * @return the categories whose id you entered
 	 */
@@ -62,7 +62,7 @@ public class CategoryController {
 		return catServ.getCategoriesByIds(ids);
 	}
 	/**
-	 * 
+	 * Gets a list of all the categories
 	 * @param catServ is the CategoryService
 	 * @return a list of categories
 	 */
