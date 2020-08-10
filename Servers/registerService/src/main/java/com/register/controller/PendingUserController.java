@@ -168,8 +168,8 @@ public class PendingUserController {
 			rest.postForObject("http://localhost:9015/users/add", pend, String.class);
 			pendingUserService.deleteUser(user);
 			EmailSender.sendAsHtml(user.getEmail(), "Your Revature CEP account has been approved!",
-					"Congrats, you have been approved here is your login information \nUsername: " + user.getEmail()
-							+ "\nPassword:" + randPassword);
+					"Congrats, you have been approved here is your login information <br/>Username: " + user.getEmail()
+							+ "<br/>Password:" + randPassword);
 			return new ResponseEntity<String>("Success", HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
@@ -190,7 +190,7 @@ public class PendingUserController {
 			pendingUserService.deleteUser(user);
 			EmailSender.sendAsHtml(user.getEmail(), "Your Revature CEP account has been denied!",
 					"Sorry, you have been denied for the following reason(s): " + denyMessage.getDenyMessage()
-							+ "\n To contact customer support with more questions please call: 555-555-5555 or email: revature@support.com");
+							+ "<br/>To contact customer support with more questions please call: 555-555-5555 or email: revature@support.com");
 			return new ResponseEntity<String>("Success", HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
