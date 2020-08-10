@@ -56,4 +56,7 @@ public class RequestService {
 		
 	}
 
+	public List<Request> interventionById(int id){
+		return  ir.findInterventionByUser(id);
+	}
 }
