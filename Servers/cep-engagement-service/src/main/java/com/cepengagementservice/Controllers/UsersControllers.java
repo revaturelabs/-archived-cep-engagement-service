@@ -79,20 +79,6 @@ public class UsersControllers {
 		return new ResponseEntity<String>("Email already in use", HttpStatus.CONFLICT);
 	}
 
-	// DO SOME ERROR CHECKING.
-	// @RequestMapping(method = RequestMethod.POST, value = "/add/batch")
-	// ResponseEntity<?> add(@RequestBody Batch batch, @RequestParam Integer id) {
-	// User usr = userService.getUserById(id);
-	// if (usr != null) {
-	// usr.addBatch(batch);
-	// usr = userService.updateUser(usr);
-	// return new ResponseEntity<User>(usr, HttpStatus.ACCEPTED);
-
-	// }
-	// return new ResponseEntity<User>(usr, HttpStatus.NOT_FOUND);
-
-	// }
-
 	@RequestMapping(method = RequestMethod.GET, value = "/email/")
 	public ResponseEntity<User> getByEmail(@RequestParam String email) {
 		User user = userService.getUserByEmail(email);
@@ -168,15 +154,6 @@ public class UsersControllers {
 		userService.updateUser(user);
 		return new ResponseEntity<String>("Success", HttpStatus.OK);
 	}
-
-	// @RequestMapping(method = RequestMethod.GET, value = "/batch/")
-	// public ResponseEntity<?> getByBatchId(@RequestParam String batchId) {
-	// List<User> user = userService.getByBatchId(batchId);
-	// if (user != null) {
-	// return new ResponseEntity<List<User>>(user, HttpStatus.OK);
-	// }
-	// return new ResponseEntity<List<User>>(user, HttpStatus.NO_CONTENT);
-	// }
 
 	////////////////// ADMIN ROLES /////////////////////
 	// ADMINs can update and delete the request status

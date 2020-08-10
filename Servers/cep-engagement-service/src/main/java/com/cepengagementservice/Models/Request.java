@@ -43,14 +43,6 @@ public class Request {
 	@Column(name= "BATCH_ID")
 	private String batchId;
 	
-	//userId mapped to User's table userId
-//	@ManyToOne
-//	@NonNull
-//	@JoinColumn(name="USERS USER_ID")
-//	//@Column(name="USER_ID")
-//	public Integer userId;
-//	//private Integer userId;
-	
 	@NonNull
     @Column(name = "user_id")
     private Integer userId;
@@ -153,11 +145,4 @@ public class Request {
 	public String getDescription() {
 		return this.description;
 	}
-//	
-//	@JsonProperty("userId")
-//	private void unPack(Integer userId)
-//	{
-//		this.userId = new User();
-//		this.userId.setUserId(userId);
-//	}
 }
