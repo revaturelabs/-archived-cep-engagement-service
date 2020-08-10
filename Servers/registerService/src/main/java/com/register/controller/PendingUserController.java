@@ -63,7 +63,7 @@ public class PendingUserController {
 	// Controller Methods
 
 	/**
-	 *
+	 * This method retrieves all pending users
 	 * @return List of all PendingUser where status = "Pending"
 	 */
 	@GetMapping("/all")
@@ -81,7 +81,7 @@ public class PendingUserController {
 	}
 
 	/**
-	 *
+	 * This method will add a pending user
 	 * @param user
 	 * @return
 	 */
@@ -153,7 +153,7 @@ public class PendingUserController {
 	}
 
 	/**
-	 *
+	 * This method will approve a pending user
 	 * @param id of user being approved
 	 * @return user object
 	 */
@@ -197,6 +197,11 @@ public class PendingUserController {
 		}
 	}
 
+	/**
+	 * This method will randomly generate a password for approved pending users.
+	 * @param len the length of the password
+	 * @return a string representing the users password
+	 */
 	public static String generateRandomPassword(int len) {
 		// ASCII range - alphanumeric (0-9, a-z, A-Z)
 		final String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -214,21 +219,4 @@ public class PendingUserController {
 
 		return sb.toString();
 	}
-
-//	/**
-//	 * @param password
-//	 * @return
-//	 */
-//	@PostMapping("/register")
-//	public ResponseEntity<String> registerUser(@RequestBody RegisterInfo register ){
-//		try {
-//			PendingUser user = pendingUserService.findByEmail(register.getEmail());
-//			user.setPassword(generateRandomPassword(8));
-//			RestTemplate rest = new RestTemplate();
-//			rest.postForObject("http://localhost:9015/users/add", user, String.class);
-//			return new ResponseEntity<String> ("Success", HttpStatus.OK);
-//		} catch (Exception e) {
-//			return new ResponseEntity<String> (HttpStatus.BAD_REQUEST);
-//		}
-//	}
 }

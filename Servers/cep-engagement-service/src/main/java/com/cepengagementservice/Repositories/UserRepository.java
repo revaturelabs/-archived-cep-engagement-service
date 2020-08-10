@@ -29,14 +29,5 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     
     @Query("select u.email from User u where u.role = 'ROLE_ADMIN'")
     List<String> getAdminEmail();
-    
-//    @Transactional
-//    default void addUser(User user) {
-//    	this.
-//	}
-
-    // @Query(value = "SELECT u FROM User u INNER JOIN u.batches ub WHERE ub.batchId
-    // = :batchId")
-    // List<User> findByBatchId(@Param("batchId") String batchId);
 
 }

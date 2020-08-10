@@ -2,7 +2,9 @@ package com.cepengagementservice.Services;
 
 import com.cepengagementservice.Models.Batch;
 import com.cepengagementservice.Models.dto.BatchDTO;
+import com.cepengagementservice.Repositories.BatchRepository;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 /**
  * 
@@ -13,15 +15,27 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class BatchService {
+	
+	private BatchRepository batchRepository;
 
-    /**
+	public BatchService() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	@Autowired
+    public BatchService(BatchRepository batchRepository) {
+		super();
+		this.batchRepository = batchRepository;
+	}
+
+	/**
      * 
      * this is the method to fetch a single batch
      * @param String id
      * @return Batch
      */
     public Batch getSingleBatch(String id) {
-        return Batch.getBatchById(id);
+        return batchRepository.getBatchById(id);
     }
 
     /**
@@ -31,7 +45,7 @@ public class BatchService {
      * @return Batch
      */
     public BatchDTO getSingleBatchDTO(String id) {
-        return Batch.getBatchDTOById(id);
+        return batchRepository.getBatchDTOById(id);
 
     }
 

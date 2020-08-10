@@ -1,5 +1,10 @@
 package com.cepengagementservice.Controllers;
 
+/**
+ * This is a class model the reset password response body
+ * @author Unknown
+ *
+ */
 public class ResetPassword {
 
 	private String oldPassword;

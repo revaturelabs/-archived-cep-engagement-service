@@ -45,8 +45,6 @@ import lombok.NonNull;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-// @EqualsAndHashCode(exclude = { "batches" })
-// @ToString(exclude = { "batches" })
 @Entity
 @Table(name = "USERS")
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "userId")
@@ -176,20 +174,5 @@ public class User {
 		this.role = role;
 		this.phone = phone;
 	}
-    
-    
-
-    // public Set<Batch> getBatches() {
-    // return batches;
-    // }
-
-    // public void setBatches(Set<Batch> batches) {
-    // this.batches = batches;
-    // }
-
-    // // Add one by one.
-    // public void addBatch(Batch batch) {
-    // this.batches.add(batch);
-    // }
 
 }

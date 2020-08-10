@@ -7,7 +7,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-
+/**
+ * This class represents a user waiting to be approved in the database
+ * @author Unknown
+ *
+ */
 @Entity
 @Table(name="PendingUser")
 public class PendingUser {

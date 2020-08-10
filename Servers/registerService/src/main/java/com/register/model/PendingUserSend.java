@@ -1,5 +1,10 @@
 package com.register.model;
 
+/**
+ * This class is what's used when sending a pending user to the cep-engagement service.
+ * @author Syste
+ *
+ */
 public class PendingUserSend {
 
 
