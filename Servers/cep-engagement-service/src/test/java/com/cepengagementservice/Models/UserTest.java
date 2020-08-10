@@ -2,47 +2,46 @@ package com.cepengagementservice.Models;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+
 import org.junit.jupiter.api.Test;
 
-class UserTest {
-
+public class UserTest {
+	
 	@Test
-	void testGettersSetters() {
+	void test() {
 		User user = new User();
-		
-		user.setEmail("test@email.com");
-		user.setCompany("company");
-		user.setFirstName("firstName");
-		user.setLastName("lastName");
-		user.setRole("role");
-		user.setPassword("password");
-		user.setPhone("phone");
 		user.setUserId(1);
+		user.setFirstName("Michael");
+		user.setLastName("Worrell");
+		user.setEmail("banobo@gmail.com");
+		user.setPassword("password");
+		user.setCompany("Revature");
+		user.setRole("ROLE_ADMIN");
+		user.setPhone("(123)456-7890");
 		
-		assertEquals("test@email.com", user.getEmail());
-		assertEquals("company", user.getCompany());
-		assertEquals("firstName", user.getFirstName());
-		assertEquals("lastName", user.getLastName());
-		assertEquals("role", user.getRole());
-		assertEquals("password", user.getPassword());
-		assertEquals("phone", user.getPhone());
+		assertEquals(user, user);
 		assertEquals(1, user.getUserId());
-		
+		assertEquals("Michael", user.getFirstName());
+		assertEquals("Worrell", user.getLastName());
+		assertEquals("banobo@gmail.com", user.getEmail());
+		assertEquals("password", user.getPassword());
+		assertEquals("Revature", user.getCompany());
+		assertEquals("ROLE_ADMIN", user.getRole());
+		assertEquals("(123)456-7890", user.getPhone());
 	}
 	
 	@Test
-	void testConstructors() {
-		User user = new User("firstName", "lastName", "email", "password", "company", "role", "phone");
+	void UserTest() {
+		User user1 = new User("Michael", "Worrell", "banobo@gmail.com", "password", "revature", "ROLE_ADMIN", "(123)456-7890");
 		
+		assertEquals("Michael", user1.getFirstName());
+		assertEquals("Worrell", user1.getLastName());
+		assertEquals("banobo@gmail.com", user1.getEmail());
+		assertEquals("password", user1.getPassword());
+		assertEquals("revature", user1.getCompany());
+		assertEquals("ROLE_ADMIN", user1.getRole());
 		
-		assertEquals("email", user.getEmail());
-		assertEquals("company", user.getCompany());
-		assertEquals("firstName", user.getFirstName());
-		assertEquals("lastName", user.getLastName());
-		assertEquals("role", user.getRole());
-		assertEquals("password", user.getPassword());
-		assertEquals("phone", user.getPhone());
-		
+		assertEquals (user1, user1);
 	}
 
 }
