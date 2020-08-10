@@ -164,12 +164,12 @@ public class PendingUserController {
 	public ResponseEntity<String> approveUser(@RequestParam("id") int id){
 		try {
 			PendingUser user = pendingUserService.findById(id);
-			user.setPassword(generateRandomPassword(8));
+			String randPassword = generateRandomPassword(8);
 			RestTemplate rest = new RestTemplate();
-			PendingUserSend pend = new PendingUserSend(user.getFirstName(), user.getLastName(), user.getEmail(), user.getPassword(), user.getCompany(), user.getRole(), user.getPhone());
+			PendingUserSend pend = new PendingUserSend(user.getFirstName(), user.getLastName(), user.getEmail(), randPassword, user.getCompany(), user.getRole(), user.getPhone());
 			rest.postForObject("http://localhost:9015/users/add", pend, String.class);
 			pendingUserService.deleteUser(user);
-			EmailSender.sendAsHtml(user.getEmail(), "Your Revature CEP account has been approved!", "Congrats, you have been approved and your password is: " + user.getPassword());
+			EmailSender.sendAsHtml(user.getEmail(), "Your Revature CEP account has been approved!", "Congrats, you have been approved and your password is: " + randPassword);
 			return new ResponseEntity<String> ("Success", HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<String> (HttpStatus.BAD_REQUEST);
