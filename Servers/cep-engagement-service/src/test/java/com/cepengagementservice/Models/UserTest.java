@@ -43,5 +43,22 @@ public class UserTest {
 		
 		assertEquals (user1, user1);
 	}
+	
+	@Test
+	void UserTestMethods() {
+		User user1 = new User("Michael", "Worrell", "banobo@gmail.com", "password", "revature", "ROLE_ADMIN", "(123)456-7890");
+		
+		User user2 = new User("Michael", "Worrell", "banobo@gmail.com", "password", "revature", "ROLE_ADMIN", "(123)456-7890");
+	
+		boolean bool = user1.equals(user2);
+		
+		assertEquals(true, bool);
+		
+	}
+	
+	/*
+	 * @Test public void simpleEqualsContract() {
+	 * EqualsVerifier.simple().forClass(User.class).verify(); }
+	 */
 
 }
