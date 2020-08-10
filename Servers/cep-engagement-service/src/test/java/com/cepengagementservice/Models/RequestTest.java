@@ -8,6 +8,8 @@ import java.util.Date;
 
 import org.junit.jupiter.api.Test;
 
+import com.cepengagementservice.Models.Request.RequestType;
+
 class RequestTest {
 
 	//Already written tests by previous batch
@@ -53,7 +55,9 @@ class RequestTest {
 		req.setEndTime(date);
 		assertEquals(date, req.getEndTime());
 		
-		
+		RequestType temp = RequestType.Intervention;
+		req.setRequestType(temp);
+		assertEquals(temp, req.getRequestType());
 	}
 
 }
