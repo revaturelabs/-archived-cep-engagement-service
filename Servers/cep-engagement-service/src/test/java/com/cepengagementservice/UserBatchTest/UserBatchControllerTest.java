@@ -28,6 +28,10 @@ import com.cepengagementservice.Models.Request;
 import com.cepengagementservice.Models.User;
 import com.cepengagementservice.Models.UserBatch;
 import com.cepengagementservice.Models.dto.BatchDTO;
+<<<<<<< HEAD
+=======
+import com.cepengagementservice.Repositories.UserRepository;
+>>>>>>> Jacob-JUnit
 import com.cepengagementservice.Services.RequestService;
 import com.cepengagementservice.Services.UserBatchService;
 import com.cepengagementservice.Services.UserServices;
@@ -40,6 +44,10 @@ public class UserBatchControllerTest {
     @Mock
     private UserBatchService userBatchService = mock(UserBatchService.class);
     
+<<<<<<< HEAD
+=======
+    
+>>>>>>> Jacob-JUnit
     @InjectMocks
     private UserBatchController userBatchController;
 

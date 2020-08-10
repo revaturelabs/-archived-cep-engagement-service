@@ -9,16 +9,21 @@ import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.function.Supplier;
 
 import com.cepengagementservice.Models.Request;
 import com.cepengagementservice.Models.User;
 import com.cepengagementservice.Repositories.UserRepository;
 import com.cepengagementservice.Services.UserServices;
+import com.google.common.base.Optional;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 //Using Mockito 
@@ -30,7 +35,7 @@ However, it cannot be used if another, i.e. SpringRunners.
 @ExtendWith(SpringExtension.class)
 public class UserServiceTest {
 
-	@Mock
+	@InjectMocks
 	UserRepository USMock = mock(UserRepository.class);
 
 	@InjectMocks
@@ -55,6 +60,30 @@ public class UserServiceTest {
 
 		assertFalse(userService.addUser(userTwo), "Users with same email shouldn't be added.");
 	}
+	@Test
+	public void testUpdateUserNotExists() {
+		User user = new User(1, "first", "last", "p", "pass", "comp", "role", "888", true, new ArrayList<Request>());
+
+		assertNotEquals(user, userService.updateUser(user), "Can't update a user that doesn't exist.");
+	}
+//	@Test
+//	public void testCheckUser() throws NoSuchElementException{
+//		User user = new User(1, "first", "last", "p", "pass", "comp", "role", "888", true, new ArrayList<Request>());
+//		Optional<User> userOpt = Optional.of(user);
+//		//Mockito.when(USMock.findById(user.getUserId()).get()).thenReturn(user);
+//		when(userService.getUserById(user.getUserId())).thenReturn(user);
+//
+//		assertTrue(userService.check(user.getUserId()), "Returns true if user is in the database.");
+//
+//	}
+//	@Test
+//	public void testCheckUserNotFound() {
+//		User user = new User(1, "first", "last", "p", "pass", "comp", "role", "888", true, new ArrayList<Request>());
+//
+//		when(userService.getUserById(user.getUserId())).thenReturn(null);
+//		assertFalse(userService.check(user.getUserId()), "Returns false since user does not exist.");
+//	}
+
 
 	@Test
 	public void testGetAllUsers() {
