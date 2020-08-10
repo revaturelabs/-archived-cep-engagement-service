@@ -1,5 +1,6 @@
 package BatchTest;
 
+import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
@@ -12,6 +13,8 @@ import java.util.Map;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.http.HttpStatus;
@@ -39,18 +42,32 @@ import com.cepengagementservice.Services.UserServices;
 @ExtendWith(SpringExtension.class)
 public class BatchServiceTest {
 	
-	@InjectMocks
+	@Mock
     private BatchService batchService;
     
     
 
 
-    @Test
-    public void testGetSingleBatch(){
+	@Test
+	public void testGetSingleBatch(){
     	Batch B1 = new Batch();
-    	B1.setBatchId("TR-1000");
+   		B1.setBatchId("TR-1000");
+   		when(batchService.getSingleBatch(B1.getBatchId())).thenReturn(B1);
     	assertEquals(B1, batchService.getSingleBatch(B1.getBatchId()), "Returns the requested batch.");
     }
-
- 
+	@Test
+	public void testGetSingleBatchDTO(){
+    	Batch B1 = new Batch();
+   		B1.setBatchId("TR-1000");
+   		BatchDTO BDTO1 = new BatchDTO();
+   		BDTO1.setBatchId(B1.getBatchId());
+   		when(batchService.getSingleBatchDTO(B1.getBatchId())).thenReturn(BDTO1);
+    	assertEquals(BDTO1, batchService.getSingleBatchDTO(B1.getBatchId()), "Returns the requested batch DTO.");
+    }
+	@Test
+	public void testCheckBatchNotFound() {
+    	Batch B1 = new Batch();
+   		B1.setBatchId("TR-1000");
+   		assertFalse(batchService.check(B1.getBatchId()), "Returns false if batch does not exist.");
+	}
 }

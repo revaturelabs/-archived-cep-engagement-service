@@ -28,6 +28,7 @@ import com.cepengagementservice.Models.Request;
 import com.cepengagementservice.Models.User;
 import com.cepengagementservice.Models.UserBatch;
 import com.cepengagementservice.Models.dto.BatchDTO;
+import com.cepengagementservice.Repositories.UserRepository;
 import com.cepengagementservice.Services.RequestService;
 import com.cepengagementservice.Services.UserBatchService;
 import com.cepengagementservice.Services.UserServices;
@@ -39,6 +40,7 @@ public class UserBatchControllerTest {
 
     @Mock
     private UserBatchService userBatchService = mock(UserBatchService.class);
+    
     
     @InjectMocks
     private UserBatchController userBatchController;
