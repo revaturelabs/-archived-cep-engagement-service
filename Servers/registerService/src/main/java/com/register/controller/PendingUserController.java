@@ -34,51 +34,48 @@ import com.register.util.EmailSender;
 
 /**
  * 
- * H2 Needs to be setup
- * Proper paths from cep-engagement need to be set
+ * H2 Needs to be setup Proper paths from cep-engagement need to be set
+ * 
  * @author
  *
  */
 @RestController
 @RequestMapping("/pending")
-@CrossOrigin(origins="*")
+@CrossOrigin(origins = "*")
 public class PendingUserController {
 
-	//Field
+	// Field
 	public PendingUserServiceImpl pendingUserService;
-	
+
 	@Value("${key.allemail}") // grabs value from src/main/resources/app.properties
 	private String emailKey;
-	
-	//Constructors
-	public PendingUserController() {}
-	
+
+	// Constructors
+	public PendingUserController() {
+	}
+
 	@Autowired
 	public PendingUserController(PendingUserServiceImpl pendingUserService) {
 		super();
 		this.pendingUserService = pendingUserService;
 	}
-	
-	//Controller Methods
-	
+
+	// Controller Methods
+
 	/**
 	 *
-	 * @return List of all PendingUser where status = "Pending"
+	 * @return List of all PendingUsers 
 	 */
 	@GetMapping("/all")
 	public ResponseEntity<List<PendingUser>> allUsers() {
-		System.out.println(0);
 		try {
-			System.out.println(1 + " " + pendingUserService.allPendingUsers());
 			List<PendingUser> users = pendingUserService.allPendingUsers();
-			System.out.println(2 + " " + users);
-			return new ResponseEntity<List<PendingUser>> (users, HttpStatus.OK);
+			return new ResponseEntity<List<PendingUser>>(users, HttpStatus.OK);
 		} catch (Exception e) {
-			return new ResponseEntity<List<PendingUser>> (HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<List<PendingUser>>(HttpStatus.BAD_REQUEST);
 		}
-		
+
 	}
-	
 
 	/**
 	 *
@@ -89,10 +86,11 @@ public class PendingUserController {
 	@PostMapping("/add")
 	public ResponseEntity<String> addUser(@RequestBody PendingUser user) {
 		try {
-			
-			ClientHttpRequestFactory factory = new BufferingClientHttpRequestFactory(new SimpleClientHttpRequestFactory());
 
-			//Rest Template is used to verify email is unique by querying DB in cep-service
+			ClientHttpRequestFactory factory = new BufferingClientHttpRequestFactory(
+					new SimpleClientHttpRequestFactory());
+
+			// Rest Template is used to verify email is unique by querying DB in cep-service
 			RestTemplate rest = new RestTemplate(factory);
 			// create headers
 			HttpHeaders headers = new HttpHeaders();
@@ -106,23 +104,18 @@ public class PendingUserController {
 
 			// build the request
 			HttpEntity<?> request = new HttpEntity<>(headers);
-			System.out.println("before request");
 			// make an HTTP GET request with headers
-			ResponseEntity<String[]> str = rest.exchange(
-					"http://localhost:9015/users/email/all",
-			        HttpMethod.GET,
-			        request,
-			        String[].class
-			);
+			ResponseEntity<String[]> str = rest.exchange("http://localhost:9015/users/email/all", HttpMethod.GET,
+					request, String[].class);
 			String[] emails = str.getBody();
-			ArrayList<String>emailList = new ArrayList<String>(Arrays.asList(emails));
+			ArrayList<String> emailList = new ArrayList<String>(Arrays.asList(emails));
 			if (emailList.contains(user.getEmail()) || pendingUserService.findByEmail(user.getEmail()) != null) {
-				return new ResponseEntity<String> ("Email taken", HttpStatus.BAD_REQUEST);
+				return new ResponseEntity<String>("Email taken", HttpStatus.BAD_REQUEST);
 			}
 			pendingUserService.addUser(user);
-			
-			//Sending a notification email to all Admins of a new pending user
-			
+
+			// Sending a notification email to all Admins of a new pending user
+
 			RestTemplate rest2 = new RestTemplate(factory);
 			HttpHeaders headers2 = new HttpHeaders();
 
@@ -134,98 +127,86 @@ public class PendingUserController {
 
 			HttpEntity<?> request2 = new HttpEntity<>(headers2);
 			// make an HTTP GET request with headers
-			ResponseEntity<String[]> str2 = rest2.exchange(
-					"http://localhost:9015/users/email/admin",
-			        HttpMethod.GET,
-			        request2,
-			        String[].class
-			);
+			ResponseEntity<String[]> str2 = rest2.exchange("http://localhost:9015/users/email/admin", HttpMethod.GET,
+					request2, String[].class);
 			String[] emails2 = str2.getBody();
-			ArrayList<String>emailList2 = new ArrayList<String>(Arrays.asList(emails2));
-			
-			for(String email: emailList2) {
-				EmailSender.sendAsHtml(email, "New CEP Registration", "A new client has registered for the CEP. <br/>Name: "
-			+user.getFirstName()+ " "+user.getLastName()+ "<br/>Company: "+user.getCompany()+"<br/>Email: "+user.getEmail()+"<br/>Phone: "+user.getPhone());
+			ArrayList<String> emailList2 = new ArrayList<String>(Arrays.asList(emails2));
+
+			for (String email : emailList2) {
+				EmailSender.sendAsHtml(email, "New CEP Registration",
+						"A new client has registered for the CEP. <br/>Name: " + user.getFirstName() + " "
+								+ user.getLastName() + "<br/>Company: " + user.getCompany() + "<br/>Email: "
+								+ user.getEmail() + "<br/>Phone: " + user.getPhone());
 			}
-			
-			
-			return new ResponseEntity<String> ("Success", HttpStatus.OK);
+
+			EmailSender.sendAsHtml(user.getEmail(), "Registration received",
+					"Your account registration has been received and an admin will be reviewing your request shortly. Please contact our customer support number if no response is received within 3-5 business days: 555-555-5555");
+
+			return new ResponseEntity<String>("Success", HttpStatus.OK);
 		} catch (Exception e) {
-			return new ResponseEntity<String> (HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
 		}
 	}
-	
+
 	/**
 	 *
 	 * @param id of user being approved
 	 * @return user object
 	 */
 	@GetMapping("/approve")
-	public ResponseEntity<String> approveUser(@RequestParam("id") int id){
+	public ResponseEntity<String> approveUser(@RequestParam("id") int id) {
 		try {
 			PendingUser user = pendingUserService.findById(id);
 			String randPassword = generateRandomPassword(8);
 			RestTemplate rest = new RestTemplate();
-			PendingUserSend pend = new PendingUserSend(user.getFirstName(), user.getLastName(), user.getEmail(), randPassword, user.getCompany(), user.getRole(), user.getPhone());
+			PendingUserSend pend = new PendingUserSend(user.getFirstName(), user.getLastName(), user.getEmail(),
+					randPassword, user.getCompany(), user.getRole(), user.getPhone());
 			rest.postForObject("http://localhost:9015/users/add", pend, String.class);
 			pendingUserService.deleteUser(user);
-			EmailSender.sendAsHtml(user.getEmail(), "Your Revature CEP account has been approved!", "Congrats, you have been approved and your password is: " + randPassword);
-			return new ResponseEntity<String> ("Success", HttpStatus.OK);
+			EmailSender.sendAsHtml(user.getEmail(), "Your Revature CEP account has been approved!",
+					"Congrats, you have been approved here is your login information <br/>Username: " + user.getEmail()
+							+ "<br/>Password:" + randPassword);
+			return new ResponseEntity<String>("Success", HttpStatus.OK);
 		} catch (Exception e) {
-			return new ResponseEntity<String> (HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
 		}
 	}
-	
+
 	/**
-	 *  Deletes PendingUser from table
+	 * Deletes PendingUser from table
+	 * 
 	 * @param id of user to be denied
 	 * @return string "Success" if works
 	 */
 	@PostMapping("/deny")
 	public ResponseEntity<String> denyUser(@RequestParam("id") int id, @RequestBody DenyMessage denyMessage) {
 		try {
-			System.out.println(denyMessage);
 			PendingUser user = pendingUserService.findById(id);
 			pendingUserService.deleteUser(user);
-			EmailSender.sendAsHtml(user.getEmail(), "Your Revature CEP account has been denied!", "Sorry, you have been denied for the following reason(s): " + denyMessage.getDenyMessage());
-			return new ResponseEntity<String> ("Success", HttpStatus.OK);
+			EmailSender.sendAsHtml(user.getEmail(), "Your Revature CEP account has been denied!",
+					"Sorry, you have been denied for the following reason(s): " + denyMessage.getDenyMessage()
+							+ "<br/>To contact customer support with more questions please call: 555-555-5555 or email: revature@support.com");
+			return new ResponseEntity<String>("Success", HttpStatus.OK);
 		} catch (Exception e) {
-			return new ResponseEntity<String> (HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
 		}
 	}
-	
+
 	public static String generateRandomPassword(int len) {
-        // ASCII range - alphanumeric (0-9, a-z, A-Z)
-        final String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+		// ASCII range - alphanumeric (0-9, a-z, A-Z)
+		final String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
-        SecureRandom random = new SecureRandom();
-        StringBuilder sb = new StringBuilder();
+		SecureRandom random = new SecureRandom();
+		StringBuilder sb = new StringBuilder();
 
-        // each iteration of loop choose a character randomly from the given ASCII range
-        // and append it to StringBuilder instance
+		// each iteration of loop choose a character randomly from the given ASCII range
+		// and append it to StringBuilder instance
 
-        for (int i = 0; i < len; i++) {
-            int randomIndex = random.nextInt(chars.length());
-            sb.append(chars.charAt(randomIndex));
-        }
+		for (int i = 0; i < len; i++) {
+			int randomIndex = random.nextInt(chars.length());
+			sb.append(chars.charAt(randomIndex));
+		}
 
-        return sb.toString();
-    }
-	
-//	/**
-//	 * @param password
-//	 * @return
-//	 */
-//	@PostMapping("/register")
-//	public ResponseEntity<String> registerUser(@RequestBody RegisterInfo register ){
-//		try {
-//			PendingUser user = pendingUserService.findByEmail(register.getEmail());
-//			user.setPassword(generateRandomPassword(8));
-//			RestTemplate rest = new RestTemplate();
-//			rest.postForObject("http://localhost:9015/users/add", user, String.class);
-//			return new ResponseEntity<String> ("Success", HttpStatus.OK);
-//		} catch (Exception e) {
-//			return new ResponseEntity<String> (HttpStatus.BAD_REQUEST);
-//		}
-//	}
+		return sb.toString();
+	}
 }

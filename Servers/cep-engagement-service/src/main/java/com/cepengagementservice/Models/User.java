@@ -101,10 +101,10 @@ public class User {
 	 * "user", optional = true) private UserProfile profile;
 	 */
     
-    @Column(name = "PROFILE_DEADLINE")
+    @Column(name = "PROFILE_DEADLINE", nullable = true)
     private String profileDeadline = null;
     
-    @Column(name = "PROFILE_ASSOCIATE_COUNT")
+    @Column(name = "PROFILE_ASSOCIATE_COUNT" , nullable = true)
     private Integer profileCount = null;
     
   //userId mapped to Request table
