@@ -64,15 +64,12 @@ public class PendingUserController {
 
 	/**
 	 *
-	 * @return List of all PendingUser where status = "Pending"
+	 * @return List of all PendingUsers 
 	 */
 	@GetMapping("/all")
 	public ResponseEntity<List<PendingUser>> allUsers() {
-		System.out.println(0);
 		try {
-			System.out.println(1 + " " + pendingUserService.allPendingUsers());
 			List<PendingUser> users = pendingUserService.allPendingUsers();
-			System.out.println(2 + " " + users);
 			return new ResponseEntity<List<PendingUser>>(users, HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<List<PendingUser>>(HttpStatus.BAD_REQUEST);
@@ -107,7 +104,6 @@ public class PendingUserController {
 
 			// build the request
 			HttpEntity<?> request = new HttpEntity<>(headers);
-			System.out.println("before request");
 			// make an HTTP GET request with headers
 			ResponseEntity<String[]> str = rest.exchange("http://localhost:9015/users/email/all", HttpMethod.GET,
 					request, String[].class);
@@ -185,7 +181,6 @@ public class PendingUserController {
 	@PostMapping("/deny")
 	public ResponseEntity<String> denyUser(@RequestParam("id") int id, @RequestBody DenyMessage denyMessage) {
 		try {
-			System.out.println(denyMessage);
 			PendingUser user = pendingUserService.findById(id);
 			pendingUserService.deleteUser(user);
 			EmailSender.sendAsHtml(user.getEmail(), "Your Revature CEP account has been denied!",
@@ -214,21 +209,4 @@ public class PendingUserController {
 
 		return sb.toString();
 	}
-
-//	/**
-//	 * @param password
-//	 * @return
-//	 */
-//	@PostMapping("/register")
-//	public ResponseEntity<String> registerUser(@RequestBody RegisterInfo register ){
-//		try {
-//			PendingUser user = pendingUserService.findByEmail(register.getEmail());
-//			user.setPassword(generateRandomPassword(8));
-//			RestTemplate rest = new RestTemplate();
-//			rest.postForObject("http://localhost:9015/users/add", user, String.class);
-//			return new ResponseEntity<String> ("Success", HttpStatus.OK);
-//		} catch (Exception e) {
-//			return new ResponseEntity<String> (HttpStatus.BAD_REQUEST);
-//		}
-//	}
 }
