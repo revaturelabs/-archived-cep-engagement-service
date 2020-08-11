@@ -8,7 +8,8 @@ spring:
     name: zuul
 
 eureka:
-  prefer-ip-address: true
+  instance:
+    prefer-ip-address: true
   client:
     fetch-registry: true
     register-with-eureka: true
