@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 //import org.springframework.transaction.annotation.Transactional;
 
 import com.cepengagementservice.Models.User;
+import com.cepengagementservice.Projections.UserProfileProjection;
 
 /**
 
@@ -29,6 +30,10 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     
     @Query("select u.email from User u where u.role = 'ROLE_ADMIN'")
     List<String> getAdminEmail();
+    
+    User findByUserId(int userId);
+    
+    <T> T findByUserId(int userId, Class<T> type);
     
 //    @Transactional
 //    default void addUser(User user) {

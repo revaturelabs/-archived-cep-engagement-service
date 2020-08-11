@@ -1,12 +1,15 @@
 package com.cepengagementservice.Models;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.cepengagementservice.Models.dto.BatchDTO;
+import javax.persistence.Cacheable;
 
 import org.springframework.web.client.RestTemplate;
+
+import com.cepengagementservice.Models.dto.BatchDTO;
 
 import lombok.Data;
 
@@ -65,5 +68,30 @@ public class Batch {
 
         return result;
     }
+    
+    /**
+     * Returns a list of ongoing batches from the Caliber API
+     * @return List<Batch>
+     */
+    public static List<Batch> getCurrentBatches(){
+    	final String uri = "http://34.82.182.44:80/mock/training/batch/current";
+    	
+    	RestTemplate restTemplate = new RestTemplate();
+    	Batch[] result = restTemplate.getForObject(uri, Batch[].class);
+    	
+    	return Arrays.asList(result);
+    }
 
+    /**
+     * Returns a list of ongoing batches from the Caliber API
+     * @return List<Batch>
+     */
+    public static List<BatchDTO> getCurrentBatchDTOs(){
+    	final String uri = "http://34.82.182.44:80/mock/training/batch/current";
+    	
+    	RestTemplate restTemplate = new RestTemplate();
+    	BatchDTO[] result = restTemplate.getForObject(uri, BatchDTO[].class);
+    	
+    	return Arrays.asList(result);
+    }
 }
