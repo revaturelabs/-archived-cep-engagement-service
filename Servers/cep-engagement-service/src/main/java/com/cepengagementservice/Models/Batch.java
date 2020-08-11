@@ -1,17 +1,6 @@
 package com.cepengagementservice.Models;
 
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
-import javax.persistence.Cacheable;
-
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
-import org.springframework.web.client.RestTemplate;
-
-import com.cepengagementservice.Models.dto.BatchDTO;
 
 import lombok.Data;
 

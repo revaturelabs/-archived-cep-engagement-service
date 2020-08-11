@@ -17,30 +17,15 @@ import com.cepengagementservice.Services.CategoryService;
 @RequestMapping("/category")
 public class CategoryController {
 	
-	private CategoryService catServ;
-	
-	/**
-	 * No args constructor
-	 */
-	public CategoryController() {
-		
-	}
+	private CategoryService categoryService;
 	
 	/**
 	 * 
 	 * @param catServ, arg constructor
 	 */
 	@Autowired
-	public CategoryController(CategoryService catServ) {
-		this.catServ = catServ;
-	}
-	
-	public CategoryService getCatServ() {
-		return catServ;
-	}
-
-	public void setCatServ(CategoryService catServ) {
-		this.catServ = catServ;
+	public CategoryController(CategoryService categoryService) {
+		this.categoryService = categoryService;
 	}
 
 	/**
@@ -50,7 +35,7 @@ public class CategoryController {
 	 */
 	@GetMapping (value = "/getById")
 	public Category getById(@RequestParam("categoryId") int id) {
-		return  catServ.getCategoryById(id);
+		return  categoryService.getCategoryById(id);
 	}
 	/**
 	 * Gets an array of the categories from a user inputed list
@@ -59,7 +44,7 @@ public class CategoryController {
 	 */
 	@GetMapping (value = "/getCatIds")
 	public List<Category> getCatIds(@RequestParam("categoryIds") int[] ids) {
-		return catServ.getCategoriesByIds(ids);
+		return categoryService.getCategoriesByIds(ids);
 	}
 	/**
 	 * Gets a list of all the categories
@@ -67,7 +52,7 @@ public class CategoryController {
 	 * @return a list of categories
 	 */
 	@GetMapping (value = "/allCategories")
-	public List<Category> allCategories(CategoryService catServ){
-		return catServ.getAllCategories();
+	public List<Category> allCategories(){
+		return categoryService.getAllCategories();
 	}
 }

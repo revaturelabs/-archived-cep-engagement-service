@@ -98,9 +98,9 @@ public class CategoryTest {
 		categoryList.add(category1);
 		categoryList.add(category2);
 		
-        when(catController.allCategories(catServ)).thenReturn(categoryList);
+        when(catController.allCategories()).thenReturn(categoryList);
         
-        assertEquals(categoryList,catController.allCategories(catServ));
+        assertEquals(categoryList,catController.allCategories());
 
 
 	}

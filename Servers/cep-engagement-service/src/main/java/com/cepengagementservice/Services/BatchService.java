@@ -1,5 +1,7 @@
 package com.cepengagementservice.Services;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -27,10 +29,6 @@ public class BatchService {
 	private BatchRepository batchRepository;
 	
 	private AssessmentService assessmentService;
-
-	public BatchService() {
-		// TODO Auto-generated constructor stub
-	}
 	
 	@Autowired
     public BatchService(BatchRepository batchRepository, AssessmentService assessmentService) {
@@ -95,7 +93,17 @@ public class BatchService {
 		List<Batch> finishByDeadline;
 
 		if (preferences.getBatchDeadline() != null && preferences.getBatchDeadline() != "") {
-			finishByDeadline = potentialBatches; // PLACEHOLDER
+			//Only batches that end by the user's given batch deadline will make it through this filter.
+			finishByDeadline = new ArrayList<>();
+
+			for (Batch tempBatch : potentialBatches) {	
+				//Front-end sends a preferred batchDeadline as a LocalDateTime instead of a LocalDate. Someone should probably fix that.
+				LocalDate batchEnd = LocalDate.parse(tempBatch.getEndDate());
+				LocalDate preferredDeadline = LocalDate.parse(preferences.getBatchDeadline());
+				if (batchEnd.isBefore(preferredDeadline)) {
+					finishByDeadline.add(tempBatch);
+				}
+			}
 		} else {
 			finishByDeadline = potentialBatches;
 		}
@@ -117,7 +125,7 @@ public class BatchService {
 
 		// FILTER BY NEEDED CATEGORIES
 		List<Batch> validBatches;
-		int minimumCategoryMatches = (int) (preferences.getNeededCategories().size() * 0.75);
+		int minimumCategoryMatches = (int) Math.ceil(preferences.getNeededCategories().size() * 0.75);
 
 		if (minimumCategoryMatches > 0) {
 			validBatches = new ArrayList<Batch>();
