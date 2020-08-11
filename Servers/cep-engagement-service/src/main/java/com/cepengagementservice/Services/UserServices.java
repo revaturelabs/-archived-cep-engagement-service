@@ -171,7 +171,6 @@ public class UserServices {
 	 * @param userId
 	 * @param newProfile
 	 */
-//	@Transactional
 	public boolean updateUserProfile(int userId, UserProfile newProfile) {
 		User targetUser = userRepository.findByUserId(userId);
 
