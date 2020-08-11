@@ -1,5 +1,6 @@
 package com.cepengagementservice.Config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
@@ -13,6 +14,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  */
 @Configuration
 public class CorsConfig {
+	
+	@Value("${frontend.uri}")
+	String frontEndUri;
 
 	/**
 	 * WebMvcConfigurer takes no parameters which overrides aaCorsMapping to take in
@@ -29,7 +33,7 @@ public class CorsConfig {
 			public void addCorsMappings(CorsRegistry registry) {
 
 				registry.addMapping("/**").allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS", "HEADER").allowedHeaders("*")
-						.allowedOrigins("http://localhost:3000");
+						.allowedOrigins(frontEndUri);
 			}
 		};
 	}

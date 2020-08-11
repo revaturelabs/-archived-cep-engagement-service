@@ -4,6 +4,11 @@ import java.util.List;
 
 import com.register.model.PendingUser;
 
+/**
+ * This interface provides crud operations for a pending user
+ * @author Unknown
+ *
+ */
 public interface PendingUserService {
 
 	public void addUser(PendingUser user);

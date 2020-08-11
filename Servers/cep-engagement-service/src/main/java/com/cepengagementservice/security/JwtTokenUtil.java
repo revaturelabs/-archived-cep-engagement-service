@@ -64,13 +64,11 @@ public class JwtTokenUtil implements Serializable {
 	// <T> for type agnostic, and gets all claims to then give only the one specified (information about user)
 	public <T> T getClaimFromToken(String token, Function<Claims, T> claimsResolver) { 
 		final Claims claims = getAllClaimsFromToken(token);
-		System.out.println("all token claims: " + claims);
 		return claimsResolver.apply(claims);
 	}
 
 	// Gets all the claims from the token
 	private Claims getAllClaimsFromToken(String token) { // gets all claims (information about user) from JWT token.
-		System.out.println("token claims: " + Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody());
 		return Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();
 	}
 	

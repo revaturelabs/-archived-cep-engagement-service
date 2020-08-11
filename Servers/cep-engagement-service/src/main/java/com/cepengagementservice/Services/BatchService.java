@@ -13,6 +13,7 @@ import com.cepengagementservice.Models.Batch;
 import com.cepengagementservice.Models.Category;
 import com.cepengagementservice.Models.UserProfile;
 import com.cepengagementservice.Models.dto.BatchDTO;
+import com.cepengagementservice.Repositories.BatchRepository;
 
 /**
  * 
@@ -22,43 +23,50 @@ import com.cepengagementservice.Models.dto.BatchDTO;
  */
 @Service
 public class BatchService {
-
-	@Autowired
+	
+	private BatchRepository batchRepository;
+	
 	private AssessmentService assessmentService;
 
-	/**
-	 * 
-	 * this is the method to fetch a single batch
-	 * 
-	 * @param String id
-	 * @return Batch
-	 */
-	@Cacheable("GetSingleBatch")
-	public Batch getSingleBatch(String id) {
-		return Batch.getBatchById(id);
+	public BatchService() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	@Autowired
+    public BatchService(BatchRepository batchRepository, AssessmentService assessmentService) {
+		super();
+		this.batchRepository = batchRepository;
+		this.assessmentService = assessmentService;
 	}
 
 	/**
-	 * 
-	 * this is the method to get a single batch from the DTO
-	 * 
-	 * @param String id
-	 * @return Batch
-	 */
-	public BatchDTO getSingleBatchDTO(String id) {
-		return Batch.getBatchDTOById(id);
+     * 
+     * this is the method to fetch a single batch
+     * @param String id
+     * @return Batch
+     */
+    public Batch getSingleBatch(String id) {
+        return batchRepository.getBatchById(id);
+    }
 
-	}
+    /**
+     * 
+     * this is the method to get a single batch from the DTO
+     * @param String id
+     * @return Batch
+     */
+    public BatchDTO getSingleBatchDTO(String id) {
+        return batchRepository.getBatchDTOById(id);
 
-	/**
-	 * 
-	 * this is a check method used to figure out if the batch actually exists for
-	 * the ID input. Checks the batch not the DTO
-	 * 
-	 * @param batchId
-	 * @return boolean
-	 */
-	@Cacheable("GetSingleBatchDTO")
+    }
+
+    /**
+     * 
+     * this is a check method used to figure out if the batch actually exists for the ID input.  Checks the batch not the DTO
+     * @param batchId
+     * @return boolean
+     */
+
 	public boolean check(String batchId) {
 		if (getSingleBatch(batchId) != null)
 			return true;
@@ -68,7 +76,7 @@ public class BatchService {
 
 	@Cacheable("GetCurrentBatches")
 	public List<Batch> getCurrentBatches() {
-		return Batch.getCurrentBatches();
+		return batchRepository.getCurrentBatches();
 	}
 
 	/**

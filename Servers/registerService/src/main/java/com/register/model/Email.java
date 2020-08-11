@@ -1,5 +1,10 @@
 package com.register.model;
 
+/**
+ * This class is used to hold a persons email.
+ * @author Unknown
+ *
+ */
 public class Email {
 
 

@@ -33,5 +33,50 @@
     "name": "key.allemail",
     "type": "java.lang.String",
     "description": "The key that is required from the request header"
+  },
+  {
+    "name": "caliber.api.batch.id",
+    "type": "java.lang.String",
+    "description": "A description for 'caliber.api.batch.id'"
+  },
+  {
+    "name": "caliber.api.batch",
+    "type": "java.lang.String",
+    "description": "A description for 'caliber.api.batch'"
+  },
+  {
+    "name": "caliber.api.assessments",
+    "type": "java.lang.String",
+    "description": "A description for 'caliber.api.assessments'"
+  },
+  {
+    "name": "caliber.api.category",
+    "type": "java.lang.String",
+    "description": "A description for 'caliber.api.category'"
+  },
+  {
+    "name": "caliber.api",
+    "type": "java.lang.String",
+    "description": "A description for 'caliber.api'"
+  },
+  {
+    "name": "frontend.uri",
+    "type": "java.lang.String",
+    "description": "A description for 'frontend.uri'"
+  },
+  {
+    "name": "zuul.microservice.uri",
+    "type": "java.lang.String",
+    "description": "A description for 'zuul.microservice.uri'"
+  },
+  {
+    "name": "caliber",
+    "type": "java.lang.String",
+    "description": "A description for 'caliber'"
+  },
+  {
+    "name": "spidergraph.caliber",
+    "type": "java.lang.String",
+    "description": "A description for 'spidergraph.caliber'"
   }
 ]}

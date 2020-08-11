@@ -62,7 +62,7 @@ public class UserServiceTest {
 	}
 	@Test
 	public void testUpdateUserNotExists() {
-		User user = new User(1, "first", "last", "p", "pass", "comp", "role", "888", true, new ArrayList<Request>());
+		User user = new User(1, "first", "last", "p", "pass", "comp", "role", "888", true, null, null, new ArrayList<Request>());
 
 		assertNotEquals(user, userService.updateUser(user), "Can't update a user that doesn't exist.");
 	}

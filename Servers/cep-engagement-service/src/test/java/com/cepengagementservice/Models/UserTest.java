@@ -46,9 +46,9 @@ public class UserTest {
 	
 	@Test
 	void UserTestMethods() {
-		User user1 = new User("Michael", "Worrell", "banobo@gmail.com", "password", "revature", "ROLE_ADMIN", "(123)456-7890");
+		User user1 = new User("Michael", "Worrell", "banobo@gmail.com", "password", "revature", "ROLE_ADMIN", "(123)456-7890", "Deadline", 5);
 		
-		User user2 = new User("Michael", "Worrell", "banobo@gmail.com", "password", "revature", "ROLE_ADMIN", "(123)456-7890");
+		User user2 = new User("Michael", "Worrell", "banobo@gmail.com", "password", "revature", "ROLE_ADMIN", "(123)456-7890", "Deadline", 5);
 	
 		boolean bool = user1.equals(user2);
 		

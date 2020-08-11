@@ -2,6 +2,12 @@ package com.register.model;
 
 import java.io.Serializable;
 
+/**
+ * This class is used to aid in sending a deny message to the user when an admin declines their
+ * account.
+ * @author Unknown
+ *
+ */
 public class DenyMessage{
 	private String denyMessage;
 	

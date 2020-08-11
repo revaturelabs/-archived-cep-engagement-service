@@ -15,6 +15,7 @@ import org.apache.http.conn.ssl.TrustStrategy;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -24,9 +25,10 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 /**
- * Functions used to retrive Associate's graphing
- * custom restTemplate to make an all accepting restTemplate
- * getting the associate graph using said custom restTemplate
+ * Functions used to retrive Associate's graphing custom restTemplate to make an
+ * all accepting restTemplate getting the associate graph using said custom
+ * restTemplate
+ * 
  * @author Unknown
  *
  */
@@ -34,10 +36,13 @@ import org.springframework.web.client.RestTemplate;
 @CrossOrigin
 public class AssociateGraphController {
 
+	@Value("${spidergraph.caliber}")
+	String uri;
 	/**
 	 * Returns a RestTemplate that has a override certifcation that is always true
-	 * SSLContextwith a null key store and override
-	 * and returns a RestTemplate with a custom requestfactory
+	 * SSLContextwith a null key store and override and returns a RestTemplate with
+	 * a custom requestfactory
+	 * 
 	 * @return RestTemplate
 	 * @throws KeyStoreException
 	 * @throws NoSuchAlgorithmException
@@ -61,29 +66,30 @@ public class AssociateGraphController {
 	}
 
 	/**
-	 * Takes in an associate's email and batch Id as path values 
-	 * and fetches an object from a restTemplate and returns the object
+	 * Takes in an associate's email and batch Id as path values and fetches an
+	 * object from a restTemplate and returns the object
+	 * 
 	 * @param associateEmail
 	 * @param batchId
 	 * @return Object
 	 */
-		 @GetMapping(value="/graph/associate/{batchId}/{associateEmail}")
-		 @Cacheable("GetAssociateGrade")
-		    public Object getAssociateGrade(@PathVariable String associateEmail,@PathVariable String batchId) {
-		        String uri = "http://34.82.182.44:80/mock/evaluation/grades/reports/{params2}/spider/{params}";
-		        
-		        Map<String, String> anotherId = new HashMap<String, String>();
-		        anotherId.put("params", associateEmail);
-		        anotherId.put("params2", batchId);
-		        try{		     
-		        //Grab the custom Rest Template.
-		        RestTemplate obj = restTemplate();	
-		        //TODO: Map the received data (JSON) to AssociateGraph.class
-		        //If fields not found from AssociateGraph model, fields will be empty.
-		        //If not able to cast a field, will throw!
-		        Object fetched = obj.getForObject(uri, Object.class ,anotherId);
-	
-		        return fetched;
+	@GetMapping(value = "/graph/associate/{batchId}/{associateEmail}")
+	@Cacheable("GetAssociateGrade")
+	public Object getAssociateGrade(@PathVariable String associateEmail, @PathVariable String batchId) {
+		//String uri = "http://34.82.182.44:80/mock/evaluation/grades/reports/{params2}/spider/{params}";
+
+		Map<String, String> anotherId = new HashMap<String, String>();
+		anotherId.put("params", associateEmail);
+		anotherId.put("params2", batchId);
+		try {
+			// Grab the custom Rest Template.
+			RestTemplate obj = restTemplate();
+			// TODO: Map the received data (JSON) to AssociateGraph.class
+			// If fields not found from AssociateGraph model, fields will be empty.
+			// If not able to cast a field, will throw!
+			Object fetched = obj.getForObject(uri + "/{params2}/spider/{params}", Object.class, anotherId);
+
+			return fetched;
 
 		} catch (Exception exception) {
 			System.out.println(exception.getMessage());

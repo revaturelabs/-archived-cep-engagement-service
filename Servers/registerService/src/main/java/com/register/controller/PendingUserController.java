@@ -63,8 +63,8 @@ public class PendingUserController {
 	// Controller Methods
 
 	/**
-	 *
-	 * @return List of all PendingUsers 
+	 * This method retrieves all pending users
+	 * @return List of all PendingUser where status = "Pending"
 	 */
 	@GetMapping("/all")
 	public ResponseEntity<List<PendingUser>> allUsers() {
@@ -78,7 +78,7 @@ public class PendingUserController {
 	}
 
 	/**
-	 *
+	 * This method will add a pending user
 	 * @param user
 	 * @return
 	 */
@@ -149,7 +149,7 @@ public class PendingUserController {
 	}
 
 	/**
-	 *
+	 * This method will approve a pending user
 	 * @param id of user being approved
 	 * @return user object
 	 */
@@ -192,6 +192,11 @@ public class PendingUserController {
 		}
 	}
 
+	/**
+	 * This method will randomly generate a password for approved pending users.
+	 * @param len the length of the password
+	 * @return a string representing the users password
+	 */
 	public static String generateRandomPassword(int len) {
 		// ASCII range - alphanumeric (0-9, a-z, A-Z)
 		final String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
