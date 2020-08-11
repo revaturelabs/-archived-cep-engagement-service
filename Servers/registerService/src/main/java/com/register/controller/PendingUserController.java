@@ -101,6 +101,7 @@ public class PendingUserController {
 
 			// example of custom header
 			headers.set("Authorization", emailKey);
+			headers.set("Access-Control-Allowed-Origins", "http://ec2-3-229-134-85.compute-1.amazonaws.com:10001");
 
 			// build the request
 			HttpEntity<?> request = new HttpEntity<>(headers);
