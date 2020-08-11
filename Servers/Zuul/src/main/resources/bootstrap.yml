@@ -8,8 +8,7 @@ spring:
     name: zuul
 
 eureka:
-  instance:
-    instance-id: ${spring.application.name}:${random.value}
+  prefer-ip-address: true
   client:
     fetch-registry: true
     register-with-eureka: true
