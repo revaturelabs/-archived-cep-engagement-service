@@ -41,7 +41,7 @@ import com.register.util.EmailSender;
  */
 @RestController
 @RequestMapping("/pending")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = {"http://ec2-3-229-134-85.compute-1.amazonaws.com", "http://ec2-3-229-134-85.compute-1.amazonaws.com:10000"})
 public class PendingUserController {
 
 	// Field
