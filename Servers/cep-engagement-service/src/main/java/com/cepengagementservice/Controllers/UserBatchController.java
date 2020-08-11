@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -54,7 +56,6 @@ public class UserBatchController {
      * @param int userId
      * @return ResponseEntity<List<Batch>> list of Batch objects
      */
-    @Cacheable("GetAssociateGrade")
     @GetMapping(value = "/batchesbyuser")
     public ResponseEntity<List<Batch>> getAllMyBatches(@RequestParam int userId) {
         try {
@@ -100,6 +101,18 @@ public class UserBatchController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
+    }
+    
+    /**
+     * Refreshes the user's UserBatch records with current ongoing batches that match their preferences.
+     * @param userId
+     * @return
+     */
+    @PatchMapping("/refresh/{userId}")
+    public ResponseEntity<String> refreshUserPairs(@PathVariable int userId) {
+    	userBatchService.refreshUserBatchesForUser(userId);
+    	
+    	return new ResponseEntity<String>("Your Batch List has been refreshed.", HttpStatus.OK);
     }
 
 }

@@ -1,31 +1,42 @@
 package com.cepengagementservice.Services;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.stereotype.Service;
+
+import com.cepengagementservice.Models.Assessment;
 import com.cepengagementservice.Models.Batch;
+import com.cepengagementservice.Models.Category;
+import com.cepengagementservice.Models.UserProfile;
 import com.cepengagementservice.Models.dto.BatchDTO;
 import com.cepengagementservice.Repositories.BatchRepository;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 /**
  * 
- * @author unknown
- * This is the service layer for Batches.  You utilize this in order to
- * pull batches by ID and to check if batches exist
+ * @author unknown This is the service layer for Batches. You utilize this in
+ *         order to pull batches by ID and to check if batches exist
  *
  */
 @Service
 public class BatchService {
 	
 	private BatchRepository batchRepository;
+	
+	private AssessmentService assessmentService;
 
 	public BatchService() {
 		// TODO Auto-generated constructor stub
 	}
 	
 	@Autowired
-    public BatchService(BatchRepository batchRepository) {
+    public BatchService(BatchRepository batchRepository, AssessmentService assessmentService) {
 		super();
 		this.batchRepository = batchRepository;
+		this.assessmentService = assessmentService;
 	}
 
 	/**
@@ -55,11 +66,89 @@ public class BatchService {
      * @param batchId
      * @return boolean
      */
+
 	public boolean check(String batchId) {
-		if (getSingleBatch(batchId)!=null)
+		if (getSingleBatch(batchId) != null)
 			return true;
 		else
 			return false;
 	}
 
+	@Cacheable("GetCurrentBatches")
+	public List<Batch> getCurrentBatches() {
+		return batchRepository.getCurrentBatches();
+	}
+
+	/**
+	 * Retrieves the ongoing batches from Caliber's Batch API, filters them by
+	 * deadline, associate count, and needed category preferences, then returns the
+	 * batches that pass.
+	 * 
+	 * @param preferences The UserProfile object being used to filter through the
+	 *                    batches.
+	 * @return List<Batch>
+	 */
+	public List<Batch> getBatchesByPreferences(UserProfile preferences) {
+		List<Batch> potentialBatches = this.getCurrentBatches();
+
+		// FILTER BY DEADLINE
+		List<Batch> finishByDeadline;
+
+		if (preferences.getBatchDeadline() != null && preferences.getBatchDeadline() != "") {
+			finishByDeadline = potentialBatches; // PLACEHOLDER
+		} else {
+			finishByDeadline = potentialBatches;
+		}
+		potentialBatches = null;
+
+		// FILTER BY ASSOCIATE COUNT
+		List<Batch> enoughAssociates;
+
+		if (preferences.getAssociateCount() != null && preferences.getAssociateCount() != 0) {
+			// Goes through finishByDeadline with a lambda that compares the size of their
+			// associate list to the minimum number of associates
+			enoughAssociates = finishByDeadline.stream()
+					.filter(b -> b.getAssociateAssignments().size() >= preferences.getAssociateCount())
+					.collect(Collectors.toList());
+		} else {
+			enoughAssociates = finishByDeadline;
+		}
+		finishByDeadline = null;
+
+		// FILTER BY NEEDED CATEGORIES
+		List<Batch> validBatches;
+		int minimumCategoryMatches = (int) (preferences.getNeededCategories().size() * 0.75);
+
+		if (minimumCategoryMatches > 0) {
+			validBatches = new ArrayList<Batch>();
+
+			/// FOR EACH BATCH...
+			for (Batch potentialBatch : enoughAssociates) {
+				//// RETRIEVE ASSESSMENTS BY BATCH
+				List<Assessment> batchAssessments = assessmentService.getByBatchId(potentialBatch.getBatchId());
+				//// MAP assessmentCategoory OUT OF EACH ASSESSMENT
+				List<Integer> assessmentCategoryIds = batchAssessments.stream().map(Assessment::getAssessmentCategory)
+						.collect(Collectors.toList());
+				List<Integer> neededCategoryIds = preferences.getNeededCategories().stream()
+						.map(Category::getCategoryId).collect(Collectors.toList());
+
+				//// COMPARE CATEGORIES FROM ASSESSMENTS TO NEEDED CATEGORIES
+				int categoryMatches = 0;
+				for (Integer categoryId : assessmentCategoryIds) {
+					if (neededCategoryIds.contains(categoryId)) {
+						categoryMatches++;
+						if (categoryMatches >= minimumCategoryMatches) {
+							validBatches.add(potentialBatch);
+							continue;
+						}
+					}
+				}
+			}
+		} else {
+			validBatches = enoughAssociates;
+		}
+		enoughAssociates = null;
+
+		return validBatches;
+	}
 }

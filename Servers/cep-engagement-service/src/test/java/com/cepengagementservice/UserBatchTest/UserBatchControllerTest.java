@@ -28,6 +28,9 @@ import com.cepengagementservice.Models.Request;
 import com.cepengagementservice.Models.User;
 import com.cepengagementservice.Models.UserBatch;
 import com.cepengagementservice.Models.dto.BatchDTO;
+
+import com.cepengagementservice.Repositories.UserRepository;
+
 import com.cepengagementservice.Services.RequestService;
 import com.cepengagementservice.Services.UserBatchService;
 import com.cepengagementservice.Services.UserServices;
@@ -39,7 +42,7 @@ public class UserBatchControllerTest {
 
     @Mock
     private UserBatchService userBatchService = mock(UserBatchService.class);
-    
+
     @InjectMocks
     private UserBatchController userBatchController;
 
@@ -56,7 +59,7 @@ public class UserBatchControllerTest {
     }
     @Test
     public void testGetAllMyBatches(){
-        User user = new User(1,"first", "last","p","pass", "comp","role", "888", true, new ArrayList<Request>());
+        User user = new User(1,"first", "last","p","pass", "comp","role", "888", true, null ,null, new ArrayList<Request>());
     	Batch B1 = new Batch();
     	Batch B2 = new Batch();
     	List<Batch> batches = new ArrayList<Batch>();
@@ -67,7 +70,7 @@ public class UserBatchControllerTest {
     }
     @Test
     public void testGetAllMyBatchesDTO(){
-        User user = new User(1,"first", "last","p","pass", "comp","role", "888", true, new ArrayList<Request>());
+        User user = new User(1,"first", "last","p","pass", "comp","role", "888", true, null, null, new ArrayList<Request>());
     	BatchDTO BD1 = new BatchDTO();
     	BatchDTO BD2 = new BatchDTO();
     	List<BatchDTO> batches = new ArrayList<BatchDTO>();

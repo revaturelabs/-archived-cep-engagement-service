@@ -36,7 +36,7 @@ import org.springframework.web.client.RestTemplate;
 @CrossOrigin
 public class AssociateGraphController {
 
-	@Value("${caliber.api.assessments.spider}")
+	@Value("${spider.caliber}")
 	String uri;
 	/**
 	 * Returns a RestTemplate that has a override certifcation that is always true

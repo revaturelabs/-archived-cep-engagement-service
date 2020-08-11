@@ -1,6 +1,8 @@
 package com.cepengagementservice.Repositories;
 
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -28,7 +30,6 @@ public class BatchRepository {
      */
     // TODO: abstract URIs
     public Batch getBatchById(String id) {
-        //final String uri = "http://34.82.182.44:80/mock/training/batch/{id}";
   
         Map<String, String> params = new HashMap<String, String>();
         params.put("id", id);
@@ -45,7 +46,6 @@ public class BatchRepository {
      * @return the specific batch by it's id
      */
     public BatchDTO getBatchDTOById(String id) {
-        //final String uri = "http://34.82.182.44:80/mock/training/batch/{id}";
 
         Map<String, String> params = new HashMap<String, String>();
         params.put("id", id);
@@ -56,6 +56,32 @@ public class BatchRepository {
         System.out.println(caliberUri+"/{id}");
         
         return result;
+    }
+    
+    /**
+     * Returns a list of ongoing batches from the Caliber API
+     * @return List<Batch>
+     */
+    public List<Batch> getCurrentBatches(){
+    	final String uri = "http://34.82.182.44:80/mock/training/batch/current";
+    	
+    	RestTemplate restTemplate = new RestTemplate();
+    	Batch[] result = restTemplate.getForObject(caliberUri + "/current", Batch[].class);
+    	
+    	return Arrays.asList(result);
+    }
+
+    /**
+     * Returns a list of ongoing batches from the Caliber API
+     * @return List<Batch>
+     */
+    public List<BatchDTO> getCurrentBatchDTOs(){
+    	final String uri = "http://34.82.182.44:80/mock/training/batch/current";
+    	
+    	RestTemplate restTemplate = new RestTemplate();
+    	BatchDTO[] result = restTemplate.getForObject(uri, BatchDTO[].class);
+    	
+    	return Arrays.asList(result);
     }
 
 }

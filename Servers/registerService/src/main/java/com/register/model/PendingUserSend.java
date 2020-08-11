@@ -22,6 +22,12 @@ public class PendingUserSend {
 	private String role;
 	
 	private String phone;
+	
+	private boolean resetPassword = true;
+	
+	private String profileDeadline;
+	
+	private Integer profileCount;
 
 	//All args
 	public PendingUserSend(String firstName, String lastName, String email, String password, String company,
@@ -34,6 +40,9 @@ public class PendingUserSend {
 		this.company = company;
 		this.role = role;
 		this.phone = phone;
+		this.resetPassword = true;
+		this.profileDeadline = null;
+		this.profileCount = null;
 	}
 
 	public String getFirstName() {
@@ -92,15 +101,37 @@ public class PendingUserSend {
 		this.phone = phone;
 	}
 
+	public boolean isResetPassword() {
+		return resetPassword;
+	}
+
+	public void setResetPassword(boolean resetPassword) {
+		this.resetPassword = resetPassword;
+	}
+
+	public String getProfileDeadline() {
+		return profileDeadline;
+	}
+
+	public void setProfileDeadline(String profileDeadline) {
+		this.profileDeadline = profileDeadline;
+	}
+
+	public Integer getProfileCount() {
+		return profileCount;
+	}
+
+	public void setProfileCount(Integer profileCount) {
+		this.profileCount = profileCount;
+	}
+
 	@Override
 	public String toString() {
-		return "PendingUser [firstName=" + firstName + ", lastName=" + lastName + ", email="
-				+ email + ", password=" + password + ", company=" + company + ", role=" + role + ", phone=" + phone
-				 + "]";
+		return "PendingUserSend [firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", password="
+				+ password + ", company=" + company + ", role=" + role + ", phone=" + phone + ", resetPassword="
+				+ resetPassword + ", profileDeadline=" + profileDeadline + ", profileCount=" + profileCount + "]";
 	}
-	
-	
-	
+
 	
 	
 }

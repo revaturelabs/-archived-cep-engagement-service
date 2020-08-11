@@ -23,9 +23,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cepengagementservice.Models.Request;
 import com.cepengagementservice.Models.User;
+import com.cepengagementservice.Models.UserProfile;
 import com.cepengagementservice.Services.RequestService;
 import com.cepengagementservice.Services.UserServices;
-import com.cepengagementservice.security.JwtTokenUtil;
 
 /**
  * Handles request from the front ends including getting all the users adding a
@@ -138,6 +138,7 @@ public class UsersControllers {
 	public ResponseEntity<String> resetPassword(@RequestBody ResetPassword reset, HttpServletRequest request) {
 
 		User user = userService.getUserByEmail(reset.getEmail());
+		
 		System.out.println(user.getPassword());
 		
 		
@@ -205,6 +206,30 @@ public class UsersControllers {
 		requestService.deleteByRequestId(requestId);
 		return new ResponseEntity<Request>(HttpStatus.NO_CONTENT);
 
+	}
+	
+	/**
+	 * Retrieves a UserProfile object using the profileDeadline, profileCount, and User-Category pairs of the given user
+	 * @param userId
+	 * @return userProfile
+	 */
+	@GetMapping("/profile/{userId}")
+	public ResponseEntity<?> getUserProfile(@PathVariable("userId") int userId) {
+		UserProfile targetProfile = userService.getProfileById(userId);
+		
+		return new ResponseEntity<UserProfile>(targetProfile, HttpStatus.OK);
+	}
+	
+	@PutMapping("/profile/{userId}")
+	public ResponseEntity<String> updateUserProfile(@PathVariable("userId") int userId, @RequestBody UserProfile newProfile) {		
+		//Save new preferences to user object and User-Category objects
+		boolean didUpdate = userService.updateUserProfile(userId, newProfile);
+		
+		if (didUpdate) {
+			return new ResponseEntity<String>("User profile updated", HttpStatus.OK);
+		} else {
+			return new ResponseEntity<String>("Matching user not found.", HttpStatus.NOT_FOUND);
+		}
 	}
 
 }

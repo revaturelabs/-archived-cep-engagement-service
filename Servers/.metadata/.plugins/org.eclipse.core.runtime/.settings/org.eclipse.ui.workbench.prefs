@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 //org.eclipse.ui.commands/state/org.eclipse.ui.navigator.resources.nested.changeProjectPresentation/org.eclipse.ui.commands.radioState=false
 //org.eclipse.ui.commands/state/org.eclipse.wst.xml.views.XPathView.processor.xpathprocessor/org.eclipse.ui.commands.radioState=xpath10
 ACTIVE_HYPERLINK_COLOR=138,201,242
@@ -8,9 +9,12 @@ ERROR_COLOR=247,68,117
 HYPERLINK_COLOR=111,197,238
 INCOMING_COLOR=31,179,235
 OUTGOING_COLOR=238,238,238
+=======
+>>>>>>> dev-trev
 PLUGINS_NOT_ACTIVATED_ON_STARTUP=;org.eclipse.m2e.discovery;
 RESOLVED_COLOR=108,210,17
 eclipse.preferences.version=1
+<<<<<<< HEAD
 org.eclipse.egit.ui.DiffAddBackgroundColor=11,121,90
 org.eclipse.egit.ui.DiffAddForegroundColor=216,254,245
 org.eclipse.egit.ui.DiffHeadlineBackgroundColor=71,71,71
@@ -52,3 +56,5 @@ org.springframework.ide.eclipse.boot.dash.MutedTextDecorColor=211,211,211
 org.springframework.ide.eclipse.boot.dash.TextDecorColor=144,238,144
 org.springframework.tooling.ls.eclipse.commons.STS4BootMarkerIndicationColor=56,84,26
 overriddenByCSS=,org.eclipse.egit.ui.DiffAddBackgroundColor,org.eclipse.egit.ui.DiffAddForegroundColor,org.eclipse.egit.ui.DiffHeadlineBackgroundColor,org.eclipse.egit.ui.DiffHeadlineForegroundColor,org.eclipse.egit.ui.DiffHunkBackgroundColor,org.eclipse.egit.ui.DiffHunkForegroundColor,org.eclipse.egit.ui.DiffRemoveBackgroundColor,org.eclipse.egit.ui.DiffRemoveForegroundColor,org.eclipse.egit.ui.IgnoredResourceBackgroundColor,org.eclipse.egit.ui.IgnoredResourceForegroundColor,org.eclipse.egit.ui.UncommittedChangeBackgroundColor,org.eclipse.egit.ui.UncommittedChangeForegroundColor,org.eclipse.jdt.ui.ColoredLabels.inherited,org.eclipse.jdt.ui.Javadoc.backgroundColor,org.eclipse.jdt.ui.Javadoc.foregroundColor,org.eclipse.mylyn.tasks.ui.colors.foreground.today.scheduled,org.eclipse.mylyn.tasks.ui.colors.foreground.past.scheduled,org.eclipse.mylyn.tasks.ui.colors.foreground.thisweek.scheduled,org.eclipse.mylyn.tasks.ui.colors.foreground.task.active,org.eclipse.mylyn.tasks.ui.colors.category.gradient.start,org.eclipse.mylyn.tasks.ui.colors.category.gradient.end,org.eclipse.pde.genericeditor.extension.editor.color.tag,org.eclipse.pde.genericeditor.extension.editor.color.attribute,org.eclipse.pde.genericeditor.extension.editor.color.text,org.eclipse.pde.genericeditor.extension.editor.color.header,org.eclipse.pde.genericeditor.extension.editor.color.comment,org.eclipse.pde.genericeditor.extension.editor.color.quote,ACTIVE_HYPERLINK_COLOR,CONFLICTING_COLOR,CONTENT_ASSIST_BACKGROUND_COLOR,CONTENT_ASSIST_FOREGROUND_COLOR,org.eclipse.ui.workbench.INFORMATION_BACKGROUND,org.eclipse.ui.workbench.INFORMATION_FOREGROUND,org.eclipse.ui.workbench.HOVER_BACKGROUND,org.eclipse.ui.workbench.HOVER_FOREGROUND,ERROR_COLOR,HYPERLINK_COLOR,INCOMING_COLOR,OUTGOING_COLOR,RESOLVED_COLOR,org.eclipse.search.ui.match.highlight,org.eclipse.ui.editors.rangeIndicatorColor,org.eclipse.jface.REVISION_NEWEST_COLOR,org.eclipse.jface.REVISION_OLDEST_COLOR,org.springframework.ide.eclipse.boot.dash.TextDecorColor,org.springframework.ide.eclipse.boot.dash.AltTextDecorColor,org.springframework.ide.eclipse.boot.dash.MutedTextDecorColor,org.springframework.tooling.ls.eclipse.commons.STS4BootMarkerIndicationColor,
+=======
+>>>>>>> dev-trev

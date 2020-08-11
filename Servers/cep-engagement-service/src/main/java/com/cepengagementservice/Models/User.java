@@ -2,36 +2,24 @@ package com.cepengagementservice.Models;
 
 import java.util.List;
 
-// import java.util.Set;
-
-// import javax.annotation.Generated;
-// import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-// import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
-// import javax.persistence.JoinColumn;
-// import javax.persistence.JoinTable;
-// import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-
-// import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-// import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-// import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
-// import lombok.ToString;
+
 
 //Why does it has to be an enum?
 //Not handling logic inside of it, neither storing several.
@@ -92,8 +80,19 @@ public class User {
     @Column(name = "RESETPASSWORD")
     private Boolean resetPassword = true;
     
+	/*
+	 * @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy =
+	 * "user", optional = true) private UserProfile profile;
+	 */
+    
+    @Column(name = "PROFILE_DEADLINE", nullable = true)
+    private String profileDeadline = null;
+    
+    @Column(name = "PROFILE_ASSOCIATE_COUNT" , nullable = true)
+    private Integer profileCount;
+    
   //userId mapped to Request table
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
   	public List<Request> requests;
   	
@@ -162,10 +161,51 @@ public class User {
     public void setPhone(String phone) {
         this.phone = phone;
     }
-
-	public User(@NonNull String firstName, @NonNull String lastName, @NonNull String email, @NonNull String password,
-			@NonNull String company, @NonNull String role, @NonNull String phone) {
-		super();
+    
+    public void setProfileDeadline(String batchDeadline) {
+    	this.profileDeadline = batchDeadline;
+    }
+    
+    public String getProfileDeadline() {
+    	return profileDeadline;
+    }
+    
+    public void setProfileCount(int associateCount) {
+    	this.profileCount = associateCount;
+    }
+    
+    public int getProfileCount() {
+    	return profileCount;
+    }
+    
+    public User(@NonNull String firstName, @NonNull String lastName, @NonNull String email, @NonNull String password,
+    		@NonNull String company, @NonNull String role, @NonNull String phone) {
+    	super();
+    	this.firstName = firstName;
+    	this.lastName = lastName;
+    	this.email = email.toLowerCase();
+    	this.password = password;
+    	this.company = company;
+    	this.role = role;
+    	this.phone = phone;
+    }
+    
+    public User(@NonNull String firstName, @NonNull String lastName, @NonNull String email, @NonNull String password,
+    		@NonNull String company, @NonNull String role, @NonNull String phone, String batchDeadline, Integer associateCount) {
+    	super();
+    	this.firstName = firstName;
+    	this.lastName = lastName;
+    	this.email = email.toLowerCase();
+    	this.password = password;
+    	this.company = company;
+    	this.role = role;
+    	this.phone = phone;
+    	this.profileDeadline = batchDeadline;
+    	this.profileCount = associateCount;
+    }
+    
+    public User(@NonNull String firstName, @NonNull String lastName, @NonNull String email, @NonNull String password,
+			@NonNull String company, @NonNull String role, @NonNull String phone, @NonNull Boolean resetPassword) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email.toLowerCase();
@@ -173,6 +213,7 @@ public class User {
 		this.company = company;
 		this.role = role;
 		this.phone = phone;
-	}
+		this.resetPassword = resetPassword;
+    }
 
 }
