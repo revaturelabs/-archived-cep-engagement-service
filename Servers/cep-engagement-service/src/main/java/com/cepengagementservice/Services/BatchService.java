@@ -86,7 +86,7 @@ public class BatchService {
 		// FILTER BY DEADLINE
 		List<Batch> finishByDeadline;
 
-		if (preferences.getBatchDeadline() != null) {
+		if (preferences.getBatchDeadline() != null && preferences.getBatchDeadline() != "") {
 			finishByDeadline = potentialBatches; // PLACEHOLDER
 		} else {
 			finishByDeadline = potentialBatches;
@@ -96,7 +96,7 @@ public class BatchService {
 		// FILTER BY ASSOCIATE COUNT
 		List<Batch> enoughAssociates;
 
-		if (preferences.getAssociateCount() != null) {
+		if (preferences.getAssociateCount() != null && preferences.getAssociateCount() != 0) {
 			// Goes through finishByDeadline with a lambda that compares the size of their
 			// associate list to the minimum number of associates
 			enoughAssociates = finishByDeadline.stream()
