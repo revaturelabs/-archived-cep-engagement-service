@@ -26,8 +26,6 @@ public interface UserCategoryRepository extends JpaRepository<UserCategory, Inte
 	 * @param profileId the id of the profile we are finding categories for
 	 * @return List<ProfileCategory> of profile-category pairs for the given profile
 	 */
-//	@Query("select pc from #{#entityName} pc where pc.profileId = ?1")
-//	@Cacheable()
 	public List<UserCategory> findByUserId(int userId);
 
 	/**
@@ -37,14 +35,11 @@ public interface UserCategoryRepository extends JpaRepository<UserCategory, Inte
 	 * @return List<ProfileCategory> of profile-category pairs for the given
 	 *         category
 	 */
-//	@Query("select pc from #{#entityName} pc where pc.categoryId = ?1")
-//	@Cacheable()
 	public List<UserCategory> findByCategoryId(int categoryId);
 
 	/**
 	 * @return All ProfileCategory objects
 	 */
-//	@Cacheable()
 	public List<UserCategory> findAll();
 
 	/**

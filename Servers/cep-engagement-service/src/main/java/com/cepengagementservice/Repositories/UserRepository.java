@@ -34,14 +34,5 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     User findByUserId(int userId);
     
     <T> T findByUserId(int userId, Class<T> type);
-    
-//    @Transactional
-//    default void addUser(User user) {
-//    	this.
-//	}
-
-    // @Query(value = "SELECT u FROM User u INNER JOIN u.batches ub WHERE ub.batchId
-    // = :batchId")
-    // List<User> findByBatchId(@Param("batchId") String batchId);
 
 }

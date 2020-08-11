@@ -29,10 +29,8 @@ public interface UserBatchRepository extends JpaRepository<UserBatch, Integer> {
      * @return List of user_batches related to the userId
      */
     @Query("select u from #{#entityName} u where u.userId = ?1")
-//    @Cacheable("UserId")
     public List<UserBatch> findByUserId(int userId);
     
-//    @Cacheable("AllBatch")
     public List<UserBatch> findAll();
     
     /**
