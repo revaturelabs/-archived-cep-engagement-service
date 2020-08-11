@@ -5,6 +5,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.cepengagementservice.Models.Batch;
 import com.cepengagementservice.Models.UserBatch;
@@ -38,6 +39,30 @@ public class UserBatchServiceTest {
     private UserBatchService UBService;
     @Test
     public void getSingleBatchByIdTest()
+    {
+        BatchDTO expected = new BatchDTO();
+        expected.setBatchId("TR-1000");
+        expected.setName("Mock Batch 1");
+        expected.setStartDate("2016-01-01");
+        expected.setEndDate("2016-03-11");
+        expected.setSkill("Big Data");
+        expected.setLocation("West Virginia");
+        expected.setType("Revature");
+        expected.setGoodGrade(70);
+        expected.setPassingGrade(80);
+        expected.setCurrentWeek(11);
+
+        List<UserBatch> uBatches= new ArrayList<UserBatch>();
+        List<Batch> batches= new ArrayList<Batch>();
+        ArrayList<BatchDTO> bDTOList = new ArrayList<BatchDTO>();
+        UserBatch user = new UserBatch(1, "TR-1000");
+        bDTOList.add(expected);
+        when(UBRepository.findByUserId(1)).thenReturn(uBatches);
+        when(UBService.getBatchesByUserId(user.getUserId())).thenReturn(batches);
+        assertEquals(batches, UBService.getBatchesByUserId(1), "Batches services must return batches list.");
+      }
+    @Test
+    public void getSingleBatchDTOByIdTest()
     {
         BatchDTO expected = new BatchDTO();
         expected.setBatchId("TR-1000");

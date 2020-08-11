@@ -57,9 +57,9 @@
 			<artifactId>spring-boot-starter-security</artifactId> <!-- Includes <groupId>org.springframework.security</groupId> <artifactId>spring-security-config</artifactId> -->
 		</dependency>
 
-		<!-- Jackson <dependency> <groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-core</artifactId> <version>2.4.3</version> </dependency>
-			<dependency> <groupId>com.fasterxml.jackson.core</groupId> <artifactId>jackson-databind</artifactId>
+		<!-- Jackson <dependency> <groupId>com.fasterxml.jackson.core</groupId> 
+			<artifactId>jackson-core</artifactId> <version>2.4.3</version> </dependency> 
+			<dependency> <groupId>com.fasterxml.jackson.core</groupId> <artifactId>jackson-databind</artifactId> 
 			<version>2.4.3</version> </dependency> Jackson -->
 
 		<dependency>
@@ -92,7 +92,7 @@
 			<scope>test</scope>
 
 
-			<!-- <exclusions> <exclusion> <groupId>org.junit.vintage</groupId> <artifactId>junit-vintage-engine</artifactId>
+			<!-- <exclusions> <exclusion> <groupId>org.junit.vintage</groupId> <artifactId>junit-vintage-engine</artifactId> 
 				</exclusion> </exclusions> -->
 		</dependency>
 
@@ -134,6 +134,28 @@
 			<groupId>com.amazonaws</groupId>
 			<artifactId>aws-java-sdk-sns</artifactId>
 			<version>1.11.808</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.mockito/mockito-all -->
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-all</artifactId>
+			<version>1.10.19</version>
+			<scope>test</scope>
+		</dependency>
+
+<!-- 		<dependency>
+			<groupId>com.jparams</groupId>
+			<artifactId>to-string-verifier</artifactId>
+			<version>1.x.x</version>
+			<scope>test</scope>
+		</dependency> -->
+
+		<dependency>
+			<groupId>nl.jqno.equalsverifier</groupId>
+			<artifactId>equalsverifier</artifactId>
+			<version>3.4.1</version>
+			<scope>test</scope>
 		</dependency>
 
 	</dependencies>
