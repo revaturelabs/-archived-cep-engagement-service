@@ -1,5 +1,8 @@
 package com.example;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
@@ -24,8 +27,10 @@ public class ZuulApplication {
 	public CorsFilter corsFilter() {
 	    final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 	    final CorsConfiguration config = new CorsConfiguration();
+	    List<String> allowedOrigins = new ArrayList<>();
+	    allowedOrigins.add("http://ec2-3-229-134-85.compute-1.amazonaws.com");
 	    config.setAllowCredentials(true);
-//	    config.addAllowedOrigin("http://ec2-3-229-134-85.compute-1.amazonaws.com");
+	    config.setAllowedOrigins(allowedOrigins);
 	    config.addAllowedHeader("*");
 	    config.addAllowedMethod("OPTIONS");
 	    config.addAllowedMethod("HEAD");
