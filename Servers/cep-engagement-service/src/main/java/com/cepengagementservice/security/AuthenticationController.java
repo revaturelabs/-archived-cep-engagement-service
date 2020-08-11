@@ -28,7 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
  * Controller that handles the end-point that deal with JWT Authentication
  */
 @RestController
-@CrossOrigin(origins={"http://ec2-3-229-134-85.compute-1.amazonaws.com"}) //CORS will be changed to EC2 servers
+@CrossOrigin(origins={ "http://localhost:3000", "http://localhost:4200", "http://localhost:8081", "http://ec2-3-229-134-85.compute-1.amazonaws.com:9015", "http://ec2-3-229-134-85.compute-1.amazonaws.com", "http://ec2-3-229-134-85.compute-1.amazonaws.com:10001"}) //CORS will be changed to EC2 servers
 public class AuthenticationController {
 
   @Value("${jwt.http.request.header}") //grabs header from src/main/resources/app.properties 

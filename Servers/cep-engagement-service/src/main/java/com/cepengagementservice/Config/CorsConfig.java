@@ -33,7 +33,7 @@ public class CorsConfig {
 			public void addCorsMappings(CorsRegistry registry) {
 
 				registry.addMapping("/**").allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS", "HEADER").allowedHeaders("*")
-						.allowedOrigins(frontEndUri);
+						.allowedOrigins(frontEndUri, "http://ec2-3-229-134-85.compute-1.amazonaws.com:10001");
 			}
 		};
 	}
