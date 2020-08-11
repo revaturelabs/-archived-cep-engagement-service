@@ -105,10 +105,10 @@ public class User {
     private String profileDeadline = null;
     
     @Column(name = "PROFILE_ASSOCIATE_COUNT" , nullable = true)
-    private Integer profileCount = null;
+    private Integer profileCount;
     
   //userId mapped to Request table
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
   	public List<Request> requests;
   	
@@ -207,7 +207,7 @@ public class User {
     }
     
     public User(@NonNull String firstName, @NonNull String lastName, @NonNull String email, @NonNull String password,
-    		@NonNull String company, @NonNull String role, @NonNull String phone, String batchDeadline, int associateCount) {
+    		@NonNull String company, @NonNull String role, @NonNull String phone, String batchDeadline, Integer associateCount) {
     	super();
     	this.firstName = firstName;
     	this.lastName = lastName;
