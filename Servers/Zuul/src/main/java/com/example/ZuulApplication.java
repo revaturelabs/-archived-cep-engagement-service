@@ -25,7 +25,7 @@ public class ZuulApplication {
 	    final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 	    final CorsConfiguration config = new CorsConfiguration();
 	    config.setAllowCredentials(true);
-	    config.addAllowedOrigin("http://ec2-3-229-134-85.compute-1.amazonaws.com");
+//	    config.addAllowedOrigin("http://ec2-3-229-134-85.compute-1.amazonaws.com");
 	    config.addAllowedHeader("*");
 	    config.addAllowedMethod("OPTIONS");
 	    config.addAllowedMethod("HEAD");
