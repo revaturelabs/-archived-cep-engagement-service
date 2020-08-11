@@ -20,22 +20,22 @@ public class ZuulApplication {
 		SpringApplication.run(ZuulApplication.class, args);
 	}
 	
-//	@Bean
-//	public CorsFilter corsFilter() {
-//	    final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-//	    final CorsConfiguration config = new CorsConfiguration();
-//	    config.setAllowCredentials(true);
-//	    config.addAllowedOrigin("http://localhost:3000");
-//	    config.addAllowedHeader("*");
-//	    config.addAllowedMethod("OPTIONS");
-//	    config.addAllowedMethod("HEAD");
-//	    config.addAllowedMethod("GET");
-//	    config.addAllowedMethod("PUT");
-//	    config.addAllowedMethod("POST");
-//	    config.addAllowedMethod("DELETE");
-//	    config.addAllowedMethod("PATCH");
-//	    source.registerCorsConfiguration("/**", config);
-//	    return new CorsFilter(source);
-//	}
+	@Bean
+	public CorsFilter corsFilter() {
+	    final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+	    final CorsConfiguration config = new CorsConfiguration();
+	    config.setAllowCredentials(true);
+	    config.addAllowedOrigin("http://ec2-3-229-134-85.compute-1.amazonaws.com");
+	    config.addAllowedHeader("*");
+	    config.addAllowedMethod("OPTIONS");
+	    config.addAllowedMethod("HEAD");
+	    config.addAllowedMethod("GET");
+	    config.addAllowedMethod("PUT");
+	    config.addAllowedMethod("POST");
+	    config.addAllowedMethod("DELETE");
+	    config.addAllowedMethod("PATCH");
+	    source.registerCorsConfiguration("/**", config);
+	    return new CorsFilter(source);
+	}
 
 }
