@@ -2,14 +2,28 @@ package com.cepengagementservice.Services;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.cepengagementservice.Models.Category;
 import com.cepengagementservice.Models.dto.CategoryDTO;
+import com.cepengagementservice.Repositories.CategoryRepository;
 
 @Service
 public class CategoryService {
+
+	private CategoryRepository categoryRepository;
+	
+	public CategoryService() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	@Autowired
+	public CategoryService(CategoryRepository categoryRepository) {
+		super();
+		this.categoryRepository = categoryRepository;
+	}
 
 	/**
 	 * Returns all Categories as a List
@@ -17,7 +31,8 @@ public class CategoryService {
 	 */
 	@Cacheable("AllCategories")
 	public List<Category> getAllCategories() {
-		return Category.getAllCategories();
+		return categoryRepository.getAllCategories();
+		
 	}
 	
 	/**
@@ -26,7 +41,7 @@ public class CategoryService {
 	 */
 	@Cacheable("AllCategoryDTOs")
 	public List<CategoryDTO> getAllCategoryDTOs() {
-		return Category.getAllCategoriesDTO();
+		return categoryRepository.getAllCategoriesDTO();
 	}
 	
 	/**
@@ -36,7 +51,7 @@ public class CategoryService {
 	 */
 	@Cacheable("SomeCategories")
 	public List<Category> getCategoriesByIds(int[] categoryIds) {
-		return Category.getCategoriesByIds(categoryIds);
+		return categoryRepository.getCategoriesByIds(categoryIds);
 	}
 	
 	/**
@@ -46,7 +61,7 @@ public class CategoryService {
 	 */
 	@Cacheable("SomeCategoryDTOs")
 	public List<CategoryDTO> getCategoryDTOsByIds(int[] categoryIds) {
-		return Category.getCategoryDTOsByIds(categoryIds);
+		return categoryRepository.getCategoryDTOsByIds(categoryIds);
 	}
 	
 	/**
@@ -56,7 +71,7 @@ public class CategoryService {
 	 */
 	@Cacheable("SingleCategory")
 	public Category getCategoryById(int categoryId) {
-		return Category.getCategory(categoryId);
+		return categoryRepository.getCategory(categoryId);
 	}
 	
 	/**
@@ -66,6 +81,6 @@ public class CategoryService {
 	 */
 	@Cacheable("SingleCategoryDTO")
 	public CategoryDTO getCategoryDTOById(int categoryId) {
-		return Category.getCategoryDTO(categoryId);
+		return categoryRepository.getCategoryDTO(categoryId);
 	}
 }

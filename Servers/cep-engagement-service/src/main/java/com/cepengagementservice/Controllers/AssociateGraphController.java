@@ -48,7 +48,6 @@ public class AssociateGraphController {
 	 * @throws NoSuchAlgorithmException
 	 * @throws KeyManagementException
 	 */
-	@Autowired
 	public RestTemplate restTemplate() throws KeyStoreException, NoSuchAlgorithmException, KeyManagementException {
 		// Override certification verification. Always return true.
 		TrustStrategy acceptingTrustStrategy = (X509Certificate[] chain, String authType) -> true;
