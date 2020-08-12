@@ -80,7 +80,7 @@ public class UsersControllers {
 		return new ResponseEntity<String>("Email already in use", HttpStatus.CONFLICT);
 	}
 
-	@RequestMapping(method = RequestMethod.GET, value = "/email/")
+	@RequestMapping(method = RequestMethod.GET, value = "/email")
 	public ResponseEntity<User> getByEmail(@RequestParam String email) {
 		User user = userService.getUserByEmail(email);
 		if (user != null) {

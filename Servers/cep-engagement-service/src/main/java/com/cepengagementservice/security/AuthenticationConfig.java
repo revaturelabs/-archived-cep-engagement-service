@@ -87,12 +87,12 @@ public class AuthenticationConfig extends WebSecurityConfigurerAdapter {
             .exceptionHandling().authenticationEntryPoint(jwtUnAuthorizedResponseAuthenticationEntryPoint).and() //handles any exceptions with custom handler
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and() //ensures that expired sessions are cleaned up
             .authorizeRequests()//Allows restricting access based upon the HttpServletRequest using RequestMatcher implementations
-            .antMatchers("/v3/api-docs/**", "/configuration/**", "/swagger*/**", "/webjars/**", "/", "/console/**").permitAll(); // permits all users to access Swagger V3 URLS
-//            .antMatchers(HttpMethod.POST, "/interventions").hasRole("CLIENT") // Only clients can add intervention requests
-//            .antMatchers(HttpMethod.GET, "/interventions").hasRole("ADMIN") // Only admins can read the intervention list
-//            .antMatchers("/users/all").hasAnyRole("ADMIN")  // Restricts getting all users and intervention requests to ADMIN users.
-//            .anyRequest().authenticated();// If you are authorized you will be able to access any routes that aren't specified to the ADMIN role.
-//        
+            .antMatchers("/v3/api-docs/**", "/configuration/**", "/swagger*/**", "/webjars/**", "/", "/console/**").permitAll() // permits all users to access Swagger V3 URLS
+            .antMatchers(HttpMethod.POST, "/interventions").hasRole("CLIENT") // Only clients can add intervention requests
+            .antMatchers(HttpMethod.GET, "/interventions").hasRole("ADMIN") // Only admins can read the intervention list
+            .antMatchers("/users/all").hasAnyRole("ADMIN")  // Restricts getting all users and intervention requests to ADMIN users.
+            .anyRequest().authenticated();// If you are authorized you will be able to access any routes that aren't specified to the ADMIN role.
+        
        httpSecurity
             .addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
         
