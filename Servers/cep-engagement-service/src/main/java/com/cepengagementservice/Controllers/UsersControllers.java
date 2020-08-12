@@ -38,7 +38,7 @@ import com.cepengagementservice.Services.UserServices;
  */
 @RestController
 @RequestMapping(value = "/users")
-@CrossOrigin
+@CrossOrigin(origins={ "http://localhost:3000", "http://localhost:4200", "http://localhost:8081", "http://ec2-3-229-134-85.compute-1.amazonaws.com:9015", "http://ec2-3-229-134-85.compute-1.amazonaws.com", "http://ec2-3-229-134-85.compute-1.amazonaws.com:10001"})
 public class UsersControllers {
 
 	@Value("${jwt.http.request.header}") // grabs header from src/main/resources/app.properties
