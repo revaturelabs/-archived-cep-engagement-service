@@ -29,7 +29,7 @@ import com.cepengagementservice.Services.UserBatchService;
  *
  */
 @RestController
-@CrossOrigin
+@CrossOrigin(origins={ "http://localhost:3000", "http://localhost:4200", "http://localhost:8081", "http://ec2-3-229-134-85.compute-1.amazonaws.com:9015", "http://ec2-3-229-134-85.compute-1.amazonaws.com", "http://ec2-3-229-134-85.compute-1.amazonaws.com:10001"})
 @RequestMapping(value = "/UB")
 public class UserBatchController {
 	
