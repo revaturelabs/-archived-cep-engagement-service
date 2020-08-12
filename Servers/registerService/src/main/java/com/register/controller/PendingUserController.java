@@ -145,7 +145,7 @@ public class PendingUserController {
 
 			return new ResponseEntity<String>("Success", HttpStatus.OK);
 		} catch (Exception e) {
-			return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 	}
 

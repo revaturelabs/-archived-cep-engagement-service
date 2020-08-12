@@ -15,8 +15,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class CorsConfig {
 	
-	@Value("${frontend.uri}")
-	String frontEndUri;
+//	@Value("${frontend.uri}")
+//	String frontEndUri;
 
 	/**
 	 * WebMvcConfigurer takes no parameters which overrides aaCorsMapping to take in
