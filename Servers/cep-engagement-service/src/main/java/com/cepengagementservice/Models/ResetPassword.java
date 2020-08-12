@@ -1,4 +1,4 @@
-package com.cepengagementservice.Controllers;
+package com.cepengagementservice.Models;
 
 /**
  * This is a class model the reset password response body

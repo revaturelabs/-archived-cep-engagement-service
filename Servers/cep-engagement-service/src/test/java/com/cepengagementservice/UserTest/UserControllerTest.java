@@ -23,9 +23,9 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 
 import com.cepengagementservice.Models.UserProfile;
-import com.cepengagementservice.Controllers.ResetPassword;
 import com.cepengagementservice.Controllers.UsersControllers;
 import com.cepengagementservice.Models.Request;
+import com.cepengagementservice.Models.ResetPassword;
 import com.cepengagementservice.Models.Request.RequestType;
 import com.cepengagementservice.Models.Request.Status;
 import com.cepengagementservice.Models.User;

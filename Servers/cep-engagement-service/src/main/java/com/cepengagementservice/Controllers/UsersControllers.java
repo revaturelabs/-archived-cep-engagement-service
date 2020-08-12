@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cepengagementservice.Models.Request;
+import com.cepengagementservice.Models.ResetPassword;
 import com.cepengagementservice.Models.User;
 import com.cepengagementservice.Models.UserProfile;
 import com.cepengagementservice.Services.RequestService;
