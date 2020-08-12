@@ -3,5 +3,10 @@
     "name": "key.allemail",
     "type": "java.lang.String",
     "description": "The key that is required from the request header"
+  },
+  {
+    "name": "frontend.uri",
+    "type": "java.lang.String",
+    "description": "A description for 'frontend.uri'"
   }
 ]}

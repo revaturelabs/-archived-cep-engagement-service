@@ -15,8 +15,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class CorsConfig {
 	
-//	@Value("${frontend.uri}")
-//	String frontEndUri;
+	@Value("${frontend.uri}")
+	String frontEndUri;
 
 	/**
 	 * WebMvcConfigurer takes no parameters which overrides aaCorsMapping to take in
@@ -33,7 +33,7 @@ public class CorsConfig {
 			public void addCorsMappings(CorsRegistry registry) {
 
 				registry.addMapping("/**").allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS", "HEADER").allowedHeaders("*")
-						.allowedOrigins("http://ec2-3-229-134-85.compute-1.amazonaws.com:9015");
+						.allowedOrigins("http://ec2-3-229-134-85.compute-1.amazonaws.com:9015", frontEndUri);
 			}
 		};
 	}
