@@ -32,7 +32,7 @@ public class CorsConfig {
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {
 
-				registry.addMapping("/**").allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS", "HEADER").allowedHeaders("*")
+				registry.addMapping("/**").allowedMethods("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS", "HEAD").allowedHeaders("*")
 						.allowedOrigins("http://ec2-3-229-134-85.compute-1.amazonaws.com:9015");
 			}
 		};
