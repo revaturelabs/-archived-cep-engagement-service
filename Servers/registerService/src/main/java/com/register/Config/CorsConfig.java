@@ -1,4 +1,4 @@
-package com.example;
+package com.register.Config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -33,7 +33,7 @@ public class CorsConfig {
 			public void addCorsMappings(CorsRegistry registry) {
 
 				registry.addMapping("/**").allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS", "HEADER").allowedHeaders("*")
-						.allowedOrigins(frontEndUri, "http://ec2-3-229-134-85.compute-1.amazonaws.com:10001");
+						.allowedOrigins("http://ec2-3-229-134-85.compute-1.amazonaws.com:9015");
 			}
 		};
 	}
