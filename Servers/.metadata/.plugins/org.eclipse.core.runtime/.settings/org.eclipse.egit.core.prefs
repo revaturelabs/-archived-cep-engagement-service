@@ -1,9 +1,7 @@
-<<<<<<< HEAD
-GitRepositoriesView.GitDirectories=C\:\\Users\\User\\Desktop\\my_git_repos\\Project-Three\\cep-engagement-service\\.git;C\:\\Users\\Syste\\Documents\\Project3-repo\\cep-engagement-service\\.git;
-GitRepositoriesView.GitDirectories.relative=C\:\\Users\\User\\Desktop\\my_git_repos\\Project-Three\\cep-engagement-service\\.git;C\:\\Users\\Syste\\Documents\\Project3-repo\\cep-engagement-service\\.git;
-=======
-GitRepositoriesView.GitDirectories=C\:\\Users\\jacob\\Desktop\\my_git_repos\\Project3\\cep-engagement-service\\.git;C\:\\Users\\User\\Desktop\\my_git_repos\\Project-Three\\cep-engagement-service\\.git;
-GitRepositoriesView.GitDirectories.relative=C\:\\Users\\jacob\\Desktop\\my_git_repos\\Project3\\cep-engagement-service\\.git;C\:\\Users\\User\\Desktop\\my_git_repos\\Project-Three\\cep-engagement-service\\.git;
->>>>>>> dbef42a11ea6dc68877fc5d12ae0d00b8990dee5
+=\=\=\=\=\=\=
+<<<<<<<=HEAD
+>>>>>>>=dbef42a11ea6dc68877fc5d12ae0d00b8990dee5
+GitRepositoriesView.GitDirectories=C\:\\Users\\jacob\\Desktop\\my_git_repos\\Project3\\cep-engagement-service\\.git;C\:\\Users\\lifea\\OneDrive\\Desktop\\new_git_repo\\cep-engagement-service\\.git;C\:\\Users\\User\\Desktop\\my_git_repos\\Project-Three\\cep-engagement-service\\.git;
+GitRepositoriesView.GitDirectories.relative=C\:\\Users\\jacob\\Desktop\\my_git_repos\\Project3\\cep-engagement-service\\.git;C\:\\Users\\lifea\\OneDrive\\Desktop\\new_git_repo\\cep-engagement-service\\.git;C\:\\Users\\User\\Desktop\\my_git_repos\\Project-Three\\cep-engagement-service\\.git;
 core_autoIgnoreDerivedResources=false
 eclipse.preferences.version=1

@@ -16,7 +16,7 @@ import org.springframework.web.filter.CorsFilter;
 @EnableEurekaClient
 @EnableZuulProxy
 @SpringBootApplication
-@CrossOrigin(origins={"http://ec2-3-229-134-85.compute-1.amazonaws.com", "http://ec2-3-229-134-85.compute-1.amazonaws.com:10001", "http://ec2-3-229-134-85.compute-1.amazonaws.com:10000"},  maxAge=3600, allowCredentials="true", allowedHeaders="*")
+@CrossOrigin(origins={"http://localhost:3000/", "http://ec2-3-229-134-85.compute-1.amazonaws.com", "http://ec2-3-229-134-85.compute-1.amazonaws.com:10001", "http://ec2-3-229-134-85.compute-1.amazonaws.com:10000"},  maxAge=3600, allowCredentials="true", allowedHeaders="*")
 public class ZuulApplication {
 
 	public static void main(String[] args) {
@@ -28,6 +28,7 @@ public class ZuulApplication {
 	    final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 	    final CorsConfiguration config = new CorsConfiguration();
 	    List<String> allowedOrigins = new ArrayList<>();
+	    allowedOrigins.add("http://localhost:3000");
 	    allowedOrigins.add("http://ec2-3-229-134-85.compute-1.amazonaws.com");
 	    allowedOrigins.add("http://ec2-3-229-134-85.compute-1.amazonaws.com:9015");
 	    allowedOrigins.add("http://ec2-3-229-134-85.compute-1.amazonaws.com:10000");

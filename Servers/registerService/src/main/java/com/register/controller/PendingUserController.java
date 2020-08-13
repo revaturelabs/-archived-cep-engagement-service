@@ -101,12 +101,12 @@ public class PendingUserController {
 
 			// example of custom header
 			headers.set("Authorization", emailKey);
-			headers.set("Access-Control-Allowed-Origins", "http://ec2-3-229-134-85.compute-1.amazonaws.com:10001");
+			headers.set("Access-Control-Allowed-Origins", "http://localhost:10001");
 
 			// build the request
 			HttpEntity<?> request = new HttpEntity<>(headers);
 			// make an HTTP GET request with headers
-			ResponseEntity<String[]> str = rest.exchange("http://ec2-3-229-134-85.compute-1.amazonaws.com:9015/users/email/all", HttpMethod.GET,
+			ResponseEntity<String[]> str = rest.exchange("http://localhost:9015/users/email/all", HttpMethod.GET,
 					request, String[].class);
 			String[] emails = str.getBody();
 			ArrayList<String> emailList = new ArrayList<String>(Arrays.asList(emails));
@@ -128,7 +128,7 @@ public class PendingUserController {
 
 			HttpEntity<?> request2 = new HttpEntity<>(headers2);
 			// make an HTTP GET request with headers
-			ResponseEntity<String[]> str2 = rest2.exchange("http://ec2-3-229-134-85.compute-1.amazonaws.com:9015/users/email/admin", HttpMethod.GET,
+			ResponseEntity<String[]> str2 = rest2.exchange("http://localhost:9015/users/email/admin", HttpMethod.GET,
 					request2, String[].class);
 			String[] emails2 = str2.getBody();
 			ArrayList<String> emailList2 = new ArrayList<String>(Arrays.asList(emails2));
@@ -162,7 +162,7 @@ public class PendingUserController {
 			RestTemplate rest = new RestTemplate();
 			PendingUserSend pend = new PendingUserSend(user.getFirstName(), user.getLastName(), user.getEmail(),
 					randPassword, user.getCompany(), user.getRole(), user.getPhone());
-			rest.postForObject("http://ec2-3-229-134-85.compute-1.amazonaws.com:9015/users/add", pend, String.class);
+			rest.postForObject("http://localhost:9015/users/add", pend, String.class);
 			pendingUserService.deleteUser(user);
 			EmailSender.sendAsHtml(user.getEmail(), "Your Revature CEP account has been approved!",
 					"Congrats, you have been approved here is your login information <br/>Username: " + user.getEmail()
